@@ -101,6 +101,72 @@ A set of simple tags.
 
 ### Categories
 
+#### CategoryLanguages
+
+Caption and links for the individual languages.
+
+
+##### CategoryLanguage
+
+Root element tag: **c**
+
+| Attribute Name | Required     | Type   | Description                                                                                                                                                   |
+|----------------|--------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **id**         | **required** | string | ISO code of the language is preferred (e.g. **en**). IETF language tag (e.g. **en-US**) could be also used, but anything from the third character is ignored. |
+
+
+| Element Name         | Required     | Type         | Description                                             |
+|----------------------|--------------|--------------|---------------------------------------------------------|
+| **parentCategoryId** | optional     | string       | An internal category identifier of the parent category. |
+
+
+#### Category
+
+Root element tag: **c**
+
+| Attribute Name | Required     | Type   | Description                                                                                   |
+|----------------|--------------|--------|-----------------------------------------------------------------------------------------------|
+| **id**         | **required** | string | An internal category identifier. This Id must match with the Id used in Products and Orders.  |
+
+
+| Element Name         | Required     | Type         | Description                                             |
+|----------------------|--------------|--------------|---------------------------------------------------------|
+| **parentCategoryId** | optional     | string       | An internal category identifier of the parent category. |
+| **languages**        | **required** | string       | An internal category identifier of the parent category. |
+| **url**              | optional     | string       | The URL of the category.                                |
+| **customFields**     | optional     | CustomFields |                                                         |
+
+
+name
+mandatory
+string
+The list of the names of the category in all available languages.
+
+
+#### Example
+
+```xml
+<?xml version="1.0"?>
+<categories version="2.14" totalItems="2">
+    <c id="1">
+        <languages>
+            <l id="en">
+                <name>Rockets</name>
+            </l>
+        </languages>
+    </c>
+    <c id="2">
+        <parentCategoryId>2</parentCategoryId>
+        <languages>
+            <l id="en">
+                <name>Saturn 5</name>
+                <url>https://myshop.com/saturn-5</url>
+            </l>
+        </languages>
+    </c>
+</categories>
+```
+
 ### Contacts
 
 #### Contact
@@ -175,9 +241,65 @@ Root element tag: **c**
 </contacts>
 ```
 
-
 Validate with [XML Schema Definition](xsd/contacts.xsd).
 
+### Coupons
+
+#### CouponValues
+
+The list of actual coupon codes.
+
+##### Example
+
+```xml
+<values>
+    <v>ABSCDF</v>
+    <v>GHCJKD</v>
+    <v>D45s45</v>
+</values>
+```
+
+#### Coupon
+
+Root element tag: **c**
+
+| Attribute Name | Required     | Type   | Description                             |
+|----------------|--------------|--------|-----------------------------------------|
+| **id**         | **required** | string | An Id of the coupon type in the e-shop. |
+
+| Element Name     | Required     | Type         | Description                                                                                                                                                                                                                    |
+|------------------|--------------|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **reusable**     | **required** | byte         | Whether this type of coupon can be used multiple times. **0**=no, **1**=yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage. |
+| **discountType** | optional     | string       | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                  |
+| **discount**     | optional     | string       | Either the monetary or percentual value of the coupon type.                                                                                                                                                                    |
+| **validFrom**    | optional     | datetime     |                                                                                                                                                                                                                                |
+| **validTo**      | optional     | datetime     |                                                                                                                                                                                                                                |
+| **values**       | **required** | CouponValues | The list of actual coupon codes.                                                                                                                                                                                               |
+| **customFields** | optional     | CustomFields |                                                                                                                                                                                                                                |
+
+#### Example
+
+```xml
+<coupons version="2.13">
+    <c id="DISCOUNT_10">
+        <reusable>0</reusable>
+        <discountType>PERCENTUAL</discountType>
+        <discount>10.20</discount>
+        <validFrom>2020-04-10T00:00:00</validFrom>
+        <validTo>2020-04-17T00:00:00</validTo>
+        <values>
+            <v>ABSCDF</v>
+            <v>GHCJKD</v>
+            <v>D45s45</v>
+        </values>
+        <customFields>
+            <f key="MaximumUseByPerson" group="parameters">2</f>
+            <f key="MaximumTotalUse" group="parameters">1000</f>
+            <f key="ImageUrl">https://www.eshop.cz/coupons/12234.jpg</f>
+        </customFields>
+    </c>
+</coupons>
+```
 
 ## XML Feed Validation
 

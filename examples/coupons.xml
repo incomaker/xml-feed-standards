@@ -1,0 +1,19 @@
+<coupons version="2.13">
+	<c id="DISCOUNT_10">
+		<reusable>0</reusable>
+		<discountType>PERCENTUAL</discountType>
+		<discount>10.20</discount>
+		<validFrom>2020-04-10T00:00:00</validFrom>
+		<validTo>2020-04-17T00:00:00</validTo>
+		<values>
+			<v>ABSCDF</v>
+			<v>GHCJKD</v>
+			<v>D45s45</v>
+		</values>
+		<customFields>
+			<f key="MaximumUseByPerson" group="parameters">2</f>
+			<f key="MaximumTotalUse" group="parameters">1000</f>
+			<f key="ImageUrl">https://www.eshop.cz/coupons/12234.jpg</f>
+		</customFields>
+	</c>
+</coupons>
