@@ -245,6 +245,15 @@ Validate with [XML Schema Definition](xsd/contacts.xsd).
 
 ### Coupons
 
+#### Download Count
+
+Unlike other feeds, the coupon feed has a special optional parameter **downloadCount** that causes the immediate generation of the requested number of coupons and their download in the feed (if the e-commerce platform supports such behavior).
+Enter the number of needed coupons.
+
+Example:
+
+    https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=coupon&id=Discount&downloadCount=1000
+
 #### CouponValues
 
 The list of actual coupon codes.
