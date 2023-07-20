@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<orders version="2.14.0" totalItems="10">
+	<o id="88886">
+		<contact>
+			<email>sochor.mirek@o2active.cz</email>
+			<firstName>Miroslav</firstName>
+			<lastName>Sochor</lastName>
+			<phoneNumber1>603534295</phoneNumber1>
+			<city>Všestary</city>
+			<country>CZ</country>
+			<street>Strančická 6</street>
+			<language>cs</language>
+			<zipCode>25164</zipCode>
+		</contact>
+		<created>2023-06-24T16:19:22</created>
+		<finished>2023-06-24T16:19:22</finished>
+		<payment>Platba předem kartou</payment>
+		<total>284</total>
+		<totalWithoutTax>234.71074388429753</totalWithoutTax>
+		<currency>CZK</currency>
+		<items>
+			<i id="111836">
+				<quantity>1</quantity>
+				<price>199</price>
+				<priceWithoutTax>164.46281</priceWithoutTax>
+				<currency>CZK</currency>
+			</i>
+		</items>
+	</o>
+	<o id="88885">
+		<contact>
+			<email>tajchman@tajchman.cz</email>
+			<firstName>Jiří</firstName>
+			<lastName>Tajchman</lastName>
+			<phoneNumber1>602762900</phoneNumber1>
+			<city>Frenštát pod Radhoštěm</city>
+			<country>CZ</country>
+			<street>Jiřího Felixe 1714</street>
+			<language>cs</language>
+			<zipCode>174401</zipCode>
+		</contact>
+		<created>2023-06-24T15:34:55</created>
+		<finished>2023-06-24T15:34:55</finished>
+		<payment>Platba předem kartou</payment>
+		<total>534</total>
+		<totalWithoutTax>441.32231388429756</totalWithoutTax>
+		<currency>CZK</currency>
+		<items>
+			<i id="167171">
+				<quantity>1</quantity>
+				<price>449</price>
+				<priceWithoutTax>371.07438</priceWithoutTax>
+				<currency>CZK</currency>
+			</i>
+		</items>
+	</o>
+	<o id="88884">
+		<contact>
+			<email>milan.gracias@tiscali.cz</email>
+			<firstName>Milan</firstName>
+			<lastName>GRACIAS</lastName>
+			<phoneNumber1>602542329</phoneNumber1>
+			<city>Králíky [2316]</city>
+			<country>CZ</country>
+			<street>Velké náměstí 355</street>
+			<language>cs</language>
+			<zipCode>561 69</zipCode>
+		</contact>
+		<created>2023-06-24T15:15:21</created>
+		<finished>2023-06-24T15:15:21</finished>
+		<payment>Platba dobírkou</payment>
+		<total>383</total>
+		<totalWithoutTax>316.52892165289256</totalWithoutTax>
+		<currency>CZK</currency>
+		<items>
+			<i id="110181">
+				<quantity>1</quantity>
+				<price>249</price>
+				<priceWithoutTax>205.78512</priceWithoutTax>
+				<currency>CZK</currency>
+			</i>
+		</items>
+	</o>
+	<o id="88883">
+		<contact>
+			<email>Janhazl@gmail.com</email>
+			<firstName>Jan</firstName>
+			<lastName>Házl</lastName>
+			<phoneNumber1>724907518</phoneNumber1>
+			<city>Žebrák [1819]</city>
+			<country>CZ</country>
+			<street>Náměstí 100</street>
+			<language>cs</language>
+			<zipCode>267 53</zipCode>
+		</contact>
+		<created>2023-06-24T14:58:04</created>
+		<finished>2023-06-24T14:58:04</finished>
+		<payment>Platba dobírkou</payment>
+		<total>993</total>
+		<totalWithoutTax>820.6611616528926</totalWithoutTax>
+		<currency>CZK</currency>
+		<items>
+			<i id="166280">
+				<quantity>1</quantity>
+				<price>859</price>
+				<priceWithoutTax>709.91736</priceWithoutTax>
+				<currency>CZK</currency>
+			</i>
+		</items>
+	</o>
+	<o id="88882">
+		<contact>
+			<email>wykin@tiscali.cz</email>
+			<firstName>Petr</firstName>
+			<lastName>Vykoukal</lastName>
+			<phoneNumber1>721976017</phoneNumber1>
+			<city>Hodonín [KM11069501]</city>
+			<country>CZ</country>
+			<street>Velkomoravská 0</street>
+			<language>cs</language>
+			<zipCode>69501</zipCode>
+		</contact>
+		<created>2023-06-24T14:52:50</created>
+		<finished>2023-06-24T14:52:50</finished>
+		<payment>Platba dobírkou při převzetí</payment>
+		<total>393</total>
+		<totalWithoutTax>324.79338603305786</totalWithoutTax>
+		<currency>CZK</currency>
+		<items>
+			<i id="163526">
+				<quantity>1</quantity>
+				<price>279</price>
+				<priceWithoutTax>230.57851</priceWithoutTax>
+				<currency>CZK</currency>
+			</i>
+		</items>
+	</o>
+	<o id="88881">
+		<contact>
+			<email>mesomrom33@gmail.com</email>
+			<firstName>Robert</firstName>
+			<lastName>Šamko</lastName>
+			<phoneNumber1>735242330</phoneNumber1>
+			<city>Broumov [5788]</city>
+			<country>CZ</country>
+			<street>Přadlácká 62</street>
+			<language>cs</language>
+			<zipCode>550 01</zipCode>
+		</contact>
+		<created>2023-06-24T14:43:01</created>
+		<finished>2023-06-24T14:43:01</finished>
+		<payment>Platba předem na účet</payment>
+		<total>344</total>
+		<totalWithoutTax>284.29752338842974</totalWithoutTax>
+		<currency>CZK</currency>
+		<items>
+			<i id="101345">
+				<quantity>1</quantity>
+				<price>275</price>
+				<priceWithoutTax>227.27273</priceWithoutTax>
+				<currency>CZK</currency>
+			</i>
+		</items>
+	</o>
+	<o id="88880">
+		<contact>
+			<email>pavca015@gmail.com</email>
+			<firstName>Pavlína</firstName>
+			<lastName>Souralová</lastName>
+			<phoneNumber1>733290325</phoneNumber1>
+			<city>Třebíč</city>
+			<country>CZ</country>
+			<street>Lavického 406</street>
+			<language>cs</language>
+			<zipCode>67401</zipCode>
+		</contact>
+		<created>2023-06-24T14:36:23</created>
+		<finished>2023-06-24T14:36:23</finished>
+		<payment>Platba předem kartou</payment>
+		<total>278</total>
+		<totalWithoutTax>229.7520661983471</totalWithoutTax>
+		<currency>CZK</currency>
+		<items>
+			<i id="132304">
+				<quantity>1</quantity>
+				<price>199</price>
+				<priceWithoutTax>164.46281</priceWithoutTax>
+				<currency>CZK</currency>
+			</i>
+		</items>
+	</o>
+	<o id="88879">
+		<contact>
+			<email>janbombera@seznam.cz</email>
+			<firstName>Ludmila</firstName>
+			<lastName>Bomberová</lastName>
+			<phoneNumber1>737882750</phoneNumber1>
+			<city>Velké Opatovice [13189]</city>
+			<country>CZ</country>
+			<street>Nádražní 281</street>
+			<language>cs</language>
+			<zipCode>679 63</zipCode>
+		</contact>
+		<created>2023-06-24T14:14:55</created>
+		<finished>2023-06-24T14:14:55</finished>
+		<payment>Platba dobírkou</payment>
+		<total>403</total>
+		<totalWithoutTax>333.0578516528926</totalWithoutTax>
+		<currency>CZK</currency>
+		<items>
+			<i id="188067">
+				<quantity>1</quantity>
+				<price>269</price>
+				<priceWithoutTax>222.31405</priceWithoutTax>
+				<currency>CZK</currency>
+			</i>
+		</items>
+	</o>
+	<o id="88878">
+		<contact>
+			<email>b.kapko@seznam.cz</email>
+			<firstName>Bronislav</firstName>
+			<lastName>Kapko</lastName>
+			<phoneNumber1>602567702</phoneNumber1>
+			<city>Hustopeče [8187]</city>
+			<country>CZ</country>
+			<street>Dukelské nám. 103/31</street>
+			<language>cs</language>
+			<zipCode>693 01</zipCode>
+		</contact>
+		<created>2023-06-24T13:56:38</created>
+		<finished>2023-06-24T13:56:38</finished>
+		<payment>Platba předem kartou</payment>
+		<total>208</total>
+		<totalWithoutTax>171.90082338842976</totalWithoutTax>
+		<currency>CZK</currency>
+		<items>
+			<i id="139073">
+				<quantity>1</quantity>
+				<price>139</price>
+				<priceWithoutTax>114.87603</priceWithoutTax>
+				<currency>CZK</currency>
+			</i>
+		</items>
+	</o>
+	<o id="88877">
+		<contact>
+			<email>ales.balda@gmail.com</email>
+			<firstName>Aleš</firstName>
+			<lastName>Balda</lastName>
+			<phoneNumber1>604450605</phoneNumber1>
+			<city>Praha [12956]</city>
+			<country>CZ</country>
+			<street>Komunardů 27</street>
+			<language>cs</language>
+			<zipCode>170 00</zipCode>
+		</contact>
+		<created>2023-06-24T13:53:12</created>
+		<finished>2023-06-24T13:53:12</finished>
+		<payment>Platba předem kartou</payment>
+		<total>417</total>
+		<totalWithoutTax>344.62809338842976</totalWithoutTax>
+		<currency>CZK</currency>
+		<items>
+			<i id="172936">
+				<quantity>1</quantity>
+				<price>99</price>
+				<priceWithoutTax>81.81818</priceWithoutTax>
+				<currency>CZK</currency>
+			</i>
+			<i id="173782">
+				<quantity>1</quantity>
+				<price>249</price>
+				<priceWithoutTax>205.78512</priceWithoutTax>
+				<currency>CZK</currency>
+			</i>
+		</items>
+	</o>
+</orders>

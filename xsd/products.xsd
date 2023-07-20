@@ -1,0 +1,104 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="products">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="p" maxOccurs="unbounded" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<xs:element name="imageUrl" minOccurs="0" type="xs:string" />
+							<xs:element name="categories" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="c" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="prices" minOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="p" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:all minOccurs="0">
+													<xs:element type="xs:decimal" name="amount" />
+													<xs:element type="xs:decimal" name="priceAfterDiscount" minOccurs="0"/>
+													<xs:element type="xs:decimal" name="priceWithoutTax" minOccurs="0"/>
+												</xs:all>
+												<xs:attribute type="xs:string" name="currency" use="optional" />
+											</xs:complexType>
+										</xs:element >
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element type="xs:decimal" name="tax" minOccurs="0"/>
+							<xs:element type="xs:decimal" name="purchase" minOccurs="0"/>
+							<xs:element name="tags" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="t" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:simpleContent>
+													<xs:extension base="xs:string">
+														<xs:attribute type="xs:string" name="key" use="optional"/>
+													</xs:extension>
+												</xs:simpleContent>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element type="xs:string" name="unit" minOccurs="0"/>
+							<xs:element type="xs:string" name="brand" minOccurs="0"/>
+							<xs:element type="xs:string" name="ean" minOccurs="0"/>
+							<xs:element type="xs:string" name="condition" minOccurs="0"/>
+							<xs:element type="xs:anyURI" name="url" minOccurs="0"/>
+							<xs:element type="xs:decimal" name="stock" minOccurs="0"/>
+							<xs:element type="xs:byte" name="active" minOccurs="0"/>
+							<xs:element type="xs:string" name="productId" minOccurs="0"/>
+							<xs:element type="xs:byte" name="newFlag" minOccurs="0"/>
+							<xs:element type="xs:byte" name="specialDealFlag" minOccurs="0"/>
+							<xs:element type="xs:byte" name="choiceFlag" minOccurs="0"/>
+							<xs:element type="xs:byte" name="freeShippingFlag" minOccurs="0"/>
+							<xs:element type="xs:dateTime" name="added" minOccurs="0"/>
+							<xs:element type="xs:int" name="availability" minOccurs="0"/>
+							<xs:element name="languages">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="l" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:all>
+													<xs:element type="xs:string" name="name"/>
+													<xs:element type="xs:string" name="url"/>
+													<xs:element type="xs:string" name="description" minOccurs="0"/>
+													<xs:element type="xs:string" name="shortDescription" minOccurs="0"/>
+													<xs:element name="attributes" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="a" maxOccurs="unbounded" minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="key" use="optional"/>
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:all>
+												<xs:attribute type="xs:string" name="id"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:all>
+						<xs:attribute type="xs:string" name="id"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute type="xs:string" name="totalItems" use="optional"/>
+			<xs:attribute type="xs:string" name="version" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

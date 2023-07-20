@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<categories version="2.10" totalItems="2">
+	<c id="1">
+		<languages>
+			<l id="en">
+				<name>Rockets</name>
+			</l>
+		</languages>
+	</c>
+	<c id="2">
+		<parentCategoryId>2</parentCategoryId>
+		<languages>
+			<l id="en">
+				<name>Saturn 5</name>
+				<url>https://myshop.com/saturn-5</url>
+			</l>
+		</languages>
+	</c>
+</categories>

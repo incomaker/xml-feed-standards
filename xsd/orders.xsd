@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="orders">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" name="o">
+					<xs:complexType>
+						<xs:all>
+							<xs:element name="contactId" type="xs:string" minOccurs="0"/>
+							<xs:element name="contact" minOccurs="0">
+								<xs:complexType>
+									<xs:all>
+										<xs:element minOccurs="0" name="firstName" type="xs:string"/>
+										<xs:element minOccurs="0" name="lastName" type="xs:string"/>
+										<xs:element name="email" type="xs:string"/>
+										<xs:element minOccurs="0" name="street" type="xs:string"/>
+										<xs:element minOccurs="0" name="street2" type="xs:string"/>
+										<xs:element minOccurs="0" name="zipCode" type="xs:string"/>
+										<xs:element minOccurs="0" name="city" type="xs:string"/>
+										<xs:element minOccurs="0" name="phoneNumber1" type="xs:string"/>
+										<xs:element minOccurs="0" name="phoneNumber2" type="xs:string"/>
+										<xs:element minOccurs="0" name="country" type="xs:string"/>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="created" type="xs:dateTime"/>
+							<xs:element minOccurs="0" name="finished" type="xs:dateTime"/>
+							<xs:element minOccurs="0" name="payment" type="xs:string"/>
+							<xs:element minOccurs="0" name="state" type="xs:string"/>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element minOccurs="0" maxOccurs="unbounded" name="i">
+											<xs:complexType>
+												<xs:all>
+													<xs:element minOccurs="0" name="variantId" type="xs:string"/>
+													<xs:element name="quantity" type="xs:decimal"/>
+													<xs:element name="price">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:decimal">
+																	<xs:attribute name="currency" use="optional"/>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="priceWithoutTax" minOccurs="0" >
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:decimal">
+																	<xs:attribute name="currency" use="optional"/>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:all>
+												<xs:attribute type="xs:string" name="id"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:all>
+						<xs:attribute type="xs:string" name="id"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="totalItems" type="xs:string" use="optional"/>
+			<xs:attribute name="version" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
