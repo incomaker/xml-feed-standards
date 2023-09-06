@@ -1,4 +1,4 @@
-<coupons version="2.13">
+<coupons version="2.14">
 	<c id="DISCOUNT_10">
 		<reusable>0</reusable>
 		<discountType>PERCENTUAL</discountType>

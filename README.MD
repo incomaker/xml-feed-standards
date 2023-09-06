@@ -24,7 +24,7 @@ The expected URL with parameters that will be called from Incomaker could look l
 
     https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=product
 
-Everything before `?` sign is a **Base URL**, 
+Everything before `?` sign is a **Base URL** (in this example: `https://www.myeshop.com/feed.php`), 
 everything after it are parameters that will be added by Incomaker when downloading your feed.
 
 You will have to provide Incomaker with your **Base URL**.
@@ -49,7 +49,7 @@ Incomaker expects the feeds provided by the e-shop in the following formats. Mos
 
 From version 2.6 on, the root element contains a mandatory attribute version with the protocol version. Omitting this attribute means version < 2.6.
 
-In all cases, the root element (products, orders, etc.) can contain an optional attribute totalItems containing the total number of items of the current entity. It means all the available entities no matter of pagination, limits, offset, etc. of the particular feed request.
+In all cases, the root element (products, orders, etc.) can contain an optional attribute **totalItems** containing the total number of items of the current entity. It means all the available entities no matter of pagination, limits, offset, etc. of the particular feed request.
 
 For each feed, a link to XSD schema file is enclosed.
 
@@ -101,24 +101,9 @@ A set of simple tags.
 
 ### Categories
 
-#### CategoryLanguages
+Collection of product categories.
 
-Caption and links for the individual languages.
-
-
-##### CategoryLanguage
-
-Root element tag: **c**
-
-| Attribute Name | Required     | Type   | Description                                                                                                                                                   |
-|----------------|--------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **id**         | **required** | string | ISO code of the language is preferred (e.g. **en**). IETF language tag (e.g. **en-US**) could be also used, but anything from the third character is ignored. |
-
-
-| Element Name         | Required     | Type         | Description                                             |
-|----------------------|--------------|--------------|---------------------------------------------------------|
-| **parentCategoryId** | optional     | string       | An internal category identifier of the parent category. |
-
+Root element tag: **categories**
 
 #### Category
 
@@ -136,12 +121,25 @@ Root element tag: **c**
 | **url**              | optional     | string       | The URL of the category.                                |
 | **customFields**     | optional     | CustomFields |                                                         |
 
+#### CategoryLanguages
 
-name
-mandatory
-string
-The list of the names of the category in all available languages.
+Caption and links for the individual languages.
 
+Root element tag: **languages**
+
+##### CategoryLanguage
+
+Root element tag: **l**
+
+| Attribute Name | Required     | Type   | Description                                                                                                                                                   |
+|----------------|--------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **id**         | **required** | string | ISO code of the language is preferred (e.g. **en**). IETF language tag (e.g. **en-US**) could be also used, but anything from the third character is ignored. |
+
+
+| Element Name | Required     | Type         | Description                             |
+|--------------|--------------|--------------|-----------------------------------------|
+| **name**     | **required** | string       | Name of the category in given language. |
+| **url**      | optional     | string       | URL of category page in given language. |
 
 #### Example
 
@@ -167,7 +165,21 @@ The list of the names of the category in all available languages.
 </categories>
 ```
 
+### Products
+
+Products provide detailed product information. This is the most complex feed.
+
+#### Example
+
+```xml
+
+```
+
 ### Contacts
+
+Collection of e-shop customers.
+
+Root element tag: **contacts**
 
 #### Contact
 
@@ -334,3 +346,7 @@ Install:
 Validate a feed:
 
     xmllint --schema xsd/orders.xsd orders.xml --noout
+
+Format the XML feed for human readability:
+
+    xmllint orders.xml --format --output orders.formatted.xml
