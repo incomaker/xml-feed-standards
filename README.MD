@@ -347,6 +347,6 @@ Validate a feed:
 
     xmllint --schema xsd/orders.xsd orders.xml --noout
 
-Format the XML feed for human readability:
+Export XML file formatted the for human readability:
 
     xmllint orders.xml --format --output orders.formatted.xml
