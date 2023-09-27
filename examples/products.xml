@@ -3,19 +3,25 @@
 	<p id="P257">
 		<productId>101834</productId>
 		<ean>85941691750107</ean>
-		<imageUrls>
-			<i>https://images.books.com/space-program.jpg</i>
-		</imageUrls>
+		<imageUrl>https://images.books.com/space-program.jpg</imageUrl>
 		<categories>
-			<c>Books</c>
-			<c>Educational</c>
-			<c>Space Travel</c>
+			<c>1</c>
+			<c>2</c>
+			<c>23</c>
 		</categories>
 		<prices>
 			<p currency="USD">
 				<amount>129</amount>
+				<priceWithoutTax>111</priceWithoutTax>
+				<priceAfterDiscount>99</priceAfterDiscount>
+			</p>
+			<p currency="CZK">
+				<amount>2500</amount>
 			</p>
 		</prices>
+		<purchase currency="USD">21</purchase>
+		<unit>pcs</unit>
+		<brand>NASA</brand>
 		<availability>10</availability>
 		<languages>
 			<l id="cs">
