@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<contacts version="2.14" totalItems="6040">
+<inc:contacts
+	xmlns:inc="https://incomaker.com/feed/3.0/contacts"
+	version="2.14"
+	totalItems="6040"
+>
 	<c id="e28bc2f0">
 		<email>neil.armstrong@nasa.gov</email>
 		<sex>MALE</sex>
@@ -31,4 +35,4 @@
 			<f key="EyeColor" group="trait">blue</f>
 		</customFields>
 	</c>
-</contacts>
+</inc:contacts>

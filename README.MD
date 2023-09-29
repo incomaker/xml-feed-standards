@@ -3,6 +3,10 @@
 This repository contains documentation for implementation of Incomaker XML feeds, 
 XSD files for feed validation and an output XML examples..
 
+## TODO
+
+- orders: too many currencies (order/item/price)
+
 ## Submitting the Base URL
 
 Instead of painstaking integration of full API and passing all data through the calls, 

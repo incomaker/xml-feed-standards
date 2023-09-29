@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="categories">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" maxOccurs="unbounded" name="c">
-          <xs:complexType>
-            <xs:all>
-              <xs:element minOccurs="0" name="parentCategoryId" type="xs:string" />
-              <xs:element name="languages">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" name="l">
-                      <xs:complexType>
-                        <xs:all>
-                          <xs:element name="name" type="xs:string" />
-                          <xs:element name="url" type="xs:string" minOccurs="0" />
-                        </xs:all>
-                        <xs:attribute name="id" />
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:all>
-            <xs:attribute type="xs:string" name="id"/>
-          </xs:complexType>
-        </xs:element>
-      </xs:sequence>
-      <xs:attribute name="version" use="optional" />
-      <xs:attribute name="totalItems" use="optional" />
-    </xs:complexType>
-  </xs:element>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:in="https://incomaker.com/feed/3.0"
+	targetNamespace="https://incomaker.com/feed/3.0/categories"
+	xmlns:inc="https://incomaker.com/feed/3.0/categories"
+>
+	<xs:import namespace="https://incomaker.com/feed/3.0" schemaLocation="incomaker.xsd"/>
+	<xs:element name="categories">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="in:feed">
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="c">
+							<xs:complexType>
+								<xs:all>
+									<xs:element minOccurs="0" name="parentCategoryId" type="xs:string"/>
+									<xs:element name="languages">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element minOccurs="0" maxOccurs="unbounded" name="l">
+													<xs:complexType>
+														<xs:all>
+															<xs:element name="name" type="xs:string"/>
+															<xs:element name="url" type="xs:string" minOccurs="0"/>
+														</xs:all>
+														<xs:attribute name="id"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:all>
+								<xs:attribute type="xs:string" name="id"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
 </xs:schema>

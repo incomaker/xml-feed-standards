@@ -1,72 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:in="https://incomaker.com/feed/3.0"
+	targetNamespace="https://incomaker.com/feed/3.0/orders"
+	xmlns:ino="https://incomaker.com/feed/3.0/orders"
+>
+	<xs:import namespace="https://incomaker.com/feed/3.0" schemaLocation="incomaker.xsd"/>
 	<xs:element name="orders">
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" name="o">
-					<xs:complexType>
-						<xs:all>
-							<xs:element name="contactId" type="xs:string" minOccurs="0"/>
-							<xs:element name="contact" minOccurs="0">
-								<xs:complexType>
-									<xs:all>
-										<xs:element minOccurs="0" name="firstName" type="xs:string"/>
-										<xs:element minOccurs="0" name="lastName" type="xs:string"/>
-										<xs:element name="email" type="xs:string"/>
-										<xs:element minOccurs="0" name="street" type="xs:string"/>
-										<xs:element minOccurs="0" name="street2" type="xs:string"/>
-										<xs:element minOccurs="0" name="zipCode" type="xs:string"/>
-										<xs:element minOccurs="0" name="city" type="xs:string"/>
-										<xs:element minOccurs="0" name="phoneNumber1" type="xs:string"/>
-										<xs:element minOccurs="0" name="phoneNumber2" type="xs:string"/>
-										<xs:element minOccurs="0" name="country" type="xs:string"/>
-									</xs:all>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="created" type="xs:dateTime"/>
-							<xs:element minOccurs="0" name="finished" type="xs:dateTime"/>
-							<xs:element minOccurs="0" name="payment" type="xs:string"/>
-							<xs:element minOccurs="0" name="state" type="xs:string"/>
-							<xs:element name="items">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element minOccurs="0" maxOccurs="unbounded" name="i">
-											<xs:complexType>
-												<xs:all>
-													<xs:element minOccurs="0" name="variantId" type="xs:string"/>
-													<xs:element name="quantity" type="xs:decimal"/>
-													<xs:element name="price">
-														<xs:complexType>
-															<xs:simpleContent>
-																<xs:extension base="xs:decimal">
-																	<xs:attribute name="currency" use="optional"/>
-																</xs:extension>
-															</xs:simpleContent>
-														</xs:complexType>
-													</xs:element>
-													<xs:element name="priceWithoutTax" minOccurs="0" >
-														<xs:complexType>
-															<xs:simpleContent>
-																<xs:extension base="xs:decimal">
-																	<xs:attribute name="currency" use="optional"/>
-																</xs:extension>
-															</xs:simpleContent>
-														</xs:complexType>
-													</xs:element>
-												</xs:all>
-												<xs:attribute type="xs:string" name="id"/>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-						</xs:all>
-						<xs:attribute type="xs:string" name="id"/>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-			<xs:attribute name="totalItems" type="xs:string" use="optional"/>
-			<xs:attribute name="version" type="xs:string" use="optional"/>
+			<xs:complexContent>
+				<xs:extension base="in:feed">
+					<xs:all>
+						<xs:element name="o" minOccurs="0">
+							<xs:complexType>
+								<xs:all>
+									<xs:element name="contactId" type="xs:string" minOccurs="0" />
+									<xs:element name="contact" minOccurs="0">
+										<xs:complexType>
+											<xs:all>
+												<xs:element name="email" type="xs:string"/>
+												<xs:element name="firstName" type="xs:string" minOccurs="0" />
+												<xs:element name="lastName" type="xs:string" minOccurs="0" />
+												<xs:element name="street" type="xs:string" minOccurs="0"/>
+												<xs:element name="street2" type="xs:string" minOccurs="0" />
+												<xs:element name="zipCode" type="xs:string" minOccurs="0"/>
+												<xs:element name="city" type="xs:string" minOccurs="0" />
+												<xs:element name="phoneNumber1" type="xs:string" minOccurs="0"/>
+												<xs:element name="phoneNumber2" type="xs:string" minOccurs="0"/>
+												<xs:element name="country" type="xs:string" minOccurs="0"/>
+												<xs:element name="language" type="xs:string" minOccurs="0"/>
+											</xs:all>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="created" type="xs:dateTime" />
+									<xs:element name="finished" type="xs:dateTime" minOccurs="0" />
+									<xs:element name="payment" type="xs:string" minOccurs="0" />
+									<xs:element name="state" type="xs:string" minOccurs="0" />
+									<xs:element name="total" type="xs:decimal" minOccurs="0" />
+									<xs:element name="totalWithoutTax" type="xs:decimal" minOccurs="0" />
+									<xs:element name="currency" type="xs:string" minOccurs="0" />
+									<xs:element name="items">
+										<xs:complexType>
+											<xs:all>
+												<xs:element name="i" minOccurs="0">
+													<xs:complexType>
+														<xs:all>
+															<xs:element name="variantId" type="xs:string" minOccurs="0" />
+															<xs:element name="quantity" type="xs:decimal"/>
+															<xs:element name="price">
+																<xs:complexType>
+																	<xs:simpleContent>
+																		<xs:extension base="xs:decimal">
+																			<xs:attribute name="currency" type="xs:string"/>
+																		</xs:extension>
+																	</xs:simpleContent>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="priceWithoutTax" minOccurs="0" >
+																<xs:complexType>
+																	<xs:simpleContent>
+																		<xs:extension base="xs:decimal">
+																			<xs:attribute name="currency" type="xs:string"/>
+																		</xs:extension>
+																	</xs:simpleContent>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="currency" type="xs:string"/>
+														</xs:all>
+														<xs:attribute name="id" type="xs:string"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:all>
+										</xs:complexType>
+									</xs:element>
+								</xs:all>
+								<xs:attribute name="id" type="xs:string"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:all>
+				</xs:extension>
+			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
+
 </xs:schema>

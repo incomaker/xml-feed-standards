@@ -1,4 +1,7 @@
-<coupons version="2.14">
+<inc:coupons
+	xmlns:inc="https://incomaker.com/feed/3.0/coupons"
+	version="2.14"
+>
 	<c id="DISCOUNT_10">
 		<reusable>0</reusable>
 		<discountType>PERCENTUAL</discountType>
@@ -16,4 +19,4 @@
 			<f key="ImageUrl">https://www.eshop.cz/coupons/12234.jpg</f>
 		</customFields>
 	</c>
-</coupons>
+</inc:coupons>

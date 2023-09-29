@@ -1,64 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema
+	xmlns:in="https://incomaker.com/feed/3.0"
+	targetNamespace="https://incomaker.com/feed/3.0/coupons"
+	xmlns:inc="https://incomaker.com/feed/3.0/coupons"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+	<xs:import namespace="https://incomaker.com/feed/3.0" schemaLocation="incomaker.xsd"/>
 	<xs:element name="coupons">
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="c" maxOccurs="unbounded">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="reusable">
-								<xs:simpleType>
-									<xs:restriction base="xs:byte">
-										<xs:enumeration value="0" />
-										<xs:enumeration value="1" />
-									</xs:restriction>
-								</xs:simpleType>
-							</xs:element>
-							<xs:element name="discountType" minOccurs="0">
-								<xs:simpleType>
-									<xs:restriction base="xs:string">
-										<xs:enumeration value="PERCENTUAL" />
-										<xs:enumeration value="MONETARY" />
-									</xs:restriction>
-								</xs:simpleType>
-							</xs:element>
-							<xs:element type="xs:decimal" name="discount" minOccurs="0"/>
-							<xs:element type="xs:dateTime" name="validFrom" minOccurs="0"/>
-							<xs:element type="xs:dateTime" name="validTo" minOccurs="0"/>
-							<xs:element name="values" >
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="v" maxOccurs="unbounded" minOccurs="1">
-											<xs:simpleType>
-												<xs:restriction base="xs:string"/>
-											</xs:simpleType>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-							<xs:element minOccurs="0" name="customFields">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element minOccurs="0" maxOccurs="unbounded" name="f">
-											<xs:complexType>
-												<xs:simpleContent>
-													<xs:extension base="xs:string">
-														<xs:attribute name="key" type="xs:string" />
-														<xs:attribute name="group" type="xs:string" use="optional"/>
-													</xs:extension>
-												</xs:simpleContent>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-						</xs:sequence>
-						<xs:attribute type="xs:string" name="id"/>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-			<xs:attribute name="totalItems" type="xs:string"/>
-			<xs:attribute name="version" type="xs:string" use="optional"/>
+			<xs:complexContent>
+				<xs:extension base="in:feed">
+					<xs:sequence>
+						<xs:element name="c" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="reusable">
+										<xs:simpleType>
+											<xs:restriction base="xs:byte">
+												<xs:enumeration value="0" />
+												<xs:enumeration value="1" />
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="discountType" minOccurs="0">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="PERCENTUAL" />
+												<xs:enumeration value="MONETARY" />
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element type="xs:decimal" name="discount" minOccurs="0"/>
+									<xs:element type="xs:dateTime" name="validFrom" minOccurs="0"/>
+									<xs:element type="xs:dateTime" name="validTo" minOccurs="0"/>
+									<xs:element name="values" >
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="v" maxOccurs="unbounded" minOccurs="1">
+													<xs:simpleType>
+														<xs:restriction base="xs:string"/>
+													</xs:simpleType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element minOccurs="0" name="customFields">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element minOccurs="0" maxOccurs="unbounded" name="f">
+													<xs:complexType>
+														<xs:simpleContent>
+															<xs:extension base="xs:string">
+																<xs:attribute name="key" type="xs:string" />
+																<xs:attribute name="group" type="xs:string" use="optional"/>
+															</xs:extension>
+														</xs:simpleContent>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute type="xs:string" name="id"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>

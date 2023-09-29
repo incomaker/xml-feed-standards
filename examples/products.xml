@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<products version="2.14" totalItems="100">
+<inp:products
+	xmlns:inp="https://incomaker.com/feed/3.0/products"
+	version="2.14"
+	totalItems="100"
+>
 	<p id="P257">
 		<productId>101834</productId>
+		<active>1</active>
 		<ean>85941691750107</ean>
 		<imageUrl>https://images.books.com/space-program.jpg</imageUrl>
 		<categories>
@@ -20,9 +25,17 @@
 			</p>
 		</prices>
 		<purchase currency="USD">21</purchase>
+		<tax>1.21</tax>
 		<unit>pcs</unit>
 		<brand>NASA</brand>
 		<availability>10</availability>
+		<condition>new</condition>
+		<stock>155</stock>
+		<newFlag>0</newFlag>
+		<specialDealFlag>0</specialDealFlag>
+		<choiceFlag>0</choiceFlag>
+		<added>2023-06-24T08:24:21</added>
+		<updated>2023-06-24T13:00:24</updated>
 		<languages>
 			<l id="cs">
 				<name>Space Program</name>
@@ -34,4 +47,4 @@
 			</l>
 		</languages>
 	</p>
-</products>
+</inp:products>

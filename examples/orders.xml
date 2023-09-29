@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<orders version="2.14" totalItems="10">
+<ino:orders
+	xmlns:ino="https://incomaker.com/feed/3.0/orders"
+	version="2.14"
+	totalItems="10"
+>
 	<o id="88886">
 		<contact>
 			<email>neil.armstrong@nasa.gov</email>
@@ -21,10 +25,10 @@
 		<items>
 			<i id="111836">
 				<quantity>1</quantity>
-				<price>199</price>
+				<price currency="EUR">199</price>
 				<priceWithoutTax>164.46281</priceWithoutTax>
 				<currency>CZK</currency>
 			</i>
 		</items>
 	</o>
-</orders>
+</ino:orders>

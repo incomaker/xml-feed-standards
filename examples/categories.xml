@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
-<categories version="2.14" totalItems="2">
+<inc:categories
+	xmlns:inc="https://incomaker.com/feed/3.0/categories"
+	version="2.14"
+	totalItems="2"
+>
 	<c id="1">
 		<languages>
 			<l id="en">
@@ -16,4 +20,4 @@
 			</l>
 		</languages>
 	</c>
-</categories>
+</inc:categories>

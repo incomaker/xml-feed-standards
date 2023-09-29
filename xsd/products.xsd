@@ -1,111 +1,117 @@
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:element name="products">
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:in="https://incomaker.com/feed/3.0"
+	targetNamespace="https://incomaker.com/feed/3.0/products"
+	xmlns:inp="https://incomaker.com/feed/3.0/products"
+>
+	<xs:import namespace="https://incomaker.com/feed/3.0" schemaLocation="incomaker.xsd"/>
+	<xs:simpleType name="productCondition" final="restriction" >
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="new" />
+			<xs:enumeration value="unwrapped" />
+			<xs:enumeration value="used" />
+			<xs:enumeration value="damaged" />
+			<xs:enumeration value="defunct" />
+			<xs:enumeration value="refurbished" />
+			<xs:enumeration value="other" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="products" >
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="p" maxOccurs="unbounded" minOccurs="0">
-					<xs:complexType>
-						<xs:all>
-							<xs:element name="imageUrl" minOccurs="0" type="xs:string" />
-							<xs:element name="imageUrls" minOccurs="0">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="i" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="categories" minOccurs="0">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="c" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-							<xs:element name="prices" minOccurs="1">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="p" maxOccurs="unbounded">
-											<xs:complexType>
-												<xs:all minOccurs="0">
-													<xs:element type="xs:decimal" name="amount" />
-													<xs:element type="xs:decimal" name="priceAfterDiscount" minOccurs="0"/>
-													<xs:element type="xs:decimal" name="priceWithoutTax" minOccurs="0"/>
-												</xs:all>
-												<xs:attribute type="xs:string" name="currency" use="optional" />
-											</xs:complexType>
-										</xs:element >
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-							<xs:element type="xs:decimal" name="tax" minOccurs="0"/>
-							<xs:element type="xs:decimal" name="purchase" minOccurs="0"/>
-							<xs:element name="tags" minOccurs="0">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="t" maxOccurs="unbounded">
-											<xs:complexType>
-												<xs:simpleContent>
-													<xs:extension base="xs:string">
-														<xs:attribute type="xs:string" name="key" use="optional"/>
-													</xs:extension>
-												</xs:simpleContent>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-							<xs:element type="xs:string" name="unit" minOccurs="0"/>
-							<xs:element type="xs:string" name="brand" minOccurs="0"/>
-							<xs:element type="xs:string" name="ean" minOccurs="0"/>
-							<xs:element type="xs:string" name="condition" minOccurs="0"/>
-							<xs:element type="xs:anyURI" name="url" minOccurs="0"/>
-							<xs:element type="xs:decimal" name="stock" minOccurs="0"/>
-							<xs:element type="xs:byte" name="active" minOccurs="0"/>
-							<xs:element type="xs:string" name="productId" minOccurs="0"/>
-							<xs:element type="xs:byte" name="newFlag" minOccurs="0"/>
-							<xs:element type="xs:byte" name="specialDealFlag" minOccurs="0"/>
-							<xs:element type="xs:byte" name="choiceFlag" minOccurs="0"/>
-							<xs:element type="xs:byte" name="freeShippingFlag" minOccurs="0"/>
-							<xs:element type="xs:dateTime" name="added" minOccurs="0"/>
-							<xs:element type="xs:int" name="availability" minOccurs="0"/>
-							<xs:element name="languages">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="l" maxOccurs="unbounded">
-											<xs:complexType>
-												<xs:all>
-													<xs:element type="xs:string" name="name"/>
-													<xs:element type="xs:string" name="url"/>
-													<xs:element type="xs:string" name="description" minOccurs="0"/>
-													<xs:element type="xs:string" name="shortDescription" minOccurs="0"/>
-													<xs:element name="attributes" minOccurs="0">
-														<xs:complexType>
-															<xs:sequence>
-																<xs:element name="a" maxOccurs="unbounded" minOccurs="0">
-																	<xs:complexType>
-																		<xs:simpleContent>
-																			<xs:extension base="xs:string">
-																				<xs:attribute type="xs:string" name="key" use="optional"/>
-																			</xs:extension>
-																		</xs:simpleContent>
-																	</xs:complexType>
-																</xs:element>
-															</xs:sequence>
-														</xs:complexType>
-													</xs:element>
-												</xs:all>
-												<xs:attribute type="xs:string" name="id"/>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
-								</xs:complexType>
-							</xs:element>
-						</xs:all>
-						<xs:attribute type="xs:string" name="id"/>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-			<xs:attribute type="xs:string" name="totalItems" use="optional"/>
-			<xs:attribute type="xs:string" name="version" use="optional"/>
+			<xs:complexContent>
+				<xs:extension base="in:feed">
+					<xs:all>
+						<xs:element name="p" minOccurs="0">
+							<xs:complexType>
+								<xs:all>
+									<xs:element name="productId" type="xs:string" minOccurs="0"/>
+									<xs:element name="active" type="xs:byte" minOccurs="0"/>
+									<xs:element name="ean" type="xs:string" minOccurs="0"/>
+									<xs:element name="imageUrl" minOccurs="0" type="xs:string" />
+									<xs:element name="categories" minOccurs="0">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="c" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="prices" minOccurs="1">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="p" maxOccurs="unbounded">
+													<xs:complexType>
+														<xs:all minOccurs="0">
+															<xs:element type="xs:decimal" name="amount" />
+															<xs:element type="xs:decimal" name="priceAfterDiscount" minOccurs="0"/>
+															<xs:element type="xs:decimal" name="priceWithoutTax" minOccurs="0"/>
+														</xs:all>
+														<xs:attribute type="xs:string" name="currency" use="optional" />
+													</xs:complexType>
+												</xs:element >
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="tax" type="xs:decimal" minOccurs="0"/>
+									<xs:element name="purchase" minOccurs="0">
+										<xs:complexType>
+											<xs:simpleContent>
+												<xs:extension base="xs:decimal">
+													<xs:attribute name="currency" type="xs:string" use="required" />
+												</xs:extension>
+											</xs:simpleContent>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="tags" type="in:tags" minOccurs="0"/>
+									<xs:element name="unit" type="xs:string" minOccurs="0"/>
+									<xs:element name="brand" type="xs:string" minOccurs="0"/>
+									<xs:element name="condition" type="inp:productCondition" minOccurs="0"/>
+									<xs:element name="stock" type="xs:int" minOccurs="0"/>
+									<xs:element name="newFlag" type="xs:byte" minOccurs="0"/>
+									<xs:element name="specialDealFlag" type="xs:byte" minOccurs="0"/>
+									<xs:element name="choiceFlag" type="xs:byte" minOccurs="0"/>
+									<xs:element name="freeShippingFlag" type="xs:byte" minOccurs="0"/>
+									<xs:element name="added" type="xs:dateTime" minOccurs="0"/>
+									<xs:element name="updated" type="xs:dateTime" minOccurs="0"/>
+									<xs:element name="availability" type="xs:int" minOccurs="0"/>
+									<xs:element name="languages">
+										<xs:complexType>
+											<xs:all>
+												<xs:element name="l">
+													<xs:complexType>
+														<xs:all>
+															<xs:element type="xs:string" name="name" />
+															<xs:element type="xs:anyURI" name="url" />
+															<xs:element type="xs:string" name="description" minOccurs="0"/>
+															<xs:element type="xs:string" name="shortDescription" minOccurs="0"/>
+															<xs:element name="attributes" minOccurs="0">
+																<xs:complexType>
+																	<xs:all>
+																		<xs:element name="a" minOccurs="0">
+																			<xs:complexType>
+																				<xs:simpleContent>
+																					<xs:extension base="xs:string">
+																						<xs:attribute type="xs:string" name="key" use="optional"/>
+																					</xs:extension>
+																				</xs:simpleContent>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:all>
+																</xs:complexType>
+															</xs:element>
+														</xs:all>
+														<xs:attribute type="xs:string" name="id"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:all>
+										</xs:complexType>
+									</xs:element>
+								</xs:all>
+								<xs:attribute type="xs:string" name="id"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:all>
+				</xs:extension>
+			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
 </xs:schema>
