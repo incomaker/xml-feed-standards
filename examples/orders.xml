@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ino:orders
 	xmlns:ino="https://incomaker.com/feed/3.0/orders"
-	version="2.14"
 	totalItems="10"
 >
 	<o id="88886">

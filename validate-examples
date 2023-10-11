@@ -1,0 +1,5 @@
+xmllint --schema xsd/categories.xsd examples/categories.xml --noout
+xmllint --schema xsd/products.xsd examples/products.xml --noout
+xmllint --schema xsd/contacts.xsd examples/contacts.xml --noout
+xmllint --schema xsd/orders.xsd examples/orders.xml --noout
+xmllint --schema xsd/coupons.xsd examples/coupons.xml --noout

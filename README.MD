@@ -3,10 +3,6 @@
 This repository contains documentation for implementation of Incomaker XML feeds, 
 XSD files for feed validation and an output XML examples..
 
-## TODO
-
-- orders: too many currencies (order/item/price)
-
 ## Submitting the Base URL
 
 Instead of painstaking integration of full API and passing all data through the calls, 
@@ -149,7 +145,10 @@ Root element tag: **l**
 
 ```xml
 <?xml version="1.0"?>
-<categories version="2.14" totalItems="2">
+<inc:categories
+    xmlns:inc="https://incomaker.com/feed/3.0/categories"
+    totalItems="2"
+>
     <c id="1">
         <languages>
             <l id="en">
@@ -166,17 +165,181 @@ Root element tag: **l**
             </l>
         </languages>
     </c>
-</categories>
+</inc:categories>
 ```
 
 ### Products
 
 Products provide detailed product information. This is the most complex feed.
 
+Collection of products. Root element tag: **products**
+
+#### ProductCategories
+
+The list of the category IDs, where the product is present.
+
 #### Example
 
 ```xml
+<categories>
+    <c>1</c>
+    <c>12</c>
+</categories>
+```
 
+#### ProductPrices
+
+List of product prices.
+
+| Attribute Name | Required | Type   | Description                           |
+|----------------|----------|--------|---------------------------------------|
+| **currency**   | optional | string | An Id of the variant of the product.. |
+| **pricelist**  | optional | string | Name of the pricelist.                |
+
+
+| Element Name           | Required     | Type    | Description                                                                                                                                                               |
+|------------------------|--------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **amount**             | **required** | decimal | Base price of the products (typically tax inclusive).                                                                                                                     |
+| **priceAfterDiscount** | optional     | decimal | Reduced price if there is a discount (the same regime as in the amount element, i.e. tax inclusive). If there is no reduction on this item, don’t use the element at all. |
+| **priceWithoutTax**    | optional     | decimal | Price without tax (VAT or sales tax).                                                                                                                                     |
+
+#### Example
+
+```xml
+<prices>
+    <p currency="USD" pricelist="cenik1">
+        <amount>129</amount>
+        <priceWithoutTax>111</priceWithoutTax>
+        <priceAfterDiscount>99</priceAfterDiscount>
+    </p>
+</prices>
+```
+
+#### ProductLanguages
+
+Product strings in different languages.
+
+Root element tag: **languages**
+
+##### ProductLanguage
+
+Root element tag: **l**
+
+| Attribute Name | Required     | Type   | Description                                                                                                                                                   |
+|----------------|--------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **id**         | **required** | string | ISO code of the language is preferred (e.g. **en**). IETF language tag (e.g. **en-US**) could be also used, but anything from the third character is ignored. |
+
+
+| Element Name         | Required     | Type         | Description                                           |
+|----------------------|--------------|--------------|-------------------------------------------------------|
+| **name**             | **required** | string       | Name of the product in given language.                |
+| **description**      | optional     | string       | Product description in the particular language.       |
+| **shortDescription** | optional     | string       | Product short description in the particular language. |
+| **url**              | **required** | string       | A URL of the product in the given language.           |
+
+TODO: attributes?
+
+#### RelatedProducts
+
+A set of productIds of similar/related products.
+
+#### Example
+
+```xml
+<related>
+    <r>1001001</r>
+    <r>2305001</r>
+</related>
+```
+
+#### Product Variant
+
+Represents a single product variant.
+
+Root element tag: **p**
+
+| Attribute Name | Required     | Type   | Description                            |
+|----------------|--------------|--------|----------------------------------------|
+| **id**         | **required** | string | An Id of the variant of the product..  |
+
+
+| Element Name        | Required     | Type                 | Description                                                                                                                             |
+|---------------------|--------------|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| **imageUrl**        | optional     | string               | URL of image of the product.                                                                                                            |
+| **categories**      | optional     | *ProductCategories*  | The list of the category IDs, where the product is present.                                                                             |
+| **prices**          | **required** | *ProductPrices*      | List of product prices in different currencies.                                                                                         |
+| **purchase**        | optional     | decimal              | Purchase price of the stock. Purchase price of the stock. In an optional attribute **currency**, you can set the currency of the price. |
+| **tags**            | optional     | *Tags*               | Product tags.                                                                                                                           |
+| **tax**             | optional     | decimal              | Tax in for of decimal number (e.g. 1.21 for tax of 21%)                                                                                 |
+| **unit**            | optional     | string               | The name of the unit.                                                                                                                   |
+| **brand**           | optional     | string               | Brand name.                                                                                                                             |
+| **ean**             | optional     | string               | EAN code                                                                                                                                |
+| **condition**       | optional     | enum                 | The condition of the product. The possible values are: new, unwrapped, used, damaged, defunct, refurbished, other                       |
+| **stock**           | optional     | integer              | The number of the items on hand.                                                                                                        |
+| **active**          | optional     | byte                 | The product is active. 0=no, 1=yes                                                                                                      |
+| **productId**       | optional     | string               | If this item is a variant, then this is an Id of the parent product.                                                                    |
+| **newFlag**         | optional     | byte                 | The product is flagged new. 0=no, 1=yes                                                                                                 |
+| **specialDealFlag** | optional     | byte                 | The product is flagged a special deal. 0=no, 1=yes                                                                                      |
+| **choiceFlag**      | optional     | byte                 | The product is flagged a choice (recommended product). 0=no, 1=yes                                                                      |
+| **added**           | optional     | datetime             | When the product was added to e-shop.                                                                                                   |
+| **updated**         | optional     | datetime             | When the product was updated for the last time.                                                                                         |
+| **availability**    | optional     | integer              | The number of days to deliver the product. 0 means immediately.                                                                         |
+| **languages**       | **required** | **ProductLanguages** | Product strings in different languages.                                                                                                 |
+| **related**         | optional     | **RelatedProducts**  | A set of productIds of similar/related products.                                                                                        |
+| **customFields**    | optional     | **CustomFields**     | A map of custom fields where any product-related value can be stored.                                                                   |
+
+#### Example
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<inp:products
+	xmlns:inp="https://incomaker.com/feed/3.0/products"
+	totalItems="100"
+>
+	<p id="P257">
+		<productId>101834</productId>
+		<active>1</active>
+		<ean>85941691750107</ean>
+		<imageUrl>https://images.books.com/space-program.jpg</imageUrl>
+		<categories>
+			<c>1</c>
+			<c>2</c>
+			<c>23</c>
+		</categories>
+		<prices>
+			<p currency="USD">
+				<amount>129</amount>
+				<priceWithoutTax>111</priceWithoutTax>
+				<priceAfterDiscount>99</priceAfterDiscount>
+			</p>
+			<p currency="CZK">
+				<amount>2500</amount>
+			</p>
+		</prices>
+		<purchase currency="USD">21</purchase>
+		<tax>1.21</tax>
+		<unit>pcs</unit>
+		<brand>NASA</brand>
+		<availability>10</availability>
+		<condition>new</condition>
+		<stock>155</stock>
+		<newFlag>0</newFlag>
+		<specialDealFlag>0</specialDealFlag>
+		<choiceFlag>0</choiceFlag>
+		<added>2023-06-24T08:24:21</added>
+		<updated>2023-06-24T13:00:24</updated>
+		<languages>
+			<l id="cs">
+				<name>Space Program</name>
+				<description>
+					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam egestas wisi a erat. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Maecenas ipsum velit, consectetuer eu lobortis ut, dictum at dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Fusce tellus. Nullam eget nisl. Curabitur ligula sapien, pulvinar a vestibulum quis, facilisis vel sapien. Etiam egestas wisi a erat. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Aliquam erat volutpat. Nullam eget nisl. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede.
+				</description>
+				<url>https://www.books.com/educational/space-program</url>
+				<attributes/>
+			</l>
+		</languages>
+	</p>
+</inp:products>
 ```
 
 ### Contacts

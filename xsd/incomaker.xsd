@@ -6,7 +6,6 @@
 >
 	<xs:complexType name="feed">
 		<xs:attribute name="totalItems" type="xs:int" />
-		<xs:attribute name="version" type="xs:string" use="required" />
 	</xs:complexType>
 	<xs:simpleType name="nonEmptyString">
 		<xs:restriction base="xs:string">
