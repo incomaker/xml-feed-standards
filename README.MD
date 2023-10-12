@@ -75,6 +75,27 @@ Root element tag: **f**
 | Attribute Name | Required     | Type   | Description                        |
 |----------------|--------------|--------|------------------------------------|
 | **key**        | **required** | string | Name of custom field               |
+
+#### Example
+
+```xml
+<customFields>
+    <f key="ShoeSize">L</f>
+    <f key="EyeColor">blue</f>
+</customFields>
+```
+
+### GroupedCustomFields
+
+A map of custom fields where any related value can be stored. In contract with *CustomFields*, these can additionally be assigned a group.
+
+#### GroupedCustomField
+
+Root element tag: **f**
+
+| Attribute Name | Required     | Type   | Description                        |
+|----------------|--------------|--------|------------------------------------|
+| **key**        | **required** | string | Name of custom field               |
 | **group**      | optional     | string | Logical grouping of related fields |
 
 #### Example
@@ -119,7 +140,6 @@ Root element tag: **c**
 | **parentCategoryId** | optional     | string       | An internal category identifier of the parent category. |
 | **languages**        | **required** | string       | An internal category identifier of the parent category. |
 | **url**              | optional     | string       | The URL of the category.                                |
-| **customFields**     | optional     | CustomFields |                                                         |
 
 #### CategoryLanguages
 
@@ -230,14 +250,13 @@ Root element tag: **l**
 | **id**         | **required** | string | ISO code of the language is preferred (e.g. **en**). IETF language tag (e.g. **en-US**) could be also used, but anything from the third character is ignored. |
 
 
-| Element Name         | Required     | Type         | Description                                           |
-|----------------------|--------------|--------------|-------------------------------------------------------|
-| **name**             | **required** | string       | Name of the product in given language.                |
-| **description**      | optional     | string       | Product description in the particular language.       |
-| **shortDescription** | optional     | string       | Product short description in the particular language. |
-| **url**              | **required** | string       | A URL of the product in the given language.           |
-
-TODO: attributes?
+| Element Name         | Required     | Type             | Description                                           |
+|----------------------|--------------|------------------|-------------------------------------------------------|
+| **name**             | **required** | string           | Name of the product in given language.                |
+| **description**      | optional     | string           | Product description in the particular language.       |
+| **shortDescription** | optional     | string           | Product short description in the particular language. |
+| **url**              | **required** | string           | A URL of the product in the given language.           |
+| **customFields**     | optional     | **CustomFields** | A map of language-specific custom fields.             |
 
 #### RelatedProducts
 
@@ -263,82 +282,86 @@ Root element tag: **p**
 | **id**         | **required** | string | An Id of the variant of the product..  |
 
 
-| Element Name        | Required     | Type                 | Description                                                                                                                             |
-|---------------------|--------------|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
-| **imageUrl**        | optional     | string               | URL of image of the product.                                                                                                            |
-| **categories**      | optional     | *ProductCategories*  | The list of the category IDs, where the product is present.                                                                             |
-| **prices**          | **required** | *ProductPrices*      | List of product prices in different currencies.                                                                                         |
-| **purchase**        | optional     | decimal              | Purchase price of the stock. Purchase price of the stock. In an optional attribute **currency**, you can set the currency of the price. |
-| **tags**            | optional     | *Tags*               | Product tags.                                                                                                                           |
-| **tax**             | optional     | decimal              | Tax in for of decimal number (e.g. 1.21 for tax of 21%)                                                                                 |
-| **unit**            | optional     | string               | The name of the unit.                                                                                                                   |
-| **brand**           | optional     | string               | Brand name.                                                                                                                             |
-| **ean**             | optional     | string               | EAN code                                                                                                                                |
-| **condition**       | optional     | enum                 | The condition of the product. The possible values are: new, unwrapped, used, damaged, defunct, refurbished, other                       |
-| **stock**           | optional     | integer              | The number of the items on hand.                                                                                                        |
-| **active**          | optional     | byte                 | The product is active. 0=no, 1=yes                                                                                                      |
-| **productId**       | optional     | string               | If this item is a variant, then this is an Id of the parent product.                                                                    |
-| **newFlag**         | optional     | byte                 | The product is flagged new. 0=no, 1=yes                                                                                                 |
-| **specialDealFlag** | optional     | byte                 | The product is flagged a special deal. 0=no, 1=yes                                                                                      |
-| **choiceFlag**      | optional     | byte                 | The product is flagged a choice (recommended product). 0=no, 1=yes                                                                      |
-| **added**           | optional     | datetime             | When the product was added to e-shop.                                                                                                   |
-| **updated**         | optional     | datetime             | When the product was updated for the last time.                                                                                         |
-| **availability**    | optional     | integer              | The number of days to deliver the product. 0 means immediately.                                                                         |
-| **languages**       | **required** | **ProductLanguages** | Product strings in different languages.                                                                                                 |
-| **related**         | optional     | **RelatedProducts**  | A set of productIds of similar/related products.                                                                                        |
-| **customFields**    | optional     | **CustomFields**     | A map of custom fields where any product-related value can be stored.                                                                   |
+| Element Name        | Required     | Type                | Description                                                                                                                             |
+|---------------------|--------------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| **imageUrl**        | optional     | string              | URL of image of the product.                                                                                                            |
+| **categories**      | optional     | *ProductCategories* | The list of the category IDs, where the product is present.                                                                             |
+| **prices**          | **required** | *ProductPrices*     | List of product prices in different currencies.                                                                                         |
+| **purchase**        | optional     | decimal             | Purchase price of the stock. Purchase price of the stock. In an optional attribute **currency**, you can set the currency of the price. |
+| **tags**            | optional     | *Tags*              | Product tags.                                                                                                                           |
+| **tax**             | optional     | decimal             | Tax in for of decimal number (e.g. 1.21 for tax of 21%)                                                                                 |
+| **unit**            | optional     | string              | The name of the unit.                                                                                                                   |
+| **brand**           | optional     | string              | Brand name.                                                                                                                             |
+| **ean**             | optional     | string              | EAN code                                                                                                                                |
+| **condition**       | optional     | enum                | The condition of the product. The possible values are: new, unwrapped, used, damaged, defunct, refurbished, other                       |
+| **stock**           | optional     | integer             | The number of the items on hand.                                                                                                        |
+| **active**          | optional     | byte                | The product is active. 0=no, 1=yes                                                                                                      |
+| **productId**       | optional     | string              | If this item is a variant, then this is an Id of the parent product.                                                                    |
+| **newFlag**         | optional     | byte                | The product is flagged new. 0=no, 1=yes                                                                                                 |
+| **specialDealFlag** | optional     | byte                | The product is flagged a special deal. 0=no, 1=yes                                                                                      |
+| **choiceFlag**      | optional     | byte                | The product is flagged a choice (recommended product). 0=no, 1=yes                                                                      |
+| **added**           | optional     | datetime            | When the product was added to e-shop.                                                                                                   |
+| **updated**         | optional     | datetime            | When the product was updated for the last time.                                                                                         |
+| **availability**    | optional     | integer             | The number of days to deliver the product. 0 means immediately.                                                                         |
+| **languages**       | **required** | *ProductLanguages*  | Product strings in different languages.                                                                                                 |
+| **related**         | optional     | *RelatedProducts*   | A set of productIds of similar/related products.                                                                                        |
+| **customFields**    | optional     | *CustomFields*      | A map of custom fields where any product-related value can be stored.                                                                   |
 
 #### Example
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <inp:products
-	xmlns:inp="https://incomaker.com/feed/3.0/products"
-	totalItems="100"
+    xmlns:inp="https://incomaker.com/feed/3.0/products"
+    totalItems="100"
 >
-	<p id="P257">
-		<productId>101834</productId>
-		<active>1</active>
-		<ean>85941691750107</ean>
-		<imageUrl>https://images.books.com/space-program.jpg</imageUrl>
-		<categories>
-			<c>1</c>
-			<c>2</c>
-			<c>23</c>
-		</categories>
-		<prices>
-			<p currency="USD">
-				<amount>129</amount>
-				<priceWithoutTax>111</priceWithoutTax>
-				<priceAfterDiscount>99</priceAfterDiscount>
-			</p>
-			<p currency="CZK">
-				<amount>2500</amount>
-			</p>
-		</prices>
-		<purchase currency="USD">21</purchase>
-		<tax>1.21</tax>
-		<unit>pcs</unit>
-		<brand>NASA</brand>
-		<availability>10</availability>
-		<condition>new</condition>
-		<stock>155</stock>
-		<newFlag>0</newFlag>
-		<specialDealFlag>0</specialDealFlag>
-		<choiceFlag>0</choiceFlag>
-		<added>2023-06-24T08:24:21</added>
-		<updated>2023-06-24T13:00:24</updated>
-		<languages>
-			<l id="cs">
-				<name>Space Program</name>
-				<description>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam egestas wisi a erat. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Maecenas ipsum velit, consectetuer eu lobortis ut, dictum at dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Fusce tellus. Nullam eget nisl. Curabitur ligula sapien, pulvinar a vestibulum quis, facilisis vel sapien. Etiam egestas wisi a erat. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Aliquam erat volutpat. Nullam eget nisl. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede.
-				</description>
-				<url>https://www.books.com/educational/space-program</url>
-				<attributes/>
-			</l>
-		</languages>
-	</p>
+    <p id="P257">
+        <productId>101834</productId>
+        <active>1</active>
+        <ean>85941691750107</ean>
+        <imageUrl>https://images.books.com/space-program.jpg</imageUrl>
+        <categories>
+            <c>1</c>
+            <c>2</c>
+            <c>23</c>
+        </categories>
+        <prices>
+            <p currency="USD">
+                <amount>129</amount>
+                <priceWithoutTax>111</priceWithoutTax>
+                <priceAfterDiscount>99</priceAfterDiscount>
+            </p>
+            <p currency="CZK">
+                <amount>2500</amount>
+            </p>
+        </prices>
+        <purchase currency="USD">21</purchase>
+        <tax>1.21</tax>
+        <unit>pcs</unit>
+        <brand>NASA</brand>
+        <availability>10</availability>
+        <condition>new</condition>
+        <stock>155</stock>
+        <newFlag>0</newFlag>
+        <specialDealFlag>0</specialDealFlag>
+        <choiceFlag>0</choiceFlag>
+        <added>2023-06-24T08:24:21</added>
+        <updated>2023-06-24T13:00:24</updated>
+        <languages>
+            <l id="cs">
+                <name>Space Program</name>
+                <description>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam egestas wisi a erat. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Maecenas ipsum
+                    velit, consectetuer eu lobortis ut, dictum at dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+                    consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
+                    eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Fusce tellus. Nullam eget nisl. Curabitur ligula sapien, pulvinar a vestibulum quis, facilisis vel sapien. Etiam egestas wisi a erat. Neque porro quisquam est,
+                    qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Proin pede metus, vulputate nec, fermentum fringilla,
+                    vehicula vitae, justo. Aliquam erat volutpat. Nullam eget nisl. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede.
+                </description>
+                <url>https://www.books.com/educational/space-program</url>
+            </l>
+        </languages>
+    </p>
 </inp:products>
 ```
 
@@ -356,30 +379,30 @@ Root element tag: **c**
 |----------------|--------------|--------|-------------------------------------|
 | **id**         | **required** | string | An Id of the contact in the e-shop  |
 
-| Element Name     | Required | Type         | Description                                           |
-|------------------|----------|--------------|-------------------------------------------------------|
-| **firstName**    | optional | string       |                                                       |
-| **lastName**     | optional | string       |                                                       |
-| **sex**          | optional | string       | Possible values: **MALE**, **FEMALE** or **UNKNOWN**  |
-| **email**        | optional | string       |                                                       |
-| **language**     | optional | string       | The language code (ISO 639-1, e.g. en)                |
-| **birthday**     | optional | date         |                                                       |
-| **consentDate**  | optional | datetime     | GDPR consent date                                     |
-| **consentTitle** | optional | string       | GDPR consent title                                    |
-| **web**          | optional | string       |                                                       |
-| **remarks**      | optional | string       |                                                       |
-| **street**       | optional | string       |                                                       |
-| **street2**      | optional | string       |                                                       |
-| **city**         | optional | string       |                                                       |
-| **zipCode**      | optional | string       |                                                       |
-| **phoneNumber1** | optional | string       |                                                       |
-| **phoneNumber2** | optional | string       |                                                       |
-| **country**      | optional | string       | ISO country code (two letters)                        |
-| **newsletter**   | optional | byte         | Is customer subscribed to a newsletter? (0=no, 1=yes) |
-| **currency**     | optional | string       | Customer’s default currency                           |
-| **pricelist**    | optional | string       | Customer’s default pricelist                          |
-| **tags**         | optional | Tags         |                                                       |
-| **customFields** | optional | CustomFields |                                                       |
+| Element Name     | Required | Type                  | Description                                           |
+|------------------|----------|-----------------------|-------------------------------------------------------|
+| **firstName**    | optional | string                |                                                       |
+| **lastName**     | optional | string                |                                                       |
+| **sex**          | optional | string                | Possible values: **MALE**, **FEMALE** or **UNKNOWN**  |
+| **email**        | optional | string                |                                                       |
+| **language**     | optional | string                | The language code (ISO 639-1, e.g. en)                |
+| **birthday**     | optional | date                  |                                                       |
+| **consentDate**  | optional | datetime              | GDPR consent date                                     |
+| **consentTitle** | optional | string                | GDPR consent title                                    |
+| **web**          | optional | string                |                                                       |
+| **remarks**      | optional | string                |                                                       |
+| **street**       | optional | string                |                                                       |
+| **street2**      | optional | string                |                                                       |
+| **city**         | optional | string                |                                                       |
+| **zipCode**      | optional | string                |                                                       |
+| **phoneNumber1** | optional | string                |                                                       |
+| **phoneNumber2** | optional | string                |                                                       |
+| **country**      | optional | string                | ISO country code (two letters)                        |
+| **newsletter**   | optional | byte                  | Is customer subscribed to a newsletter? (0=no, 1=yes) |
+| **currency**     | optional | string                | Customer’s default currency                           |
+| **pricelist**    | optional | string                | Customer’s default pricelist                          |
+| **tags**         | optional | *Tags*                |                                                       |
+| **customFields** | optional | *GroupedCustomFields* |                                                       |
 
 #### Example
 
@@ -435,7 +458,7 @@ Example:
 
 #### CouponValues
 
-The list of actual coupon codes.
+List of actual coupon codes.
 
 ##### Example
 
@@ -463,7 +486,6 @@ Root element tag: **c**
 | **validFrom**    | optional     | datetime     |                                                                                                                                                                                                                                |
 | **validTo**      | optional     | datetime     |                                                                                                                                                                                                                                |
 | **values**       | **required** | CouponValues | The list of actual coupon codes.                                                                                                                                                                                               |
-| **customFields** | optional     | CustomFields |                                                                                                                                                                                                                                |
 
 #### Example
 
@@ -480,11 +502,6 @@ Root element tag: **c**
             <v>GHCJKD</v>
             <v>D45s45</v>
         </values>
-        <customFields>
-            <f key="MaximumUseByPerson" group="parameters">2</f>
-            <f key="MaximumTotalUse" group="parameters">1000</f>
-            <f key="ImageUrl">https://www.eshop.cz/coupons/12234.jpg</f>
-        </customFields>
     </c>
 </coupons>
 ```

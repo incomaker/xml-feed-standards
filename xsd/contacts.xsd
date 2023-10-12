@@ -36,7 +36,7 @@
 									<xs:element name="currency" type="xs:string" minOccurs="0" />
 									<xs:element name="pricelist" type="xs:string" minOccurs="0" />
 									<xs:element name="tags" type="in:tags" minOccurs="0" />
-									<xs:element name="customFields" type="in:customFields" minOccurs="0" />
+									<xs:element name="customFields" type="in:groupedCustomFields" minOccurs="0" />
 								</xs:all>
 								<xs:attribute type="xs:string" name="id"/>
 							</xs:complexType>

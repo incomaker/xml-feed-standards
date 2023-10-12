@@ -44,22 +44,6 @@
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
-									<xs:element minOccurs="0" name="customFields">
-										<xs:complexType>
-											<xs:sequence>
-												<xs:element minOccurs="0" maxOccurs="unbounded" name="f">
-													<xs:complexType>
-														<xs:simpleContent>
-															<xs:extension base="xs:string">
-																<xs:attribute name="key" type="xs:string" />
-																<xs:attribute name="group" type="xs:string" use="optional"/>
-															</xs:extension>
-														</xs:simpleContent>
-													</xs:complexType>
-												</xs:element>
-											</xs:sequence>
-										</xs:complexType>
-									</xs:element>
 								</xs:sequence>
 								<xs:attribute type="xs:string" name="id"/>
 							</xs:complexType>

@@ -24,6 +24,19 @@
 					<xs:simpleContent>
 						<xs:extension base="in:nonEmptyString">
 							<xs:attribute name="key" type="xs:string" use="required" />
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="groupedCustomFields">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="f">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="in:nonEmptyString">
+							<xs:attribute name="key" type="xs:string" use="required" />
 							<xs:attribute name="group" type="xs:string" />
 						</xs:extension>
 					</xs:simpleContent>

@@ -12,10 +12,5 @@
 			<v>GHCJKD</v>
 			<v>D45s45</v>
 		</values>
-		<customFields>
-			<f key="MaximumUseByPerson" group="parameters">2</f>
-			<f key="MaximumTotalUse" group="parameters">1000</f>
-			<f key="ImageUrl">https://www.eshop.cz/coupons/12234.jpg</f>
-		</customFields>
 	</c>
 </inc:coupons>
