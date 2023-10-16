@@ -1,9 +1,7 @@
 # Incomaker XML Feed Standards
 
 This repository contains documentation for implementation of Incomaker XML feeds, 
-XSD files for feed validation and an output XML examples..
-
-## Submitting the Base URL
+XSD files for feed validation and an output XML examples.
 
 Instead of painstaking integration of full API and passing all data through the calls, 
 just provide Incomaker with the following data.
@@ -16,6 +14,9 @@ You should create the following data feeds:
 - Contacts
 - Orders
 - Coupons
+- Info
+
+## Submitting the Base URL
 
 ### Feed Base URL
 
@@ -49,9 +50,10 @@ Incomaker expects the feeds provided by the e-shop in the following formats. Mos
 
 From version 2.6 on, the root element contains a mandatory attribute version with the protocol version. Omitting this attribute means version < 2.6.
 
-In all cases, the root element (products, orders, etc.) can contain an optional attribute **totalItems** containing the total number of items of the current entity. It means all the available entities no matter of pagination, limits, offset, etc. of the particular feed request.
+In all cases, the root element (products, orders, etc.) can contain an optional attribute **totalItems** containing the total number of filtered items of the current entity. 
+It means all the available entities after filtering (applied *since* date) before applying pagination (*limit* and *offset*).
 
-For each feed, a link to XSD schema file is enclosed.
+XML structure definition is bellow, for each feed, a link to XSD schema file is enclosed.
 
 ### Date formats
 
@@ -408,7 +410,10 @@ Root element tag: **c**
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
-<contacts version="2.14.0" totalItems="6040">
+<inc:contacts
+    xmlns:inc="https://incomaker.com/feed/3.0/contacts"
+    totalItems="6040"
+>
     <c id="e28bc2f0">
         <email>neil.armstrong@nasa.gov</email>
         <sex>MALE</sex>
@@ -440,10 +445,116 @@ Root element tag: **c**
             <f key="EyeColor" group="trait">blue</f>
         </customFields>
     </c>
-</contacts>
+</inc:contacts>
 ```
 
 Validate with [XML Schema Definition](xsd/contacts.xsd).
+
+### Orders
+
+List of the orders.
+
+#### OrderContact
+
+Contact details in case of unregistered sale.
+There must be either **contactId** or **contact** specified. Only one of the elements is allowed!
+
+Root element tag: **contact**
+
+| Attribute Name | Required     | Type   | Description                        |
+|----------------|--------------|--------|------------------------------------|
+| **id**         | **required** | string | An Id of the order in the e-shop.  |
+
+| Element Name     | Required | Type           | Description                     |
+|------------------|----------|----------------|---------------------------------|
+| **firstName**    | optional | string         |                                 |
+| **lastName**     | optional | string         |                                 |
+| **email**        | optional | string         |                                 |
+| **street**       | optional | string         |                                 |
+| **street2**      | optional | string         |                                 |
+| **city**         | optional | string         |                                 |
+| **zipCode**      | optional | string         |                                 |
+| **phoneNumber1** | optional | string         |                                 |
+| **phoneNumber2** | optional | string         |                                 |
+| **country**      | optional | string         | ISO country code (two letters)  |
+| **language**     | optional | string         | ISO language code (two letters) |
+
+#### OrderItems
+
+List of order items.
+
+##### Order Item
+
+Root element tag: **i**
+
+| Attribute Name | Required     | Type   | Description                                                       |
+|----------------|--------------|--------|-------------------------------------------------------------------|
+| **id**         | **required** | string | An Id of product variant. Should match **id** in *Products* feed. |
+
+| Element Name        | Required     | Type    | Description                           |
+|---------------------|--------------|---------|---------------------------------------|
+| **quantity**        | **required** | decimal | The quantity of goods sold.           |
+| **price**           | **required** | decimal | The price of the item. Tax inclusive. |
+| **priceWithoutTax** | optional     | decimal | The price of the item without tax.    |
+
+#### Order
+
+Root element tag: **o**
+
+| Attribute Name | Required     | Type   | Description                        |
+|----------------|--------------|--------|------------------------------------|
+| **id**         | **required** | string | An Id of the order in the e-shop.  |
+
+| Element Name        | Required     | Type           | Description                                                                            |
+|---------------------|--------------|----------------|----------------------------------------------------------------------------------------|
+| **contactId**       | optional     | string         | An Id of the contact in the e-shop. (Use only when **contact** is missing)             |
+| **contact**         | optional     | *OrderContact* | Contact details in case of unregistered sale. (Use only when **contactId** is missing) |
+| **created**         | optional     | datetime       | The timestamp of creation.                                                             |
+| **finished**        | optional     | datetime       | The timestamp of the moment when the order is finished.                                |
+| **total**           | optional     | decimal        | Total price of the order including shipping, discounts, etc.                           |
+| **totalWithoutTax** | optional     | decimal        | Total price of the order including shipping, discounts, etc. - tax exclusive.          |
+| **currency**        | optional     | string         | Order currency.                                                                        |
+| **payment**         | optional     | string         | The means of payment.                                                                  |
+| **state**           | optional     | string         | The state of the order.                                                                |
+| **items**           | **required** | *OrderItems*   | The list of the items in the order.                                                    |
+
+#### Example
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<ino:orders
+	xmlns:ino="https://incomaker.com/feed/3.0/orders"
+	totalItems="10"
+>
+	<o id="88886">
+		<contact>
+			<email>neil.armstrong@nasa.gov</email>
+			<firstName>Neil</firstName>
+			<lastName>Armstrong</lastName>
+			<phoneNumber1>0102030405</phoneNumber1>
+			<city>Moon City</city>
+			<country>US</country>
+			<street>Crater Road</street>
+			<language>en</language>
+			<zipCode>79401</zipCode>
+		</contact>
+		<created>1969-06-24T16:19:22</created>
+		<finished>1969-06-24T18:20:05</finished>
+		<payment>credit card</payment>
+		<total>284</total>
+		<totalWithoutTax>234.71074388429753</totalWithoutTax>
+		<currency>USD</currency>
+		<items>
+			<i id="111836">
+				<quantity>1</quantity>
+				<price currency="EUR">199</price>
+				<priceWithoutTax>164.46281</priceWithoutTax>
+				<currency>CZK</currency>
+			</i>
+		</items>
+	</o>
+</ino:orders>
+```
 
 ### Coupons
 
@@ -490,7 +601,7 @@ Root element tag: **c**
 #### Example
 
 ```xml
-<coupons version="2.13">
+<inc:coupons xmlns:inc="https://incomaker.com/feed/3.0/coupons">
     <c id="DISCOUNT_10">
         <reusable>0</reusable>
         <discountType>PERCENTUAL</discountType>
@@ -503,7 +614,7 @@ Root element tag: **c**
             <v>D45s45</v>
         </values>
     </c>
-</coupons>
+</inc:coupons>
 ```
 
 ## XML Feed Validation
