@@ -1,20 +1,19 @@
 # Incomaker XML Feed Standards
 
 This repository contains documentation for implementation of Incomaker XML feeds, 
-XSD files for feed validation and an output XML examples.
+XSD files for schema validation and examples.
 
 Instead of painstaking integration of full API and passing all data through the calls, 
-just provide Incomaker with the following data.
-Incomaker will download data from the shop repeatedly, approximately once per day.
+just provide Incomaker with the following data. Incomaker will regularly download data from the shop, usually once per day.
 
 You should create the following data feeds:
 
-- Categories
-- Products
-- Contacts
-- Orders
-- Coupons
-- Info
+- [Categories](#categories)
+- [Products](#products)
+- [Contacts](#contacts)
+- [Orders](#orders)
+- [Coupons](#coupons)
+- [Info](#info)
 
 ## Submitting the Base URL
 
@@ -615,6 +614,42 @@ Root element tag: **c**
         </values>
     </c>
 </inc:coupons>
+```
+
+### Info
+
+This special xml feed contains a single collection of *CustomFields* where you can provide us with additional information about your e-shop.
+
+
+| Custom Field Name | Description |
+|-------------------|-------------|
+| **ico**           | ?           |
+| **dic**           | ?           |
+| **dic**           | ?           |
+
+
+#### Example
+
+```xml
+<info version="2.11">
+<contact>
+<customFields>
+<c id="ico">IČO</c>
+<c id="dic">DIČ</c>
+<c id="date_subscribe">Datum přihlášení</c>
+<c id="date_unsubscribe">Datum odhlášení</c>
+<c id="price_level_id">ID cenové hladiny</c>
+<c id="price_level">Cenová hladina</c>
+<c id="users_groups_1">Skupina uživatelů: Odběr novinek</c>
+<c id="users_groups_8">Skupina uživatelů: Dotaz na produkt</c>
+<c id="users_groups_686">Skupina uživatelů: Hlídací pes</c>
+<c id="users_groups_96841">Skupina uživatelů: VIVA</c>
+<c id="custom_data_profilePicture">profilePicture</c>
+<c id="custom_data_birthdate">birthdate</c>
+<c id="custom_data_found_us_where">found_us_where</c>
+</customFields>
+</contact>
+</info>
 ```
 
 ## XML Feed Validation

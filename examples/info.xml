@@ -1,0 +1,19 @@
+<info version="2.11">
+	<contact>
+		<customFields>
+			<c id="ico">IČO</c>
+			<c id="dic">DIČ</c>
+			<c id="date_subscribe">Datum přihlášení</c>
+			<c id="date_unsubscribe">Datum odhlášení</c>
+			<c id="price_level_id">ID cenové hladiny</c>
+			<c id="price_level">Cenová hladina</c>
+			<c id="users_groups_1">Skupina uživatelů: Odběr novinek</c>
+			<c id="users_groups_8">Skupina uživatelů: Dotaz na produkt</c>
+			<c id="users_groups_686">Skupina uživatelů: Hlídací pes</c>
+			<c id="users_groups_96841">Skupina uživatelů: VIVA</c>
+			<c id="custom_data_profilePicture">profilePicture</c>
+			<c id="custom_data_birthdate">birthdate</c>
+			<c id="custom_data_found_us_where">found_us_where</c>
+		</customFields>
+	</contact>
+</info>
