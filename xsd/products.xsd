@@ -1,10 +1,8 @@
 <xs:schema
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:in="https://incomaker.com/feed/3.0"
-	targetNamespace="https://incomaker.com/feed/3.0/products"
-	xmlns:inp="https://incomaker.com/feed/3.0/products"
+	xmlns:in="https://incomaker.com/feed/2.15"
 >
-	<xs:import namespace="https://incomaker.com/feed/3.0" schemaLocation="incomaker.xsd"/>
+	<xs:import namespace="https://incomaker.com/feed/2.15" schemaLocation="incomaker.xsd"/>
 	<xs:simpleType name="productCondition" final="restriction" >
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="new" />
@@ -64,7 +62,7 @@
 									<xs:element name="tags" type="in:tags" minOccurs="0"/>
 									<xs:element name="unit" type="xs:string" minOccurs="0"/>
 									<xs:element name="brand" type="xs:string" minOccurs="0"/>
-									<xs:element name="condition" type="inp:productCondition" minOccurs="0"/>
+									<xs:element name="condition" type="productCondition" minOccurs="0"/>
 									<xs:element name="stock" type="xs:int" minOccurs="0"/>
 									<xs:element name="newFlag" type="xs:byte" minOccurs="0"/>
 									<xs:element name="specialDealFlag" type="xs:byte" minOccurs="0"/>

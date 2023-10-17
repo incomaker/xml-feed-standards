@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ino:orders
-	xmlns:ino="https://incomaker.com/feed/3.0/orders"
+<orders
+	version="2.15"
 	totalItems="10"
 >
 	<o id="88886">
@@ -30,4 +30,4 @@
 			</i>
 		</items>
 	</o>
-</ino:orders>
+</orders>

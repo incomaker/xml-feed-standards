@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<inp:products
-	xmlns:inp="https://incomaker.com/feed/3.0/products"
+<products
+	version="2.15"
 	totalItems="100"
 >
 	<p id="P257">
@@ -53,4 +53,4 @@
 			<f key="Color">blue</f>
 		</customFields>
 	</p>
-</inp:products>
+</products>

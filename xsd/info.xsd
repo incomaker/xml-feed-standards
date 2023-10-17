@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:in="https://incomaker.com/feed/2.15"
+>
+	<xs:import namespace="https://incomaker.com/feed/3.0" schemaLocation="incomaker.xsd"/>
+	<xs:element name="info">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="in:feed">
+					<xs:all>
+						<xs:element name="contact">
+							<xs:complexType>
+								<xs:all>
+									<xs:element name="customFields" >
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element minOccurs="0" maxOccurs="unbounded" name="c">
+													<xs:complexType>
+														<xs:simpleContent>
+															<xs:extension base="in:nonEmptyString">
+																<xs:attribute name="id" type="xs:string" use="required" />
+															</xs:extension>
+														</xs:simpleContent>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:all>
+							</xs:complexType>
+						</xs:element>
+					</xs:all>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

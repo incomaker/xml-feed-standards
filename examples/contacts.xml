@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<inc:contacts
-	xmlns:inc="https://incomaker.com/feed/3.0/contacts"
+<contacts
+	version="2.15"
 	totalItems="6040"
 >
 	<c id="e28bc2f0">
@@ -34,4 +34,4 @@
 			<f key="EyeColor" group="trait">blue</f>
 		</customFields>
 	</c>
-</inc:contacts>
+</contacts>

@@ -1,7 +1,7 @@
 # Incomaker XML Feed Standards
 
 This repository contains documentation for implementation of Incomaker XML feeds, 
-XSD files for schema validation and examples.
+XSD files for [schema validation](#xml-feed-validation) and examples.
 
 Instead of painstaking integration of full API and passing all data through the calls, 
 just provide Incomaker with the following data. Incomaker will regularly download data from the shop, usually once per day.
@@ -33,51 +33,70 @@ Please, see the full list of parameters to implement below.
 
 ### Feed Parameters
 
-| Param Name        | Required     | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                               |
-|-------------------|--------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **key**           | **required** | UUID    | Api Key returned from the register plugin function                                                                                                                                                                                                                                                                                                                                                        |
-| **type**          | **required** | string  | Indicates type of returned feed: (**category**, **product**, **contact**, **order** or **coupon**)                                                                                                                                                                                                                                                                                                        |
-| **id**            | optional     | string  | An internal identifier of an item to be returned. If the request with this parameters is called, Incomaker expects to receive one item (i.e. one product) with the respective ID. The ID is the internal ID of the eshop. Id has the highest priority. If it is used in the call together with since, limit, or offset, ID is the only parameter to follow                                                |
-| **since**         | optional     | date    | When the request is called with since-parameter, it is expected to return just the changes made since the respective date (inclusive). If it is technically impossible to implement it, you can always return the full list of items, and Incomaker distinguish the changes automatically. However, it is **strongly recommended** to implement it in order to save traffic and server load on both sides |
-| **limit**         | optional     | integer | Maximum number of items that should be returned in the call. Incomaker always tries to request the items in batches of reasonable sizes, however it is recommended to limit the maximum number of returned items for the security reasons. Optionally could be used together with **offset**                                                                                                              |
-| **offset**        | optional     | integer | First item that will be returned in the requested batch. Can be used together with **limit** only                                                                                                                                                                                                                                                                                                         |
-| **downloadCount** | optional     | integer | Only relevant for **type=coupon**. Indicates the number of coupons to be generated                                                                                                                                                                                                                                                                                                                        |
+| Param Name        | Required     | Type                | Description                                                                                                                                                                                                                                                                                                                                                                                                              |
+|-------------------|--------------|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **key**           | **required** | [string](#string)   | API key returned from the register plugin function. API key has a format of [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier)                                                                                                                                                                                                                                                                          |
+| **type**          | **required** | [string](#string)   | Indicates type of returned feed. Supported values are: **category**, **product**, **contact**, **order** or **coupon**.                                                                                                                                                                                                                                                                                                  |
+| **id**            | optional     | [string](#string)   | An internal identifier of an item to be returned. If the request with this parameters is called, Incomaker expects to receive one item (i.e. one product) with the respective ID. The ID is the internal ID of the eshop. Id has the highest priority. If it is used in the call together with since, limit, or offset, ID is the only parameter to follow.                                                              |
+| **since**         | optional     | [date](#date)       | When the request is called with **since** parameter, it is expected to return just the changes made since the respective date (inclusive). If it is technically impossible to implement it, you can always return the full list of items, and Incomaker distinguish the changes automatically. However, it is **strongly recommended** to implement it in order to save traffic and server load on both sides.  |
+| **limit**         | optional     | [integer](#integer) | Maximum number of items that should be returned in the call. Incomaker always tries to request the items in batches of reasonable sizes, however it is recommended to limit the maximum number of returned items for the security reasons. Optionally could be used together with **offset**.                                                                                                                            |
+| **offset**        | optional     | [integer](#integer) | First item that will be returned in the requested batch. Can be used together with **limit** only.                                                                                                                                                                                                                                                                                                                       |
+| **downloadCount** | optional     | [integer](#integer) | Only relevant for **type=coupon**. Indicates the number of coupons to be generated.                                                                                                                                                                                                                                                                                                                                      |
 
 ## Feed Data Structure
 
-Incomaker expects the feeds provided by the e-shop in the following formats. Most of the fields are optional, however you should provide as much as possible. The intelligence of Incomaker is dependent on data available, and the more data we have the better results we deliver.
-
-From version 2.6 on, the root element contains a mandatory attribute version with the protocol version. Omitting this attribute means version < 2.6.
+Incomaker expects the feeds provided by the e-shop in the following formats. Most of the fields are optional, however you should provide as much as possible.
+The intelligence of Incomaker is dependent on data available, and the more data we have the better results we deliver.
 
 In all cases, the root element (products, orders, etc.) can contain an optional attribute **totalItems** containing the total number of filtered items of the current entity. 
 It means all the available entities after filtering (applied *since* date) before applying pagination (*limit* and *offset*).
 
 XML structure definition is bellow, for each feed, a link to XSD schema file is enclosed.
 
-### Date formats
+### Common Data Types
 
-All dates should be formatted in ISO date format.
+#### String
 
-**date** - **YYYY-MM-DD** (example: 2023-06-24)
+Any sequence of characters. 
 
-**datetime** - **YYYY-MM-DDTHH:mm:ss** (example: 2023-06-24T13:00:24)
+Please note that encoding must match with that in your XML header, we strongly recommend using **UTF-8** encoding for all XML files.
 
-Optionally, **datetime** can also include time zone (example: 2023-06-24T13:00:24+02:00), timezone you entered during plugin registration will be used otherwise
+Also make sure that string](#string) doesn't contain any characters prohibited inside XML like `&`, `#`, `$`, etc. 
+If you need to include them in your string, please use [CDATA](https://en.wikipedia.org/wiki/CDATA).
 
-### CustomFields
+#### Decimal
+
+Decimal number with comma (`.`) used as decimal separator. Number should not contain spaces or any thousands separator. 
+
+#### Integer
+
+Whole number without any decimal or thousands separator.
+
+#### Date
+
+Date without time formatted in ISO date format - **YYYY-MM-DD** (example: `2023-06-24`)
+
+#### Datetime
+ 
+Date and time formatted in ISO datetime format - **YYYY-MM-DD'T'HH:mm:ss** (example: `2023-06-24T13:00:24`)
+
+Optionally, datetime can also include a time zone (example: `2023-06-24T13:00:24+02:00`).
+When datetime value doesn't contain timezone, one you entered during plugin registration will be used.
+
+#### CustomFields
 
 A map of custom fields where any related value can be stored.
 Used for adding extra information not covered by standard fields.
 
-#### CustomField
+##### CustomField
 
 Root element tag: **f**
 
-| Attribute Name | Required     | Type   | Description                        |
-|----------------|--------------|--------|------------------------------------|
-| **key**        | **required** | string | Name of custom field               |
+| Attribute Name | Required     | Type              | Description                        |
+|----------------|--------------|-------------------|------------------------------------|
+| **key**        | **required** | [string](#string) | Name of custom field               |
 
-#### Example
+##### Example
 
 ```xml
 <customFields>
@@ -86,20 +105,20 @@ Root element tag: **f**
 </customFields>
 ```
 
-### GroupedCustomFields
+#### GroupedCustomFields
 
 A map of custom fields where any related value can be stored. In contract with *CustomFields*, these can additionally be assigned a group.
 
-#### GroupedCustomField
+##### GroupedCustomField
 
 Root element tag: **f**
 
-| Attribute Name | Required     | Type   | Description                        |
-|----------------|--------------|--------|------------------------------------|
-| **key**        | **required** | string | Name of custom field               |
-| **group**      | optional     | string | Logical grouping of related fields |
+| Attribute Name | Required     | Type              | Description                        |
+|----------------|--------------|-------------------|------------------------------------|
+| **key**        | **required** | [string](#string) | Name of custom field               |
+| **group**      | optional     | [string](#string) | Logical grouping of related fields |
 
-#### Example
+##### Example
 
 ```xml
 <customFields>
@@ -108,11 +127,11 @@ Root element tag: **f**
 </customFields>
 ```
 
-### Tags
+#### Tags
 
 A set of simple tags.
 
-#### Example 
+##### Example 
 
 ```xml
 <tags>
@@ -131,16 +150,15 @@ Root element tag: **categories**
 
 Root element tag: **c**
 
-| Attribute Name | Required     | Type   | Description                                                                                   |
-|----------------|--------------|--------|-----------------------------------------------------------------------------------------------|
-| **id**         | **required** | string | An internal category identifier. This Id must match with the Id used in Products and Orders.  |
+| Attribute Name | Required     | Type              | Description                                                                                   |
+|----------------|--------------|-------------------|-----------------------------------------------------------------------------------------------|
+| **id**         | **required** | [string](#string) | An internal category identifier. This Id must match with the Id used in Products and Orders.  |
 
-
-| Element Name         | Required     | Type         | Description                                             |
-|----------------------|--------------|--------------|---------------------------------------------------------|
-| **parentCategoryId** | optional     | string       | An internal category identifier of the parent category. |
-| **languages**        | **required** | string       | An internal category identifier of the parent category. |
-| **url**              | optional     | string       | The URL of the category.                                |
+| Element Name         | Required     | Type              | Description                                             |
+|----------------------|--------------|-------------------|---------------------------------------------------------|
+| **parentCategoryId** | optional     | [string](#string) | An internal category identifier of the parent category. |
+| **languages**        | **required** | [string](#string) | An internal category identifier of the parent category. |
+| **url**              | optional     | [string](#string) | The URL of the category.                                |
 
 #### CategoryLanguages
 
@@ -152,22 +170,21 @@ Root element tag: **languages**
 
 Root element tag: **l**
 
-| Attribute Name | Required     | Type   | Description                                                                                                                                                   |
-|----------------|--------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **id**         | **required** | string | ISO code of the language is preferred (e.g. **en**). IETF language tag (e.g. **en-US**) could be also used, but anything from the third character is ignored. |
+| Attribute Name | Required     | Type              | Description                                                                                                                                                   |
+|----------------|--------------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **id**         | **required** | [string](#string) | ISO code of the language is preferred (e.g. **en**). IETF language tag (e.g. **en-US**) could be also used, but anything from the third character is ignored. |
 
-
-| Element Name | Required     | Type         | Description                             |
-|--------------|--------------|--------------|-----------------------------------------|
-| **name**     | **required** | string       | Name of the category in given language. |
-| **url**      | optional     | string       | URL of category page in given language. |
+| Element Name | Required     | Type              | Description                             |
+|--------------|--------------|-------------------|-----------------------------------------|
+| **name**     | **required** | [string](#string) | Name of the category in given language. |
+| **url**      | optional     | [string](#string) | URL of category page in given language. |
 
 #### Example
 
 ```xml
-<?xml version="1.0"?>
-<inc:categories
-    xmlns:inc="https://incomaker.com/feed/3.0/categories"
+<?xml version="1.0" encoding="utf-8"?>
+<categories
+    version="2.15"
     totalItems="2"
 >
     <c id="1">
@@ -178,7 +195,7 @@ Root element tag: **l**
         </languages>
     </c>
     <c id="2">
-        <parentCategoryId>2</parentCategoryId>
+        <parentCategoryId>1</parentCategoryId>
         <languages>
             <l id="en">
                 <name>Saturn 5</name>
@@ -186,7 +203,7 @@ Root element tag: **l**
             </l>
         </languages>
     </c>
-</inc:categories>
+</categories>
 ```
 
 ### Products
@@ -212,17 +229,17 @@ The list of the category IDs, where the product is present.
 
 List of product prices.
 
-| Attribute Name | Required | Type   | Description                           |
-|----------------|----------|--------|---------------------------------------|
-| **currency**   | optional | string | An Id of the variant of the product.. |
-| **pricelist**  | optional | string | Name of the pricelist.                |
+| Attribute Name | Required | Type              | Description                           |
+|----------------|----------|-------------------|---------------------------------------|
+| **currency**   | optional | [string](#string) | An Id of the variant of the product.. |
+| **pricelist**  | optional | [string](#string) | Name of the pricelist.                |
 
 
-| Element Name           | Required     | Type    | Description                                                                                                                                                               |
-|------------------------|--------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **amount**             | **required** | decimal | Base price of the products (typically tax inclusive).                                                                                                                     |
-| **priceAfterDiscount** | optional     | decimal | Reduced price if there is a discount (the same regime as in the amount element, i.e. tax inclusive). If there is no reduction on this item, don’t use the element at all. |
-| **priceWithoutTax**    | optional     | decimal | Price without tax (VAT or sales tax).                                                                                                                                     |
+| Element Name           | Required     | Type                | Description                                                                                                                                                               |
+|------------------------|--------------|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **amount**             | **required** | [decimal](#decimal) | Base price of the products (typically tax inclusive).                                                                                                                     |
+| **priceAfterDiscount** | optional     | [decimal](#decimal) | Reduced price if there is a discount (the same regime as in the amount element, i.e. tax inclusive). If there is no reduction on this item, don’t use the element at all. |
+| **priceWithoutTax**    | optional     | [decimal](#decimal) | Price without tax (VAT or sales tax).                                                                                                                                     |
 
 #### Example
 
@@ -242,22 +259,44 @@ Product strings in different languages.
 
 Root element tag: **languages**
 
+##### ProductLanguageAttributes
+
+A map of language-specific custom attributes.
+
+Root element tag: **attributes**
+
+###### ProductLanguageAttribute
+
+Root element tag: **l**
+
+| Attribute Name | Required     | Type              | Description                                                                                                                                                   |
+|----------------|--------------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **id**         | **required** | [string](#string) | ISO code of the language is preferred (e.g. **en**). IETF language tag (e.g. **en-US**) could be also used, but anything from the third character is ignored. |
+
+| Element Name         | Required     | Type                                                    | Description                                           |
+|----------------------|--------------|---------------------------------------------------------|-------------------------------------------------------|
+| **name**             | **required** | [string](#string)                                       | Name of the product in given language.                |
+| **description**      | optional     | [string](#string)                                       | Product description in the particular language.       |
+| **shortDescription** | optional     | [string](#string)                                       | Product short description in the particular language. |
+| **url**              | **required** | [string](#string)                                       | A URL of the product in the given language.           |
+| **attributes**       | optional     | [ProductLanguageAttributes](#productlanguageattributes) | A map of language-specific custom attributes.         |
+
+
 ##### ProductLanguage
 
 Root element tag: **l**
 
-| Attribute Name | Required     | Type   | Description                                                                                                                                                   |
-|----------------|--------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **id**         | **required** | string | ISO code of the language is preferred (e.g. **en**). IETF language tag (e.g. **en-US**) could be also used, but anything from the third character is ignored. |
+| Attribute Name | Required     | Type              | Description                                                                                                                                                   |
+|----------------|--------------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **id**         | **required** | [string](#string) | ISO code of the language is preferred (e.g. **en**). IETF language tag (e.g. **en-US**) could be also used, but anything from the third character is ignored. |
 
-
-| Element Name         | Required     | Type             | Description                                           |
-|----------------------|--------------|------------------|-------------------------------------------------------|
-| **name**             | **required** | string           | Name of the product in given language.                |
-| **description**      | optional     | string           | Product description in the particular language.       |
-| **shortDescription** | optional     | string           | Product short description in the particular language. |
-| **url**              | **required** | string           | A URL of the product in the given language.           |
-| **customFields**     | optional     | **CustomFields** | A map of language-specific custom fields.             |
+| Element Name         | Required     | Type                                                    | Description                                           |
+|----------------------|--------------|---------------------------------------------------------|-------------------------------------------------------|
+| **name**             | **required** | [string](#string)                                       | Name of the product in given language.                |
+| **description**      | optional     | [string](#string)                                       | Product description in the particular language.       |
+| **shortDescription** | optional     | [string](#string)                                       | Product short description in the particular language. |
+| **url**              | **required** | [string](#string)                                       | A URL of the product in the given language.           |
+| **attributes**       | optional     | [ProductLanguageAttributes](#productlanguageattributes) | A map of language-specific custom attributes.         |
 
 #### RelatedProducts
 
@@ -278,35 +317,34 @@ Represents a single product variant.
 
 Root element tag: **p**
 
-| Attribute Name | Required     | Type   | Description                            |
-|----------------|--------------|--------|----------------------------------------|
-| **id**         | **required** | string | An Id of the variant of the product..  |
+| Attribute Name | Required     | Type              | Description                          |
+|----------------|--------------|-------------------|--------------------------------------|
+| **id**         | **required** | [string](#string) | An Id of the variant of the product. |
 
-
-| Element Name        | Required     | Type                | Description                                                                                                                             |
-|---------------------|--------------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
-| **imageUrl**        | optional     | string              | URL of image of the product.                                                                                                            |
-| **categories**      | optional     | *ProductCategories* | The list of the category IDs, where the product is present.                                                                             |
-| **prices**          | **required** | *ProductPrices*     | List of product prices in different currencies.                                                                                         |
-| **purchase**        | optional     | decimal             | Purchase price of the stock. Purchase price of the stock. In an optional attribute **currency**, you can set the currency of the price. |
-| **tags**            | optional     | *Tags*              | Product tags.                                                                                                                           |
-| **tax**             | optional     | decimal             | Tax in for of decimal number (e.g. 1.21 for tax of 21%)                                                                                 |
-| **unit**            | optional     | string              | The name of the unit.                                                                                                                   |
-| **brand**           | optional     | string              | Brand name.                                                                                                                             |
-| **ean**             | optional     | string              | EAN code                                                                                                                                |
-| **condition**       | optional     | enum                | The condition of the product. The possible values are: new, unwrapped, used, damaged, defunct, refurbished, other                       |
-| **stock**           | optional     | integer             | The number of the items on hand.                                                                                                        |
-| **active**          | optional     | byte                | The product is active. 0=no, 1=yes                                                                                                      |
-| **productId**       | optional     | string              | If this item is a variant, then this is an Id of the parent product.                                                                    |
-| **newFlag**         | optional     | byte                | The product is flagged new. 0=no, 1=yes                                                                                                 |
-| **specialDealFlag** | optional     | byte                | The product is flagged a special deal. 0=no, 1=yes                                                                                      |
-| **choiceFlag**      | optional     | byte                | The product is flagged a choice (recommended product). 0=no, 1=yes                                                                      |
-| **added**           | optional     | datetime            | When the product was added to e-shop.                                                                                                   |
-| **updated**         | optional     | datetime            | When the product was updated for the last time.                                                                                         |
-| **availability**    | optional     | integer             | The number of days to deliver the product. 0 means immediately.                                                                         |
-| **languages**       | **required** | *ProductLanguages*  | Product strings in different languages.                                                                                                 |
-| **related**         | optional     | *RelatedProducts*   | A set of productIds of similar/related products.                                                                                        |
-| **customFields**    | optional     | *CustomFields*      | A map of custom fields where any product-related value can be stored.                                                                   |
+| Element Name        | Required     | Type                                    | Description                                                                                                                                   |
+|---------------------|--------------|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| **imageUrl**        | optional     | [string](#string)                       | URL of image of the product.                                                                                                                  |
+| **categories**      | optional     | [ProductCategories](#productcategories) | The list of the category IDs, where the product is present.                                                                                   |
+| **prices**          | **required** | [ProductPrices](#productprices)         | List of product prices in different currencies.                                                                                               |
+| **purchase**        | optional     | [decimal](#decimal)                     | Purchase price of the stock. Purchase price of the stock. In an optional attribute **currency**, you can set the currency of the price.       |
+| **tags**            | optional     | [Tags](#tags)                           | Product tags.                                                                                                                                 |
+| **tax**             | optional     | [decimal](#decimal)                     | Tax in form of decimal number (e.g. 1.21 for tax of 21%)                                                                                      |
+| **unit**            | optional     | [string](#string)                       | The name of the unit.                                                                                                                         |
+| **brand**           | optional     | [string](#string)                       | Brand name.                                                                                                                                   |
+| **ean**             | optional     | [string](#string)                       | EAN code                                                                                                                                      |
+| **condition**       | optional     | [string](#string)                       | The condition of the product. The possible values are: **new**, **unwrapped**, **used**, **damaged**, **defunct**, **refurbished**, **other** |
+| **stock**           | optional     | [integer](#integer)                     | The number of the items on hand.                                                                                                              |
+| **active**          | optional     | [integer](#integer)                     | The product is active. 0=no, 1=yes                                                                                                            |
+| **productId**       | optional     | [string](#string)                       | If this item is a variant, then this is an Id of the parent product.                                                                          |
+| **newFlag**         | optional     | [integer](#integer)                     | The product is flagged new. 0=no, 1=yes                                                                                                       |
+| **specialDealFlag** | optional     | [integer](#integer)                     | The product is flagged a special deal. 0=no, 1=yes                                                                                            |
+| **choiceFlag**      | optional     | [integer](#integer)                     | The product is flagged a choice (recommended product). 0=no, 1=yes                                                                            |
+| **added**           | optional     | [datetime](#datetime)                   | When the product was added to e-shop.                                                                                                         |
+| **updated**         | optional     | [datetime](#datetime)                   | When the product was updated for the last time.                                                                                               |
+| **availability**    | optional     | [integer](#integer)                     | The number of days to deliver the product. 0 means immediately.                                                                               |
+| **languages**       | **required** | [ProductLanguages](#productlanguages)   | Product strings in different languages.                                                                                                       |
+| **related**         | optional     | [RelatedProducts](#relatedproducts)     | A set of productIds of similar/related products.                                                                                              |
+| **customFields**    | optional     | [CustomFields](#customfields)           | A map of custom fields where any product-related value can be stored.                                                                         |
 
 #### Example
 
@@ -376,41 +414,41 @@ Root element tag: **contacts**
 
 Root element tag: **c**
 
-| Attribute Name | Required     | Type   | Description                         |
-|----------------|--------------|--------|-------------------------------------|
-| **id**         | **required** | string | An Id of the contact in the e-shop  |
+| Attribute Name | Required     | Type              | Description                         |
+|----------------|--------------|-------------------|-------------------------------------|
+| **id**         | **required** | [string](#string) | An Id of the contact in the e-shop  |
 
-| Element Name     | Required | Type                  | Description                                           |
-|------------------|----------|-----------------------|-------------------------------------------------------|
-| **firstName**    | optional | string                |                                                       |
-| **lastName**     | optional | string                |                                                       |
-| **sex**          | optional | string                | Possible values: **MALE**, **FEMALE** or **UNKNOWN**  |
-| **email**        | optional | string                |                                                       |
-| **language**     | optional | string                | The language code (ISO 639-1, e.g. en)                |
-| **birthday**     | optional | date                  |                                                       |
-| **consentDate**  | optional | datetime              | GDPR consent date                                     |
-| **consentTitle** | optional | string                | GDPR consent title                                    |
-| **web**          | optional | string                |                                                       |
-| **remarks**      | optional | string                |                                                       |
-| **street**       | optional | string                |                                                       |
-| **street2**      | optional | string                |                                                       |
-| **city**         | optional | string                |                                                       |
-| **zipCode**      | optional | string                |                                                       |
-| **phoneNumber1** | optional | string                |                                                       |
-| **phoneNumber2** | optional | string                |                                                       |
-| **country**      | optional | string                | ISO country code (two letters)                        |
-| **newsletter**   | optional | byte                  | Is customer subscribed to a newsletter? (0=no, 1=yes) |
-| **currency**     | optional | string                | Customer’s default currency                           |
-| **pricelist**    | optional | string                | Customer’s default pricelist                          |
-| **tags**         | optional | *Tags*                |                                                       |
-| **customFields** | optional | *GroupedCustomFields* |                                                       |
+| Element Name     | Required | Type                                        | Description                                                       |
+|------------------|----------|---------------------------------------------|-------------------------------------------------------------------|
+| **firstName**    | optional | [string](#string)                           |                                                                   |
+| **lastName**     | optional | [string](#string)                           |                                                                   |
+| **sex**          | optional | [string](#string)                           | Possible values: **MALE**, **FEMALE** or **UNKNOWN**              |
+| **email**        | optional | [string](#string)                           |                                                                   |
+| **language**     | optional | [string](#string)                           | The language code (ISO 639-1, e.g. en)                            |
+| **birthday**     | optional | [date](#date)                               |                                                                   |
+| **consentDate**  | optional | [datetime](#datetime)                       | GDPR consent date                                                 |
+| **consentTitle** | optional | [string](#string)                           | GDPR consent title                                                |
+| **web**          | optional | [string](#string)                           |                                                                   |
+| **remarks**      | optional | [string](#string)                           |                                                                   |
+| **street**       | optional | [string](#string)                           |                                                                   |
+| **street2**      | optional | [string](#string)                           |                                                                   |
+| **city**         | optional | [string](#string)                           |                                                                   |
+| **zipCode**      | optional | [string](#string)                           |                                                                   |
+| **phoneNumber1** | optional | [string](#string)                           |                                                                   |
+| **phoneNumber2** | optional | [string](#string)                           |                                                                   |
+| **country**      | optional | [string](#string)                           | ISO country code (two letters)                                    |
+| **newsletter**   | optional | [integer](#integer)                         | Is customer subscribed to a newsletter? (**0** - no, **1** - yes) |
+| **currency**     | optional | [string](#string)                           | Customer’s default currency                                       |
+| **pricelist**    | optional | [string](#string)                           | Customer’s default pricelist                                      |
+| **tags**         | optional | [Tags](#tags)                               |                                                                   |
+| **customFields** | optional | [GroupedCustomFields](#groupedcustomfields) |                                                                   |
 
 #### Example
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
-<inc:contacts
-    xmlns:inc="https://incomaker.com/feed/3.0/contacts"
+<contacts
+    version="2.15"
     totalItems="6040"
 >
     <c id="e28bc2f0">
@@ -444,7 +482,7 @@ Root element tag: **c**
             <f key="EyeColor" group="trait">blue</f>
         </customFields>
     </c>
-</inc:contacts>
+</contacts>
 ```
 
 Validate with [XML Schema Definition](xsd/contacts.xsd).
@@ -460,23 +498,23 @@ There must be either **contactId** or **contact** specified. Only one of the ele
 
 Root element tag: **contact**
 
-| Attribute Name | Required     | Type   | Description                        |
-|----------------|--------------|--------|------------------------------------|
-| **id**         | **required** | string | An Id of the order in the e-shop.  |
+| Attribute Name | Required     | Type              | Description                        |
+|----------------|--------------|-------------------|------------------------------------|
+| **id**         | **required** | [string](#string) | An Id of the order in the e-shop.  |
 
-| Element Name     | Required | Type           | Description                     |
-|------------------|----------|----------------|---------------------------------|
-| **firstName**    | optional | string         |                                 |
-| **lastName**     | optional | string         |                                 |
-| **email**        | optional | string         |                                 |
-| **street**       | optional | string         |                                 |
-| **street2**      | optional | string         |                                 |
-| **city**         | optional | string         |                                 |
-| **zipCode**      | optional | string         |                                 |
-| **phoneNumber1** | optional | string         |                                 |
-| **phoneNumber2** | optional | string         |                                 |
-| **country**      | optional | string         | ISO country code (two letters)  |
-| **language**     | optional | string         | ISO language code (two letters) |
+| Element Name     | Required | Type              | Description                     |
+|------------------|----------|-------------------|---------------------------------|
+| **firstName**    | optional | [string](#string) |                                 |
+| **lastName**     | optional | [string](#string) |                                 |
+| **email**        | optional | [string](#string) |                                 |
+| **street**       | optional | [string](#string) |                                 |
+| **street2**      | optional | [string](#string) |                                 |
+| **city**         | optional | [string](#string) |                                 |
+| **zipCode**      | optional | [string](#string) |                                 |
+| **phoneNumber1** | optional | [string](#string) |                                 |
+| **phoneNumber2** | optional | [string](#string) |                                 |
+| **country**      | optional | [string](#string) | ISO country code (two letters)  |
+| **language**     | optional | [string](#string) | ISO language code (two letters) |
 
 #### OrderItems
 
@@ -486,73 +524,73 @@ List of order items.
 
 Root element tag: **i**
 
-| Attribute Name | Required     | Type   | Description                                                       |
-|----------------|--------------|--------|-------------------------------------------------------------------|
-| **id**         | **required** | string | An Id of product variant. Should match **id** in *Products* feed. |
+| Attribute Name | Required     | Type              | Description                                                       |
+|----------------|--------------|-------------------|-------------------------------------------------------------------|
+| **id**         | **required** | [string](#string) | An Id of product variant. Should match **id** in *Products* feed. |
 
-| Element Name        | Required     | Type    | Description                           |
-|---------------------|--------------|---------|---------------------------------------|
-| **quantity**        | **required** | decimal | The quantity of goods sold.           |
-| **price**           | **required** | decimal | The price of the item. Tax inclusive. |
-| **priceWithoutTax** | optional     | decimal | The price of the item without tax.    |
+| Element Name        | Required     | Type                | Description                           |
+|---------------------|--------------|---------------------|---------------------------------------|
+| **quantity**        | **required** | [decimal](#decimal) | The quantity of goods sold.           |
+| **price**           | **required** | [decimal](#decimal) | The price of the item. Tax inclusive. |
+| **priceWithoutTax** | optional     | [decimal](#decimal) | The price of the item without tax.    |
 
 #### Order
 
 Root element tag: **o**
 
-| Attribute Name | Required     | Type   | Description                        |
-|----------------|--------------|--------|------------------------------------|
-| **id**         | **required** | string | An Id of the order in the e-shop.  |
+| Attribute Name | Required     | Type              | Description                        |
+|----------------|--------------|-------------------|------------------------------------|
+| **id**         | **required** | [string](#string) | An Id of the order in the e-shop.  |
 
-| Element Name        | Required     | Type           | Description                                                                            |
-|---------------------|--------------|----------------|----------------------------------------------------------------------------------------|
-| **contactId**       | optional     | string         | An Id of the contact in the e-shop. (Use only when **contact** is missing)             |
-| **contact**         | optional     | *OrderContact* | Contact details in case of unregistered sale. (Use only when **contactId** is missing) |
-| **created**         | optional     | datetime       | The timestamp of creation.                                                             |
-| **finished**        | optional     | datetime       | The timestamp of the moment when the order is finished.                                |
-| **total**           | optional     | decimal        | Total price of the order including shipping, discounts, etc.                           |
-| **totalWithoutTax** | optional     | decimal        | Total price of the order including shipping, discounts, etc. - tax exclusive.          |
-| **currency**        | optional     | string         | Order currency.                                                                        |
-| **payment**         | optional     | string         | The means of payment.                                                                  |
-| **state**           | optional     | string         | The state of the order.                                                                |
-| **items**           | **required** | *OrderItems*   | The list of the items in the order.                                                    |
+| Element Name        | Required     | Type                          | Description                                                                            |
+|---------------------|--------------|-------------------------------|----------------------------------------------------------------------------------------|
+| **contactId**       | optional     | [string](#string)             | An Id of the contact in the e-shop. (Use only when **contact** is missing)             |
+| **contact**         | optional     | [OrderContact](#ordercontact) | Contact details in case of unregistered sale. (Use only when **contactId** is missing) |
+| **created**         | optional     | [datetime](#datetime)         | The timestamp of creation.                                                             |
+| **finished**        | optional     | [datetime](#datetime)         | The timestamp of the moment when the order is finished.                                |
+| **total**           | optional     | [decimal](#decimal)           | Total price of the order including shipping, discounts, etc.                           |
+| **totalWithoutTax** | optional     | [decimal](#decimal)           | Total price of the order including shipping, discounts, etc. - tax exclusive.          |
+| **currency**        | optional     | [string](#string)             | Order currency.                                                                        |
+| **payment**         | optional     | [string](#string)             | The means of payment.                                                                  |
+| **state**           | optional     | [string](#string)             | The state of the order.                                                                |
+| **items**           | **required** | [OrderItems](#orderitems)     | The list of the items in the order.                                                    |
 
 #### Example
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
-<ino:orders
-	xmlns:ino="https://incomaker.com/feed/3.0/orders"
-	totalItems="10"
+<orders
+    version="2.15"
+    totalItems="10"
 >
-	<o id="88886">
-		<contact>
-			<email>neil.armstrong@nasa.gov</email>
-			<firstName>Neil</firstName>
-			<lastName>Armstrong</lastName>
-			<phoneNumber1>0102030405</phoneNumber1>
-			<city>Moon City</city>
-			<country>US</country>
-			<street>Crater Road</street>
-			<language>en</language>
-			<zipCode>79401</zipCode>
-		</contact>
-		<created>1969-06-24T16:19:22</created>
-		<finished>1969-06-24T18:20:05</finished>
-		<payment>credit card</payment>
-		<total>284</total>
-		<totalWithoutTax>234.71074388429753</totalWithoutTax>
-		<currency>USD</currency>
-		<items>
-			<i id="111836">
-				<quantity>1</quantity>
-				<price currency="EUR">199</price>
-				<priceWithoutTax>164.46281</priceWithoutTax>
-				<currency>CZK</currency>
-			</i>
-		</items>
-	</o>
-</ino:orders>
+    <o id="88886">
+        <contact>
+            <email>neil.armstrong@nasa.gov</email>
+            <firstName>Neil</firstName>
+            <lastName>Armstrong</lastName>
+            <phoneNumber1>0102030405</phoneNumber1>
+            <city>Moon City</city>
+            <country>US</country>
+            <street>Crater Road</street>
+            <language>en</language>
+            <zipCode>79401</zipCode>
+        </contact>
+        <created>1969-06-24T16:19:22</created>
+        <finished>1969-06-24T18:20:05</finished>
+        <payment>credit card</payment>
+        <total>284</total>
+        <totalWithoutTax>234.71074388429753</totalWithoutTax>
+        <currency>USD</currency>
+        <items>
+            <i id="111836">
+                <quantity>1</quantity>
+                <price currency="EUR">199</price>
+                <priceWithoutTax>164.46281</priceWithoutTax>
+                <currency>CZK</currency>
+            </i>
+        </items>
+    </o>
+</orders>
 ```
 
 ### Coupons
@@ -584,23 +622,27 @@ List of actual coupon codes.
 
 Root element tag: **c**
 
-| Attribute Name | Required     | Type   | Description                             |
-|----------------|--------------|--------|-----------------------------------------|
-| **id**         | **required** | string | An Id of the coupon type in the e-shop. |
+| Attribute Name | Required     | Type              | Description                             |
+|----------------|--------------|-------------------|-----------------------------------------|
+| **id**         | **required** | [string](#string) | An Id of the coupon type in the e-shop. |
 
-| Element Name     | Required     | Type         | Description                                                                                                                                                                                                                    |
-|------------------|--------------|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **reusable**     | **required** | byte         | Whether this type of coupon can be used multiple times. **0**=no, **1**=yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage. |
-| **discountType** | optional     | string       | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                  |
-| **discount**     | optional     | string       | Either the monetary or percentual value of the coupon type.                                                                                                                                                                    |
-| **validFrom**    | optional     | datetime     |                                                                                                                                                                                                                                |
-| **validTo**      | optional     | datetime     |                                                                                                                                                                                                                                |
-| **values**       | **required** | CouponValues | The list of actual coupon codes.                                                                                                                                                                                               |
+| Element Name     | Required     | Type                          | Description                                                                                                                                                                                                                        |
+|------------------|--------------|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **reusable**     | **required** | [integer](#integer)           | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage. |
+| **discountType** | optional     | [string](#string)             | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                      |
+| **discount**     | optional     | [string](#string)             | Either the monetary or percentual value of the coupon type.                                                                                                                                                                        |
+| **validFrom**    | optional     | [datetime](#datetime)         |                                                                                                                                                                                                                                    |
+| **validTo**      | optional     | [datetime](#datetime)         |                                                                                                                                                                                                                                    |
+| **values**       | **required** | [CouponValues](#couponvalues) | The list of actual coupon codes.                                                                                                                                                                                                   |
 
 #### Example
 
 ```xml
-<inc:coupons xmlns:inc="https://incomaker.com/feed/3.0/coupons">
+<?xml version="1.0" encoding="UTF-8" ?>
+<coupons
+    version="2.15"
+    totalItems="1"
+>
     <c id="DISCOUNT_10">
         <reusable>0</reusable>
         <discountType>PERCENTUAL</discountType>
@@ -613,42 +655,41 @@ Root element tag: **c**
             <v>D45s45</v>
         </values>
     </c>
-</inc:coupons>
+</coupons>
 ```
 
 ### Info
 
-This special xml feed contains a single collection of *CustomFields* where you can provide us with additional information about your e-shop.
+This special xml feed contains a single collection of fields where you can provide us with additional information about your e-shop.
 
-
-| Custom Field Name | Description |
-|-------------------|-------------|
-| **ico**           | ?           |
-| **dic**           | ?           |
-| **dic**           | ?           |
-
+| Custom Field Name  | Description |
+|--------------------|-------------|
+| **ico**            | ?           |
+| **dic**            | ?           |
+| **date_subscribe** | ?           |
 
 #### Example
 
 ```xml
-<info version="2.11">
-<contact>
-<customFields>
-<c id="ico">IČO</c>
-<c id="dic">DIČ</c>
-<c id="date_subscribe">Datum přihlášení</c>
-<c id="date_unsubscribe">Datum odhlášení</c>
-<c id="price_level_id">ID cenové hladiny</c>
-<c id="price_level">Cenová hladina</c>
-<c id="users_groups_1">Skupina uživatelů: Odběr novinek</c>
-<c id="users_groups_8">Skupina uživatelů: Dotaz na produkt</c>
-<c id="users_groups_686">Skupina uživatelů: Hlídací pes</c>
-<c id="users_groups_96841">Skupina uživatelů: VIVA</c>
-<c id="custom_data_profilePicture">profilePicture</c>
-<c id="custom_data_birthdate">birthdate</c>
-<c id="custom_data_found_us_where">found_us_where</c>
-</customFields>
-</contact>
+<?xml version="1.0" encoding="UTF-8" ?>
+<info version="2.15">
+    <contact>
+        <customFields>
+            <c id="ico">IČO</c>
+            <c id="dic">DIČ</c>
+            <c id="date_subscribe">Datum přihlášení</c>
+            <c id="date_unsubscribe">Datum odhlášení</c>
+            <c id="price_level_id">ID cenové hladiny</c>
+            <c id="price_level">Cenová hladina</c>
+            <c id="users_groups_1">Skupina uživatelů: Odběr novinek</c>
+            <c id="users_groups_8">Skupina uživatelů: Dotaz na produkt</c>
+            <c id="users_groups_686">Skupina uživatelů: Hlídací pes</c>
+            <c id="users_groups_96841">Skupina uživatelů: VIVA</c>
+            <c id="custom_data_profilePicture">profilePicture</c>
+            <c id="custom_data_birthdate">birthdate</c>
+            <c id="custom_data_found_us_where">found_us_where</c>
+        </customFields>
+    </contact>
 </info>
 ```
 
@@ -661,9 +702,7 @@ that will help you validate your feeds.
 
 ### Online
 
-One possibility is to use free online 
-[XML validator](https://www.freeformatter.com/xml-validator-xsd.html) - just upload
-your feed and corresponding XSD file. 
+One possibility is to use free online [XML validator](https://www.freeformatter.com/xml-validator-xsd.html) - just upload your feed and corresponding XSD file. 
 
 ### Linux
 
@@ -680,3 +719,7 @@ Validate a feed:
 Export XML file formatted the for human readability:
 
     xmllint orders.xml --format --output orders.formatted.xml
+
+#### Example
+
+Check out `validate-examples` script in root of this repository which is used to validate examples used in this documentation. 

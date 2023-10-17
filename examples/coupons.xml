@@ -1,5 +1,7 @@
-<inc:coupons
-	xmlns:inc="https://incomaker.com/feed/3.0/coupons"
+<?xml version="1.0" encoding="UTF-8" ?>
+<coupons
+	version="2.15"
+	totalItems="1"
 >
 	<c id="DISCOUNT_10">
 		<reusable>0</reusable>
@@ -13,4 +15,4 @@
 			<v>D45s45</v>
 		</values>
 	</c>
-</inc:coupons>
+</coupons>

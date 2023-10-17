@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema
-	xmlns:in="https://incomaker.com/feed/3.0"
-	targetNamespace="https://incomaker.com/feed/3.0/coupons"
-	xmlns:inc="https://incomaker.com/feed/3.0/coupons"
+	xmlns:in="https://incomaker.com/feed/2.15"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
 	<xs:import namespace="https://incomaker.com/feed/3.0" schemaLocation="incomaker.xsd"/>

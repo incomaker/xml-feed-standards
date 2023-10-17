@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:in="https://incomaker.com/feed/3.0"
-	targetNamespace="https://incomaker.com/feed/3.0"
+	xmlns:in="https://incomaker.com/feed/2.15"
+	targetNamespace="https://incomaker.com/feed/2.15"
 >
 	<xs:complexType name="feed">
 		<xs:attribute name="totalItems" type="xs:int" />
+		<xs:attribute name="version" type="xs:token" />
 	</xs:complexType>
 	<xs:simpleType name="nonEmptyString">
 		<xs:restriction base="xs:string">

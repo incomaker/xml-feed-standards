@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:in="https://incomaker.com/feed/3.0"
-	targetNamespace="https://incomaker.com/feed/3.0/contacts"
-	xmlns:inc="https://incomaker.com/feed/3.0/contacts"
+	xmlns:in="https://incomaker.com/feed/2.15"
 >
-	<xs:import namespace="https://incomaker.com/feed/3.0" schemaLocation="incomaker.xsd"/>
+	<xs:import namespace="https://incomaker.com/feed/2.15" schemaLocation="incomaker.xsd"/>
 	<xs:element name="contacts">
 		<xs:complexType>
 			<xs:complexContent>

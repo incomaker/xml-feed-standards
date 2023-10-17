@@ -1,4 +1,5 @@
-<info version="2.11">
+<?xml version="1.0" encoding="UTF-8" ?>
+<info version="2.15">
 	<contact>
 		<customFields>
 			<c id="ico">IČO</c>

@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
-<inc:categories
-	xmlns:inc="https://incomaker.com/feed/3.0/categories"
+<?xml version="1.0" encoding="utf-8"?>
+<categories
+	version="2.15"
 	totalItems="2"
 >
 	<c id="1">
@@ -11,7 +11,7 @@
 		</languages>
 	</c>
 	<c id="2">
-		<parentCategoryId>2</parentCategoryId>
+		<parentCategoryId>1</parentCategoryId>
 		<languages>
 			<l id="en">
 				<name>Saturn 5</name>
@@ -19,4 +19,4 @@
 			</l>
 		</languages>
 	</c>
-</inc:categories>
+</categories>
