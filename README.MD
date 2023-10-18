@@ -267,20 +267,13 @@ Root element tag: **attributes**
 
 ###### ProductLanguageAttribute
 
-Root element tag: **l**
+Custom product language-specific attribute. Tag content represents attribute value.
 
-| Attribute Name | Required     | Type              | Description                                                                                                                                                   |
-|----------------|--------------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **id**         | **required** | [string](#string) | ISO code of the language is preferred (e.g. **en**). IETF language tag (e.g. **en-US**) could be also used, but anything from the third character is ignored. |
+Root element tag: **a**
 
-| Element Name         | Required     | Type                                                    | Description                                           |
-|----------------------|--------------|---------------------------------------------------------|-------------------------------------------------------|
-| **name**             | **required** | [string](#string)                                       | Name of the product in given language.                |
-| **description**      | optional     | [string](#string)                                       | Product description in the particular language.       |
-| **shortDescription** | optional     | [string](#string)                                       | Product short description in the particular language. |
-| **url**              | **required** | [string](#string)                                       | A URL of the product in the given language.           |
-| **attributes**       | optional     | [ProductLanguageAttributes](#productlanguageattributes) | A map of language-specific custom attributes.         |
-
+| Attribute Name | Required     | Type              | Description                    |
+|----------------|--------------|-------------------|--------------------------------|
+| **key**        | **required** | [string](#string) | Machine name of the attribute. |
 
 ##### ProductLanguage
 
@@ -334,11 +327,11 @@ Root element tag: **p**
 | **ean**             | optional     | [string](#string)                       | EAN code                                                                                                                                      |
 | **condition**       | optional     | [string](#string)                       | The condition of the product. The possible values are: **new**, **unwrapped**, **used**, **damaged**, **defunct**, **refurbished**, **other** |
 | **stock**           | optional     | [integer](#integer)                     | The number of the items on hand.                                                                                                              |
-| **active**          | optional     | [integer](#integer)                     | The product is active. 0=no, 1=yes                                                                                                            |
+| **active**          | optional     | [integer](#integer)                     | The product is active (**0** - no, **1** - yes).                                                                                              |
 | **productId**       | optional     | [string](#string)                       | If this item is a variant, then this is an Id of the parent product.                                                                          |
-| **newFlag**         | optional     | [integer](#integer)                     | The product is flagged new. 0=no, 1=yes                                                                                                       |
-| **specialDealFlag** | optional     | [integer](#integer)                     | The product is flagged a special deal. 0=no, 1=yes                                                                                            |
-| **choiceFlag**      | optional     | [integer](#integer)                     | The product is flagged a choice (recommended product). 0=no, 1=yes                                                                            |
+| **newFlag**         | optional     | [integer](#integer)                     | The product is flagged new (**0** - no, **1** - yes).                                                                                         |
+| **specialDealFlag** | optional     | [integer](#integer)                     | The product is flagged a special deal (**0** - no, **1** - yes).                                                                              |
+| **choiceFlag**      | optional     | [integer](#integer)                     | The product is flagged a choice - recommended product (**0** - no, **1** - yes).                                                              |
 | **added**           | optional     | [datetime](#datetime)                   | When the product was added to e-shop.                                                                                                         |
 | **updated**         | optional     | [datetime](#datetime)                   | When the product was updated for the last time.                                                                                               |
 | **availability**    | optional     | [integer](#integer)                     | The number of days to deliver the product. 0 means immediately.                                                                               |
@@ -350,8 +343,8 @@ Root element tag: **p**
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
-<inp:products
-    xmlns:inp="https://incomaker.com/feed/3.0/products"
+<products
+    version="2.15"
     totalItems="100"
 >
     <p id="P257">
@@ -390,18 +383,21 @@ Root element tag: **p**
             <l id="cs">
                 <name>Space Program</name>
                 <description>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam egestas wisi a erat. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Maecenas ipsum
-                    velit, consectetuer eu lobortis ut, dictum at dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
-                    consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
-                    eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Fusce tellus. Nullam eget nisl. Curabitur ligula sapien, pulvinar a vestibulum quis, facilisis vel sapien. Etiam egestas wisi a erat. Neque porro quisquam est,
-                    qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Proin pede metus, vulputate nec, fermentum fringilla,
-                    vehicula vitae, justo. Aliquam erat volutpat. Nullam eget nisl. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede.
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam egestas wisi a erat. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Maecenas ipsum velit, consectetuer eu lobortis ut, dictum at dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Fusce tellus. Nullam eget nisl. Curabitur ligula sapien, pulvinar a vestibulum quis, facilisis vel sapien. Etiam egestas wisi a erat. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Aliquam erat volutpat. Nullam eget nisl. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede.
                 </description>
                 <url>https://www.books.com/educational/space-program</url>
+                <attributes>
+                    <a key="Velikost">L</a>
+                    <a key="Barva">Modrá</a>
+                </attributes>
             </l>
         </languages>
+        <customFields>
+            <f key="Size">L</f>
+            <f key="Color">blue</f>
+        </customFields>
     </p>
-</inp:products>
+</products>
 ```
 
 ### Contacts

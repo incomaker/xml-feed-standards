@@ -42,10 +42,10 @@
 					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam egestas wisi a erat. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Maecenas ipsum velit, consectetuer eu lobortis ut, dictum at dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Fusce tellus. Nullam eget nisl. Curabitur ligula sapien, pulvinar a vestibulum quis, facilisis vel sapien. Etiam egestas wisi a erat. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. Aliquam erat volutpat. Nullam eget nisl. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede.
 				</description>
 				<url>https://www.books.com/educational/space-program</url>
-				<customFields>
-					<f key="Velikost">L</f>
-					<f key="Barva">Modrá</f>
-				</customFields>
+				<attributes>
+					<a key="Velikost">L</a>
+					<a key="Barva">Modrá</a>
+				</attributes>
 			</l>
 		</languages>
 		<customFields>

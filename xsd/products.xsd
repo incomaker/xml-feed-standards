@@ -18,8 +18,8 @@
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="in:feed">
-					<xs:all>
-						<xs:element name="p" minOccurs="0">
+					<xs:sequence>
+						<xs:element name="p" minOccurs="0" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:all>
 									<xs:element name="productId" type="xs:string" minOccurs="0"/>
@@ -81,7 +81,21 @@
 															<xs:element type="xs:anyURI" name="url" />
 															<xs:element type="xs:string" name="description" minOccurs="0"/>
 															<xs:element type="xs:string" name="shortDescription" minOccurs="0"/>
-															<xs:element name="customFields" type="in:customFields" minOccurs="0" />
+															<xs:element name="attributes" minOccurs="0">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="a" minOccurs="0" maxOccurs="unbounded">
+																			<xs:complexType>
+																				<xs:simpleContent>
+																					<xs:extension base="xs:string">
+																						<xs:attribute type="xs:string" name="key" use="required"/>
+																					</xs:extension>
+																				</xs:simpleContent>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
 														</xs:all>
 														<xs:attribute type="xs:string" name="id"/>
 													</xs:complexType>
@@ -94,7 +108,7 @@
 								<xs:attribute type="xs:string" name="id"/>
 							</xs:complexType>
 						</xs:element>
-					</xs:all>
+					</xs:sequence>
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
