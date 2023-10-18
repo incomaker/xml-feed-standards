@@ -61,7 +61,7 @@ Any sequence of characters.
 
 Please note that encoding must match with that in your XML header, we strongly recommend using **UTF-8** encoding for all XML files.
 
-Also make sure that string](#string) doesn't contain any characters prohibited inside XML like `&`, `#`, `$`, etc. 
+Also make sure that string doesn't contain any characters prohibited inside XML like `&`, `#`, `$`, etc. 
 If you need to include them in your string, please use [CDATA](https://en.wikipedia.org/wiki/CDATA).
 
 #### Decimal
