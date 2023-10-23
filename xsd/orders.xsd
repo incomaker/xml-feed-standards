@@ -8,8 +8,8 @@
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="in:feed">
-					<xs:all>
-						<xs:element name="o" minOccurs="0">
+					<xs:sequence>
+						<xs:element name="o" minOccurs="0" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:all>
 									<xs:element name="contactId" type="xs:string" minOccurs="0" />
@@ -75,7 +75,7 @@
 								<xs:attribute name="id" type="xs:string"/>
 							</xs:complexType>
 						</xs:element>
-					</xs:all>
+					</xs:sequence>
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
