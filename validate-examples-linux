@@ -1,4 +1,5 @@
 # Verifies that all example xml files are compliant with XSD schema definition
+# You must install xmllint first!
 
 xmllint --schema xsd/categories.xsd examples/categories.xml --noout
 xmllint --schema xsd/products.xsd examples/products.xml --noout

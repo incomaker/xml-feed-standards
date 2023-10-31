@@ -39,8 +39,8 @@
 									<xs:element name="currency" type="xs:string" minOccurs="0" />
 									<xs:element name="items">
 										<xs:complexType>
-											<xs:all>
-												<xs:element name="i" minOccurs="0">
+											<xs:sequence>
+												<xs:element name="i" minOccurs="0" maxOccurs="unbounded">
 													<xs:complexType>
 														<xs:all>
 															<xs:element name="variantId" type="xs:string" minOccurs="0" />
@@ -68,7 +68,7 @@
 														<xs:attribute name="id" type="xs:string"/>
 													</xs:complexType>
 												</xs:element>
-											</xs:all>
+											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
 								</xs:all>

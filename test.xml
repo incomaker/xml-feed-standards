@@ -28,12 +28,6 @@
 				<priceWithoutTax>164.46281</priceWithoutTax>
 				<currency>CZK</currency>
 			</i>
-			<i id="111837">
-				<quantity>2</quantity>
-				<price currency="EUR">20</price>
-				<priceWithoutTax>16</priceWithoutTax>
-				<currency>EUR</currency>
-			</i>
 		</items>
 	</o>
 </orders>

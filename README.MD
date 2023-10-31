@@ -1,9 +1,9 @@
 # Incomaker XML Feed Standards
 
-This repository contains documentation for implementation of Incomaker XML feeds, 
+This repository contains documentation for implementation of Incomaker XML feeds,
 XSD files for [schema validation](#xml-feed-validation) and examples.
 
-Instead of painstaking integration of full API and passing all data through the calls, 
+Instead of painstaking integration of full API and passing all data through the calls,
 just provide Incomaker with the following data. Incomaker will regularly download data from the shop, usually once per day.
 
 You should create the following data feeds:
@@ -24,7 +24,7 @@ The expected URL with parameters that will be called from Incomaker could look l
 
     https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=product
 
-Everything before `?` sign is a **Base URL** (in this example: `https://www.myeshop.com/feed.php`), 
+Everything before `?` sign is a **Base URL** (in this example: `https://www.myeshop.com/feed.php`),
 everything after it are parameters that will be added by Incomaker when downloading your feed.
 
 You will have to provide Incomaker with your **Base URL**.
@@ -48,7 +48,7 @@ Please, see the full list of parameters to implement below.
 Incomaker expects the feeds provided by the e-shop in the following formats. Most of the fields are optional, however you should provide as much as possible.
 The intelligence of Incomaker is dependent on data available, and the more data we have the better results we deliver.
 
-In all cases, the root element (products, orders, etc.) can contain an optional attribute **totalItems** containing the total number of filtered items of the current entity. 
+In all cases, the root element (products, orders, etc.) can contain an optional attribute **totalItems** containing the total number of filtered items of the current entity.
 It means all the available entities after filtering (applied *since* date) before applying pagination (*limit* and *offset*).
 
 XML structure definition is bellow, for each feed, a link to XSD schema file is enclosed.
@@ -57,16 +57,16 @@ XML structure definition is bellow, for each feed, a link to XSD schema file is 
 
 #### String
 
-Any sequence of characters. 
+Any sequence of characters.
 
 Please note that encoding must match with that in your XML header, we strongly recommend using **UTF-8** encoding for all XML files.
 
-Also make sure that string doesn't contain any characters prohibited inside XML like `&`, `#`, `$`, etc. 
+Also make sure that string doesn't contain any characters prohibited inside XML like `&`, `#`, `$`, etc.
 If you need to include them in your string, please use [CDATA](https://en.wikipedia.org/wiki/CDATA).
 
 #### Decimal
 
-Decimal number with comma (`.`) used as decimal separator. Number should not contain spaces or any thousands separator. 
+Decimal number with comma (`.`) used as decimal separator. Number should not contain spaces or any thousands separator.
 
 #### Integer
 
@@ -77,7 +77,7 @@ Whole number without any decimal or thousands separator.
 Date without time formatted in ISO date format - **YYYY-MM-DD** (example: `2023-06-24`)
 
 #### Datetime
- 
+
 Date and time formatted in ISO datetime format - **YYYY-MM-DD'T'HH:mm:ss** (example: `2023-06-24T13:00:24`)
 
 Optionally, datetime can also include a time zone (example: `2023-06-24T13:00:24+02:00`).
@@ -131,7 +131,7 @@ Root element tag: **f**
 
 A set of simple tags.
 
-##### Example 
+##### Example
 
 ```xml
 <tags>
@@ -693,12 +693,12 @@ This special xml feed contains a single collection of fields where you can provi
 
 It is a time-saver for both you and us if you verify your feeds before submitting them to Incomaker.
 
-There are XML Schema Definition files inside `xsd` folder of this repository 
+There are XML Schema Definition files inside `xsd` folder of this repository
 that will help you validate your feeds.
 
 ### Online
 
-One possibility is to use free online [XML validator](https://www.freeformatter.com/xml-validator-xsd.html) - just upload your feed and corresponding XSD file. 
+One possibility is to use free online [XML validator](https://www.freeformatter.com/xml-validator-xsd.html) - just upload your feed and corresponding XSD file.
 
 ### Linux
 
@@ -716,6 +716,12 @@ Export XML file formatted the for human readability:
 
     xmllint orders.xml --format --output orders.formatted.xml
 
-#### Example
+#### Docker
 
-Check out `validate-examples` script in root of this repository which is used to validate examples used in this documentation. 
+You can use enclosed Docker container and scripts to validate XML feed:
+
+    ./validate-docker orders my-orders-feed.xml
+
+on Windows:
+
+    validate-docker.cmd orders %cd%/my-orders-feed.xml

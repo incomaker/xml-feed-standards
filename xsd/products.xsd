@@ -33,7 +33,7 @@
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
-									<xs:element name="prices" minOccurs="1">
+									<xs:element name="prices">
 										<xs:complexType>
 											<xs:sequence>
 												<xs:element name="p" maxOccurs="unbounded">
@@ -73,8 +73,8 @@
 									<xs:element name="availability" type="xs:int" minOccurs="0"/>
 									<xs:element name="languages">
 										<xs:complexType>
-											<xs:all>
-												<xs:element name="l">
+											<xs:sequence>
+												<xs:element name="l" maxOccurs="unbounded">
 													<xs:complexType>
 														<xs:all>
 															<xs:element type="xs:string" name="name" />
@@ -100,7 +100,7 @@
 														<xs:attribute type="xs:string" name="id"/>
 													</xs:complexType>
 												</xs:element>
-											</xs:all>
+											</xs:sequence>
 										</xs:complexType>
 									</xs:element>
 									<xs:element name="customFields" type="in:customFields" minOccurs="0" />
