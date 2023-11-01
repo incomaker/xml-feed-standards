@@ -1,8 +1,8 @@
 # Verifies that all example xml files are compliant with XSD schema definition
 
-docker compose run xmllint --schema xsd/categories.xsd examples/categories.xml --noout
-docker compose run xmllint --schema xsd/products.xsd examples/products.xml --noout
-docker compose run xmllint --schema xsd/contacts.xsd examples/contacts.xml --noout
-docker compose run xmllint --schema xsd/orders.xsd examples/orders.xml --noout
-docker compose run xmllint --schema xsd/coupons.xsd examples/coupons.xml --noout
-docker compose run xmllint --schema xsd/info.xsd examples/info.xml --noout
+./validate-docker categories ${PWD}/examples/categories.xml
+./validate-docker products ${PWD}/examples/products.xml
+./validate-docker contacts ${PWD}/examples/contacts.xml
+./validate-docker orders ${PWD}/examples/orders.xml
+./validate-docker coupons ${PWD}/examples/coupons.xml
+./validate-docker info ${PWD}/examples/info.xml
