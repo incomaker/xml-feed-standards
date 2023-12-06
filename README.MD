@@ -240,6 +240,7 @@ List of product prices.
 | **amount**             | **required** | [decimal](#decimal) | Base price of the products (typically tax inclusive).                                                                                                                     |
 | **priceAfterDiscount** | optional     | [decimal](#decimal) | Reduced price if there is a discount (the same regime as in the amount element, i.e. tax inclusive). If there is no reduction on this item, don’t use the element at all. |
 | **priceWithoutTax**    | optional     | [decimal](#decimal) | Price without tax (VAT or sales tax).                                                                                                                                     |
+| **discountRate**       | optional     | [decimal](#decimal) | Percentual discount rate.                                                                                                                                                 |
 
 #### Example
 
@@ -249,6 +250,7 @@ List of product prices.
         <amount>129</amount>
         <priceWithoutTax>111</priceWithoutTax>
         <priceAfterDiscount>99</priceAfterDiscount>
+        <discountRate>15</discountRate>
     </p>
 </prices>
 ```
@@ -344,7 +346,7 @@ Root element tag: **p**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <products
-    version="2.15"
+    version="2.16"
     totalItems="100"
 >
     <p id="P257">

@@ -42,6 +42,7 @@
 															<xs:element type="xs:decimal" name="amount" />
 															<xs:element type="xs:decimal" name="priceAfterDiscount" minOccurs="0"/>
 															<xs:element type="xs:decimal" name="priceWithoutTax" minOccurs="0"/>
+															<xs:element type="xs:decimal" name="discountRate" minOccurs="0"/>
 														</xs:all>
 														<xs:attribute type="xs:string" name="currency" use="optional" />
 													</xs:complexType>
