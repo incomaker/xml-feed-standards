@@ -154,11 +154,11 @@ Root element tag: **c**
 |----------------|--------------|-------------------|-----------------------------------------------------------------------------------------------|
 | **id**         | **required** | [string](#string) | An internal category identifier. This Id must match with the Id used in Products and Orders.  |
 
-| Element Name         | Required     | Type              | Description                                             |
-|----------------------|--------------|-------------------|---------------------------------------------------------|
-| **parentCategoryId** | optional     | [string](#string) | An internal category identifier of the parent category. |
-| **languages**        | **required** | [string](#string) | An internal category identifier of the parent category. |
-| **url**              | optional     | [string](#string) | The URL of the category.                                |
+| Element Name         | Required     | Type                                      | Description                                             |
+|----------------------|--------------|-------------------------------------------|---------------------------------------------------------|
+| **parentCategoryId** | optional     | [string](#string)                         | An internal category identifier of the parent category. |
+| **languages**        | **required** | [CategoryLanguages](#categorylanguages)   | Category names in different languages.                  |
+| **url**              | optional     | [string](#string)                         | The URL of the category.                                |
 
 #### CategoryLanguages
 
@@ -396,6 +396,10 @@ Root element tag: **p**
             <f key="Size">L</f>
             <f key="Color">blue</f>
         </customFields>
+        <tags>
+            <t>Apollo Program</t>
+            <t>Astronaut</t>
+        </tags>
     </p>
 </products>
 ```
