@@ -158,7 +158,6 @@ Root element tag: **c**
 |----------------------|--------------|-------------------------------------------|---------------------------------------------------------|
 | **parentCategoryId** | optional     | [string](#string)                         | An internal category identifier of the parent category. |
 | **languages**        | **required** | [CategoryLanguages](#categorylanguages)   | Category names in different languages.                  |
-| **url**              | optional     | [string](#string)                         | The URL of the category.                                |
 
 #### CategoryLanguages
 
