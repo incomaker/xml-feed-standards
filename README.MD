@@ -613,7 +613,7 @@ List of actual coupon codes. Element value is code of the coupon.
 
 | Attribute Name | Required     | Type              | Description                                                                                           |
 |----------------|--------------|-------------------|-------------------------------------------------------------------------------------------------------|
-| **contactId**  | **required** | [string](#string) | Coupon recipient. An Id of the contact in the e-shop, must math **id** attribute in the contact feed. |
+| **contactId**  | **optional** | [string](#string) | Coupon recipient. An Id of the contact in the e-shop, must math **id** attribute in the contact feed. |
 
 ```xml
 <values>
