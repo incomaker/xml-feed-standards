@@ -607,13 +607,17 @@ Example:
 
 #### CouponValues
 
-List of actual coupon codes.
+List of actual coupon codes. Element value is code of the coupon.
 
 ##### Example
 
+| Attribute Name | Required     | Type              | Description                                                                        |
+|----------------|--------------|-------------------|------------------------------------------------------------------------------------|
+| **contactId**  | **required** | [string](#string) | An Id of the contact in the e-shop, must math **id** attribute in the contact feed |
+
 ```xml
 <values>
-    <v>ABSCDF</v>
+    <v contactId="646GS">ABSCDF</v>
     <v>GHCJKD</v>
     <v>D45s45</v>
 </values>

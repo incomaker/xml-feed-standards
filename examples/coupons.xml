@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <coupons
-	version="2.15"
+	version="2.16"
 	totalItems="1"
 >
 	<c id="DISCOUNT_10">
@@ -10,7 +10,7 @@
 		<validFrom>2020-04-10T00:00:00</validFrom>
 		<validTo>2020-04-17T00:00:00</validTo>
 		<values>
-			<v>ABSCDF</v>
+			<v contactId="client165">ABSCDF</v>
 			<v>GHCJKD</v>
 			<v>D45s45</v>
 		</values>
