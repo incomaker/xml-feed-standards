@@ -611,9 +611,9 @@ List of actual coupon codes. Element value is code of the coupon.
 
 ##### Example
 
-| Attribute Name | Required     | Type              | Description                                                                        |
-|----------------|--------------|-------------------|------------------------------------------------------------------------------------|
-| **contactId**  | **required** | [string](#string) | An Id of the contact in the e-shop, must math **id** attribute in the contact feed |
+| Attribute Name | Required     | Type              | Description                                                                                           |
+|----------------|--------------|-------------------|-------------------------------------------------------------------------------------------------------|
+| **contactId**  | **required** | [string](#string) | Coupon recipient. An Id of the contact in the e-shop, must math **id** attribute in the contact feed. |
 
 ```xml
 <values>
@@ -655,8 +655,8 @@ Root element tag: **c**
         <validFrom>2020-04-10T00:00:00</validFrom>
         <validTo>2020-04-17T00:00:00</validTo>
         <values>
-            <v>ABSCDF</v>
-            <v>GHCJKD</v>
+            <v contactId="646GS">ABSCDF</v>
+            <v contactId="78ADF4">GHCJKD</v>
             <v>D45s45</v>
         </values>
     </c>
