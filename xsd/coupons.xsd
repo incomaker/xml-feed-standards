@@ -31,13 +31,17 @@
 									<xs:element type="xs:decimal" name="discount" minOccurs="0"/>
 									<xs:element type="xs:dateTime" name="validFrom" minOccurs="0"/>
 									<xs:element type="xs:dateTime" name="validTo" minOccurs="0"/>
-									<xs:element name="values" >
+									<xs:element name="values">
 										<xs:complexType>
 											<xs:sequence>
 												<xs:element name="v" maxOccurs="unbounded" minOccurs="1">
-													<xs:simpleType>
-														<xs:restriction base="xs:string"/>
-													</xs:simpleType>
+													<xs:complexType>
+														<xs:simpleContent>
+															<xs:extension base="xs:string">
+																<xs:attribute type="xs:string" name="contactId" />
+															</xs:extension>
+														</xs:simpleContent>
+													</xs:complexType>
 												</xs:element>
 											</xs:sequence>
 										</xs:complexType>
