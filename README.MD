@@ -645,7 +645,7 @@ Root element tag: **c**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <coupons
-    version="2.15"
+    version="2.17"
     totalItems="1"
 >
     <c id="DISCOUNT_10">
