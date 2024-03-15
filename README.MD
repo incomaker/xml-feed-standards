@@ -66,7 +66,7 @@ If you need to include them in your string, please use [CDATA](https://en.wikipe
 
 #### Decimal
 
-Decimal number with comma (`.`) used as decimal separator. Number should not contain spaces or any thousands separator.
+Decimal number with dot (`.`) used as decimal separator. Number should not contain spaces or any thousands separator.
 
 #### Integer
 
@@ -346,7 +346,7 @@ Root element tag: **p**
 <?xml version="1.0" encoding="UTF-8" ?>
 <products
     version="2.16"
-    totalItems="100"
+    totalItems="123"
 >
     <p id="P257">
         <productId>101834</productId>
