@@ -1293,7 +1293,7 @@ To create coupons, Incomaker will make a **POST** request to your standard base 
 |-------------------|--------------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **key**           | **required** | [string](#string)   | API key returned from the register plugin function. API key has a format of [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier)                                                           |
 | **type**          | **required** | [string](#string)   | Indicates type of returned feed. The only supported value here is: **coupon**.                                                                                                                            |
-| **couponTypeId**  | optional     | [string](#string)   | An identifier of coupon type as in [Coupon Types](#couponTypes) feed.                                                                                                                                     |
+| **couponTypeId**  | optional     | [string](#string)   | An identifier of coupon type as in [Coupon Types](#coupon-types) feed.                                                                                                                                    |
 | **downloadCount** | optional     | [integer](#integer) | Indicates the number of coupons to be generated.                                                                                                                                                          |
 | **contactId**     | optional     | [string](#string)   | Coupon recipient. Optional. An Id of the contact in the e-shop that will own created coupons, must match **id** attribute in the contact feed. This is used, for example, when creating birthday coupons. |
 
@@ -1344,12 +1344,21 @@ This special xml feed contains a single collection of fields where you can provi
 
 It is a time-saver for both you and us if you verify your feeds before submitting them to Incomaker.
 
-There are XML Schema Definition files inside `xsd` folder of this repository
-that will help you validate your feeds.
+There are XML Schema Definition files inside `xsd` folder of this repository that will help you validate your feeds.
 
 ### Online
 
 One possibility is to use free online [XML validator](https://www.freeformatter.com/xml-validator-xsd.html) - just upload your feed and corresponding XSD file.
+
+#### Docker
+
+If you have Docker installed, you can use enclosed container and scripts to validate XML feed:
+
+    ./validate-docker orders my-orders-feed.xml
+
+on Windows:
+
+    validate-docker.cmd orders %cd%/my-orders-feed.xml
 
 ### Linux
 
@@ -1366,13 +1375,3 @@ Validate a feed:
 Export XML file formatted the for human readability:
 
     xmllint orders.xml --format --output orders.formatted.xml
-
-#### Docker
-
-You can use enclosed Docker container and scripts to validate XML feed:
-
-    ./validate-docker orders my-orders-feed.xml
-
-on Windows:
-
-    validate-docker.cmd orders %cd%/my-orders-feed.xml

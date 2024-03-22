@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+	xmlns:in="https://incomaker.com/feed/3"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+	<xs:import namespace="https://incomaker.com/feed/3" schemaLocation="incomaker.xsd"/>
+	<xs:element name="couponTypes">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="in:feed">
+					<xs:sequence>
+						<xs:element name="couponType" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:all>
+									<xs:element type="xs:int" name="id"/>
+									<xs:element name="reusable">
+										<xs:simpleType>
+											<xs:restriction base="xs:byte">
+												<xs:enumeration value="0" />
+												<xs:enumeration value="1" />
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element type="in:nonEmptyString" name="title" minOccurs="0"/>
+								</xs:all>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

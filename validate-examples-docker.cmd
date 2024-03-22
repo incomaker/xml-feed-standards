@@ -4,5 +4,6 @@ call validate-docker.cmd categories %cd%/examples/categories.xml
 call validate-docker.cmd products %cd%/examples/products.xml
 call validate-docker.cmd contacts %cd%/examples/contacts.xml
 call validate-docker.cmd orders %cd%/examples/orders.xml
+call validate-docker.cmd couponTypes %cd%/examples/couponTypes.xml
 call validate-docker.cmd coupons %cd%/examples/coupons.xml
 call validate-docker.cmd info %cd%/examples/info.xml
