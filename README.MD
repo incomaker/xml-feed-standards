@@ -618,15 +618,15 @@ List of actual coupon codes. Element value is code of the coupon.
 
 Root element tag: **c**
 
-| Attribute Name | Required     | Type              | Description                             |
-|----------------|--------------|-------------------|-----------------------------------------|
-| **id**         | **required** | [string](#string) | An Id of the coupon type in the e-shop. |
+| Attribute Name | Required     | Type              | Description                                        |
+|----------------|--------------|-------------------|----------------------------------------------------|
+| **id**         | **required** | [string](#string) | An Id of the coupon type (template) in the e-shop. |
 
 | Element Name     | Required     | Type                          | Description                                                                                                                                                                                                                        |
 |------------------|--------------|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **reusable**     | **required** | [integer](#integer)           | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage. |
 | **discountType** | optional     | [string](#string)             | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                      |
-| **discount**     | optional     | [string](#string)             | Either the monetary or percentual value of the coupon type.                                                                                                                                                                        |
+| **discount**     | optional     | [decimal](#decimal)           | Either the monetary or percentual value of the coupon type.                                                                                                                                                                        |
 | **validFrom**    | optional     | [datetime](#datetime)         |                                                                                                                                                                                                                                    |
 | **validTo**      | optional     | [datetime](#datetime)         |                                                                                                                                                                                                                                    |
 | **values**       | **required** | [CouponValues](#couponvalues) | The list of actual coupon codes.                                                                                                                                                                                                   |

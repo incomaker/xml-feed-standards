@@ -64,7 +64,7 @@
 									<xs:element name="unit" type="xs:string" minOccurs="0"/>
 									<xs:element name="brand" type="xs:string" minOccurs="0"/>
 									<xs:element name="condition" type="productCondition" minOccurs="0"/>
-									<xs:element name="stock" type="xs:int" minOccurs="0"/>
+									<xs:element name="stock" type="xs:decimal" minOccurs="0"/>
 									<xs:element name="newFlag" type="xs:byte" minOccurs="0"/>
 									<xs:element name="specialDealFlag" type="xs:byte" minOccurs="0"/>
 									<xs:element name="choiceFlag" type="xs:byte" minOccurs="0"/>
