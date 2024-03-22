@@ -646,12 +646,12 @@ Root element tag: **c**
         <validFrom>2020-04-10T00:00:00</validFrom>
         <validTo>2020-04-17T00:00:00</validTo>
         <values>
-			<v>D4dg47</v>
-			<v>B45s48</v>
+            <v>D4dg47</v>
+            <v>B45s48</v>
             <v contactId="646GS">ABSCDF</v>
             <v>GHCJKD</v>
             <v>D45s45</v>
-			...
+            ...
         </values>
     </c>
 </coupons>
