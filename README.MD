@@ -596,15 +596,6 @@ Root element tag: **o**
 
 ### Coupons
 
-#### Download Count
-
-Unlike other feeds, the coupon feed has a special optional parameter **downloadCount** that causes the immediate generation of the requested number of coupons and their download in the feed (if the e-commerce platform supports such behavior).
-Enter the number of needed coupons.
-
-Example:
-
-    https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=coupon&id=Discount&downloadCount=1000
-
 #### CouponValues
 
 List of actual coupon codes. Element value is code of the coupon.
@@ -648,20 +639,37 @@ Root element tag: **c**
     version="2.17"
     totalItems="1"
 >
-    <c id="DISCOUNT_10">
+    <c id="DiscountChristmas2024">
         <reusable>0</reusable>
         <discountType>PERCENTUAL</discountType>
         <discount>10.20</discount>
         <validFrom>2020-04-10T00:00:00</validFrom>
         <validTo>2020-04-17T00:00:00</validTo>
         <values>
+			<v>D4dg47</v>
+			<v>B45s48</v>
             <v contactId="646GS">ABSCDF</v>
-            <v contactId="78ADF4">GHCJKD</v>
+            <v>GHCJKD</v>
             <v>D45s45</v>
+			...
         </values>
     </c>
 </coupons>
 ```
+
+#### Creating New Coupons
+
+Unlike other feeds, the coupon feed also allows for creating new items.
+If you want Incomaker to send coupons within an email campaign, it can use this method to create coupons on the fly.
+
+In order to create new coupons, there is an additional parameter **downloadCount** that causes the immediate generation of requested number of coupons and their download in the feed (if the e-commerce platform supports such behavior).
+
+Parameter **id** denotes type (or *template*) for newly created coupons.
+
+Following example will generate 1000 new coupons of type **DiscountChristmas2024**:
+
+    https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=coupon&id=DiscountChristmas2024&downloadCount=1000
+
 
 ### Info
 
