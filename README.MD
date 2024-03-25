@@ -1309,7 +1309,7 @@ This endpoint returns XML document with identical schema to [Coupons](#coupons) 
 
 #### RequestBody
 
-Request body container JSON document that specifies attributes for new coupons - either provide ID of coupon template or all necessary attributes.
+Request body contains [JSON](https://www.json.org/json-en.html) document that specifies attributes for new coupons - either provide ID of coupon template or all necessary attributes.
 
 You must either provide template ID matching **couponTemplateId** that references a template from [Coupon Templates](#couponTemplates) or provide all necessary attributes on per-coupon basis (**discountType**, **reusable**, **discount**, **validFrom**, **validTo**).
 
@@ -1322,7 +1322,7 @@ You must either provide template ID matching **couponTemplateId** that reference
 | **discount**         | optional     | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                                                                           |
 | **validFrom**        | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                  |
 | **validTo**          | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                  |
-| **contactIds**       | optional     | Array<string>         | Coupon recipients. Optional. If specified, then there should be a coupon created for each contact. Array of contact IDs in the e-shop that will own created coupons, must match **id** attribute in the contact feed. This is used, for example, when creating birthday coupons. |
+| **contactIds**       | optional     | Array&lt;string&gt;   | Coupon recipients. Optional. If specified, then there should be a coupon created for each contact. Array of contact IDs in the e-shop that will own created coupons, must match **id** attribute in the contact feed. This is used, for example, when creating birthday coupons. |
 
 #### Example - by template ID
 
