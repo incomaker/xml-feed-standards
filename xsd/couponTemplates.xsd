@@ -4,12 +4,12 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
 	<xs:import namespace="https://incomaker.com/feed/3" schemaLocation="incomaker.xsd"/>
-	<xs:element name="couponTypes">
+	<xs:element name="couponTemplates">
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="in:feed">
 					<xs:sequence>
-						<xs:element name="couponType" maxOccurs="unbounded">
+						<xs:element name="couponTemplate" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:all>
 									<xs:element type="xs:int" name="id"/>
@@ -21,6 +21,17 @@
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:element>
+									<xs:element name="discountType">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="PERCENTUAL" />
+												<xs:enumeration value="MONETARY" />
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element type="xs:decimal" name="discount"/>
+									<xs:element type="xs:dateTime" name="validFrom" minOccurs="0"/>
+									<xs:element type="xs:dateTime" name="validTo" minOccurs="0"/>
 									<xs:element type="in:nonEmptyString" name="title" minOccurs="0"/>
 								</xs:all>
 							</xs:complexType>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<couponTemplates
+	version="3.0"
+	totalItems="2"
+>
+	<couponTemplate>
+		<id>16</id>
+		<reusable>1</reusable>
+		<discountType>PERCENTUAL</discountType>
+		<discount>20</discount>
+	</couponTemplate>
+	<couponTemplate>
+		<id>156</id>
+		<title>Christmas Campaign 2024</title>
+		<reusable>0</reusable>
+		<discountType>MONETARY</discountType>
+		<discount>500</discount>
+		<validFrom>2020-04-10T00:00:00</validFrom>
+		<validTo>2020-04-17T00:00:00</validTo>
+	</couponTemplate>
+</couponTemplates>

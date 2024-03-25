@@ -1193,48 +1193,63 @@ Root element tag: **o**
 </orders>
 ```
 
-### Coupon Types
+### Coupon Templates
 
-Each coupon must be assigned to a single type (aka *coupon class* or *coupon template*). This feed provides a list of all coupon types present in the e-shop.
+Each coupon must be assigned to a single template. This feed provides a list of all coupon templates present in the e-shop.
 
-Root element tag: **couponTypes**
+If your platform doesn't support coupon templates, instead if implementing this feed, you will output all coupon attributes in coupon feed. 
 
-#### Coupon Type
+Root element tag: **couponTemplates**
 
-A single coupon type.
+#### Coupon Template
 
-Root element tag: **couponType**
+A single coupon template.
 
-| Element Name     | Required     | Type                | Description                                                                                                                                                                                                                        |
-|------------------|--------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **id**           | **required** | [string](#string)   | Unique identifier of the coupon type.                                                                                                                                                                                              |
-| **title**        | **optional** | [string](#string)   | Optional human-readable name of the coupon type.                                                                                                                                                                                   |
-| **reusable**     | **required** | [integer](#integer) | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage. |
+Root element tag: **couponTemplate**
+
+| Element Name     | Required     | Type                  | Description                                                                                                                                                                                                                        |
+|------------------|--------------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **id**           | **required** | [string](#string)     | Unique identifier of coupon template.                                                                                                                                                                                              |
+| **title**        | optional     | [string](#string)     | Optional human-readable name of the coupon template.                                                                                                                                                                               |
+| **reusable**     | **required** | [integer](#integer)   | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage. |
+| **discountType** | **required** | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                      |
+| **discount**     | **required** | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                             |
+| **validFrom**    | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                    |
+| **validTo**      | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                    |
 
 #### Example
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
-<couponTypes
+<couponTemplates
     version="3.0"
-    totalItems="1"
+    totalItems="25"
 >
-    <couponType>
+    <couponTemplate>
         <id>16</id>
         <reusable>1</reusable>
-    </couponType>
-    <couponType>
+        <discountType>PERCENTUAL</discountType>
+        <discount>20</discount>
+    </couponTemplate>
+    <couponTemplate>
         <id>156</id>
         <title>Christmas Campaign 2024</title>
         <reusable>0</reusable>
-    </couponType>
+        <discountType>MONETARY</discountType>
+        <discount>500</discount>
+        <validFrom>2020-04-10T00:00:00</validFrom>
+        <validTo>2020-04-17T00:00:00</validTo>
+    </couponTemplate>
     ...
-</couponTypes>
+</couponTemplates>
+
 ```
 
 ### Coupons
 
 A list of discount coupons (aka *vouchers*).
+
+All attributes except **code** are marked as optional, but you must provide either **couponTemplateId** that references a template from [Coupon Templates](#couponTemplates) or provide all necessary attributes on per-coupon basis (**discountType**, **reusable**, **discount**, **validFrom**, **validTo**).
 
 Root element tag: **coupons**
 
@@ -1244,16 +1259,16 @@ A single coupon.
 
 Root element tag: **coupon**
 
-| Element Name     | Required     | Type                  | Description                                                                                                                                                                                                                                                           |
-|------------------|--------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **couponTypeId** | **required** | [string](#string)     | Unique identifier of the coupon type. Must match **id** in [Coupon Types](#couponTypes) feed.                                                                                                                                                                         |
-| **discountType** | **required** | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                                                         |
-| **discount**     | **required** | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                                                                |
-| **code**         | **required** | [string](#string)     | The actual coupon code that a customer will use when claiming the coupon.                                                                                                                                                                                             |
-| **validFrom**    | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                       |
-| **validTo**      | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                       |
-| **contactId**    | optional     | [string](#string)     | Coupon recipient. Optional. An Id of the contact in the e-shop that owns the coupon, must match **id** attribute in the contact feed. This is used, for example, when coupon is for customer's birthday and hence is reserved for this customer since it was created. |
-
+| Element Name         | Required     | Type                  | Description                                                                                                                                                                                                                                                           |
+|----------------------|--------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **code**             | **required** | [string](#string)     | The actual coupon code that a customer will use when claiming the coupon.                                                                                                                                                                                             |
+| **couponTemplateId** | optional     | [string](#string)     | Unique identifier of the coupon type. Must match **id** in [Coupon Templates](#couponTemplates) feed.                                                                                                                                                                 |
+| **discountType**     | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                                                         |
+| **reusable**         | optional     | [integer](#integer)   | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage.                                    |
+| **discount**         | optional     | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                                                                |
+| **validFrom**        | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                       |
+| **validTo**          | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                       |
+| **contactId**        | optional     | [string](#string)     | Coupon recipient. Optional. An Id of the contact in the e-shop that owns the coupon, must match **id** attribute in the contact feed. This is used, for example, when coupon is for customer's birthday and hence is reserved for this customer since it was created. |
 
 #### Example
 

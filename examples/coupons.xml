@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <coupons
 	version="3.0"
-	totalItems="2"
+	totalItems="25"
 >
 	<coupon>
-		<couponTypeId>16</couponTypeId>
-		<discountType>PERCENTUAL</discountType>
-		<discount>10</discount>
+		<reusable>0</reusable>
+		<discountType>MONETARY</discountType>
+		<discount>500</discount>
+		<validFrom>2020-04-10T00:00:00</validFrom>
 		<validTo>2020-04-17T00:00:00</validTo>
 		<code>GHCJKD</code>
 	</coupon>
 	<coupon>
-		<couponTypeId>156</couponTypeId>
-		<discountType>PERCENTUAL</discountType>
-		<discount>20</discount>
-		<validFrom>2020-04-10T00:00:00</validFrom>
-		<validTo>2020-04-17T00:00:00</validTo>
+		<couponTemplateId>156</couponTemplateId>
 		<contactId>client16</contactId>
 		<code>D45s45</code>
 	</coupon>

@@ -4,6 +4,6 @@
 ./validate-docker products ${PWD}/examples/products.xml
 ./validate-docker contacts ${PWD}/examples/contacts.xml
 ./validate-docker orders ${PWD}/examples/orders.xml
-./validate-docker couponTypes ${PWD}/examples/couponTypes.xml
+./validate-docker couponTemplates ${PWD}/examples/couponTemplates.xml
 ./validate-docker coupons ${PWD}/examples/coupons.xml
 ./validate-docker info ${PWD}/examples/info.xml

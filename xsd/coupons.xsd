@@ -9,10 +9,12 @@
 			<xs:complexContent>
 				<xs:extension base="in:feed">
 					<xs:sequence>
-						<xs:element name="c" maxOccurs="unbounded">
+						<xs:element name="coupon" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:all>
-									<xs:element name="reusable">
+									<xs:element type="xs:string" name="code"/>
+									<xs:element type="xs:string" name="couponTemplateId" minOccurs="0"/>
+									<xs:element name="reusable" minOccurs="0">
 										<xs:simpleType>
 											<xs:restriction base="xs:byte">
 												<xs:enumeration value="0" />
@@ -31,23 +33,8 @@
 									<xs:element type="xs:decimal" name="discount" minOccurs="0"/>
 									<xs:element type="xs:dateTime" name="validFrom" minOccurs="0"/>
 									<xs:element type="xs:dateTime" name="validTo" minOccurs="0"/>
-									<xs:element name="values">
-										<xs:complexType>
-											<xs:sequence>
-												<xs:element name="v" maxOccurs="unbounded" minOccurs="1">
-													<xs:complexType>
-														<xs:simpleContent>
-															<xs:extension base="xs:string">
-																<xs:attribute type="xs:string" name="contactId" />
-															</xs:extension>
-														</xs:simpleContent>
-													</xs:complexType>
-												</xs:element>
-											</xs:sequence>
-										</xs:complexType>
-									</xs:element>
+									<xs:element type="xs:string" name="contactId" minOccurs="0"/>
 								</xs:all>
-								<xs:attribute type="xs:string" name="id"/>
 							</xs:complexType>
 						</xs:element>
 					</xs:sequence>
