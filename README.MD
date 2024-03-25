@@ -1242,7 +1242,6 @@ Root element tag: **couponTemplate**
     </couponTemplate>
     ...
 </couponTemplates>
-
 ```
 
 ### Coupons
@@ -1280,18 +1279,14 @@ Root element tag: **coupon**
 >
     <coupon>
         <couponTypeId>16</couponTypeId>
-        <discountType>PERCENTUAL</discountType>
-        <discount>10</discount>
-        <validTo>2020-04-17T00:00:00</validTo>
         <code>GHCJKD</code>
     </coupon>
     <coupon>
-        <couponTypeId>156</couponTypeId>
         <discountType>PERCENTUAL</discountType>
         <discount>20</discount>
         <validFrom>2020-04-10T00:00:00</validFrom>
-        <validTo>2020-04-17T00:00:00</validTo>
-        <contactId>client16</contactId>
+        <validTo>2025-04-17T00:00:00</validTo>
+        <contactId>1789</contactId>
         <code>D45s45</code>
     </coupon>
     ...
@@ -1304,21 +1299,68 @@ If you want Incomaker to send coupons within an email campaign, it can use this 
 
 To create coupons, Incomaker will make a **POST** request to your standard base URL with following parameters:
 
-| Param Name        | Required     | Type                | Description                                                                                                                                                                                               |
-|-------------------|--------------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **key**           | **required** | [string](#string)   | API key returned from the register plugin function. API key has a format of [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier)                                                           |
-| **type**          | **required** | [string](#string)   | Indicates type of returned feed. The only supported value here is: **coupon**.                                                                                                                            |
-| **couponTypeId**  | optional     | [string](#string)   | An identifier of coupon type as in [Coupon Types](#coupon-types) feed.                                                                                                                                    |
-| **downloadCount** | optional     | [integer](#integer) | Indicates the number of coupons to be generated.                                                                                                                                                          |
-| **contactId**     | optional     | [string](#string)   | Coupon recipient. Optional. An Id of the contact in the e-shop that will own created coupons, must match **id** attribute in the contact feed. This is used, for example, when creating birthday coupons. |
+| Param Name   | Required     | Type                          | Description                                                                                                                                      |
+|--------------|--------------|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| **key**      | **required** | [string](#string)             | API key returned from the register plugin function. API key has a format of [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier)  |
+| **type**     | **required** | [string](#string)             | Indicates type of returned feed. The only supported value here is: **coupon**.                                                                   |
+| REQUEST_BODY | **required** | [RequestBody](#RequestBody)   | JSON document with attributes for new coupons.                                                                                                   |
 
-#### Example
+This endpoint returns XML document with identical schema to [Coupons](#coupons) feed containing all generated coupons. However, there is no paging or filtering support in this case.
 
-Following example will generate 1000 new coupons of type **DiscountChristmas2024**:
+#### RequestBody
 
-    POST https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=coupon&couponTypeId=DiscountChristmas2024&downloadCount=1000
+Request body container JSON document that specifies attributes for new coupons - either provide ID of coupon template or all necessary attributes.
 
-This will return XML document with identical schema to [Coupons](#coupons) feed containing all generated coupons. There is no paging or filtering support in this case.
+You must either provide template ID matching **couponTemplateId** that references a template from [Coupon Templates](#couponTemplates) or provide all necessary attributes on per-coupon basis (**discountType**, **reusable**, **discount**, **validFrom**, **validTo**).
+
+| Attribute Name       | Required     | Type                  | Description                                                                                                                                                                                                                                                                      |
+|----------------------|--------------|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **downloadCount**    | optional     | [integer](#integer)   | Indicates the number of coupons to be generated. This can only be empty if you fill **contactIds**                                                                                                                                                                               |
+| **couponTemplateId** | optional     | [string](#string)     | An identifier of coupon type as in [Coupon Types](#coupon-types) feed.                                                                                                                                                                                                           |
+| **discountType**     | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                                                                    |
+| **reusable**         | optional     | [integer](#integer)   | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage.                                               |
+| **discount**         | optional     | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                                                                           |
+| **validFrom**        | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                  |
+| **validTo**          | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                  |
+| **contactIds**       | optional     | Array<string>         | Coupon recipients. Optional. If specified, then there should be a coupon created for each contact. Array of contact IDs in the e-shop that will own created coupons, must match **id** attribute in the contact feed. This is used, for example, when creating birthday coupons. |
+
+#### Example - by template ID
+
+Following example will generate 1000 new coupons from template **DiscountChristmas2024**:
+
+    POST https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=coupon
+    {
+        "downloadCount": 1000,
+        "couponTemplateId": "DiscountChristmas2024"
+    }
+
+#### Example - by attributes
+
+Following example will generate 500 new coupons for 10% discount:
+
+    POST https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=coupon
+    {
+        "downloadCount": 500,
+        "reusable": "0",
+        "discountType": "PERCENTUAL",
+        "discount": "10",
+        "validFrom": "2023-12-01T00:00:00",
+        "validTo": "2024-01-30T00:00:00"
+    }
+
+#### Example - for specific contacts
+
+Following example will generate new coupon for discount of 150 (in e-shop's currency) for each of the contacts (**86342b04** and **4fde001**):
+
+    POST https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=coupon
+    {
+        "reusable": "0",
+        "discountType": "MONETARY",
+        "discount": "150",
+        "validFrom": "2023-12-01T00:00:00",
+        "validTo": "2024-01-30T00:00:00",
+        "contactIds": ["86342b04", "4fde001"]
+    }
 
 ### Info
 
