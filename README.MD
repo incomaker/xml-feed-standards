@@ -1328,7 +1328,7 @@ You must either provide template ID matching **couponTemplateId** that reference
 
 Following example will generate 1000 new coupons from template **DiscountChristmas2024**:
 
-    POST https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=coupon
+    POST https://www.myeshop.com/feed.php?key=92342b04-fa97-4fde-baa5-c3f912b88430&type=coupon
     {
         "downloadCount": 1000,
         "couponTemplateId": "DiscountChristmas2024"
@@ -1338,7 +1338,7 @@ Following example will generate 1000 new coupons from template **DiscountChristm
 
 Following example will generate 500 new coupons for 10% discount:
 
-    POST https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=coupon
+    POST https://www.myeshop.com/feed.php?key=92342b04-fa97-4fde-baa5-c3f912b88430&type=coupon
     {
         "downloadCount": 500,
         "reusable": false,
@@ -1352,7 +1352,7 @@ Following example will generate 500 new coupons for 10% discount:
 
 Following example will generate new coupon for discount of 150 (in e-shop's currency) for each of the contacts (**86342b04** and **4fde001**):
 
-    POST https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=coupon
+    POST https://www.myeshop.com/feed.php?key=92342b04-fa97-4fde-baa5-c3f912b88430&type=coupon
     {
         "reusable": false,
         "discountType": "MONETARY",
