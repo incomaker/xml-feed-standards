@@ -1318,7 +1318,7 @@ You must either provide template ID matching **couponTemplateId** that reference
 | **downloadCount**    | optional     | [integer](#integer)   | Indicates the number of coupons to be generated. This can only be empty if you fill **contactIds**                                                                                                                                                                               |
 | **couponTemplateId** | optional     | [string](#string)     | An identifier of coupon type as in [Coupon Templates](#coupon-templates) feed.                                                                                                                                                                                                   |
 | **discountType**     | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                                                                    |
-| **reusable**         | optional     | [integer](#integer)   | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage.                                               |
+| **reusable**         | optional     | boolean               | Whether this type of coupon can be used multiple times. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage.                                                                        |
 | **discount**         | optional     | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                                                                           |
 | **validFrom**        | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                  |
 | **validTo**          | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                  |
@@ -1341,9 +1341,9 @@ Following example will generate 500 new coupons for 10% discount:
     POST https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=coupon
     {
         "downloadCount": 500,
-        "reusable": "0",
+        "reusable": false,
         "discountType": "PERCENTUAL",
-        "discount": "10",
+        "discount": 10,
         "validFrom": "2023-12-01T00:00:00",
         "validTo": "2024-01-30T00:00:00"
     }
@@ -1354,9 +1354,9 @@ Following example will generate new coupon for discount of 150 (in e-shop's curr
 
     POST https://www.myeshop.com/feed.php?key=86342b04-fa97-4fde-baa5-c3f912b88430&type=coupon
     {
-        "reusable": "0",
+        "reusable": false,
         "discountType": "MONETARY",
-        "discount": "150",
+        "discount": 150,
         "validFrom": "2023-12-01T00:00:00",
         "validTo": "2024-01-30T00:00:00",
         "contactIds": ["86342b04", "4fde001"]
