@@ -1091,31 +1091,6 @@ List of the orders.
 
 Root element tag: **orders**
 
-#### OrderContact
-
-Contact details in case of unregistered sale.
-There must be either **contactId** or **contact** specified. Only one of the elements is allowed!
-
-Root element tag: **contact**
-
-| Attribute Name | Required     | Type              | Description                        |
-|----------------|--------------|-------------------|------------------------------------|
-| **id**         | **required** | [string](#string) | An Id of the order in the e-shop.  |
-
-| Element Name     | Required | Type              | Description                     |
-|------------------|----------|-------------------|---------------------------------|
-| **firstName**    | optional | [string](#string) |                                 |
-| **lastName**     | optional | [string](#string) |                                 |
-| **email**        | optional | [string](#string) |                                 |
-| **street**       | optional | [string](#string) |                                 |
-| **street2**      | optional | [string](#string) |                                 |
-| **city**         | optional | [string](#string) |                                 |
-| **zipCode**      | optional | [string](#string) |                                 |
-| **phoneNumber1** | optional | [string](#string) |                                 |
-| **phoneNumber2** | optional | [string](#string) |                                 |
-| **country**      | optional | [string](#string) | ISO country code (two letters)  |
-| **language**     | optional | [string](#string) | ISO language code (two letters) |
-
 #### OrderItems
 
 List of order items.
@@ -1142,25 +1117,27 @@ Root element tag: **o**
 |----------------|--------------|-------------------|------------------------------------|
 | **id**         | **required** | [string](#string) | An Id of the order in the e-shop.  |
 
-| Element Name        | Required     | Type                          | Description                                                                            |
-|---------------------|--------------|-------------------------------|----------------------------------------------------------------------------------------|
-| **contactId**       | optional     | [string](#string)             | An Id of the contact in the e-shop. (Use only when **contact** is missing)             |
-| **contact**         | optional     | [OrderContact](#ordercontact) | Contact details in case of unregistered sale. (Use only when **contactId** is missing) |
-| **created**         | optional     | [datetime](#datetime)         | The timestamp of creation.                                                             |
-| **finished**        | optional     | [datetime](#datetime)         | The timestamp of the moment when the order is finished.                                |
-| **total**           | optional     | [decimal](#decimal)           | Total price of the order including shipping, discounts, etc.                           |
-| **totalWithoutTax** | optional     | [decimal](#decimal)           | Total price of the order including shipping, discounts, etc. - tax exclusive.          |
-| **currency**        | optional     | [string](#string)             | Order currency.                                                                        |
-| **payment**         | optional     | [string](#string)             | The means of payment.                                                                  |
-| **state**           | optional     | [string](#string)             | The state of the order.                                                                |
-| **items**           | **required** | [OrderItems](#orderitems)     | The list of the items in the order.                                                    |
+To link the order with a customer, there must be either **contactId** or **contact** specified. Only one of the elements is allowed!
+
+| Element Name        | Required     | Type                      | Description                                                                            |
+|---------------------|--------------|---------------------------|----------------------------------------------------------------------------------------|
+| **contactId**       | optional     | [string](#string)         | An Id of the contact in the e-shop. (Use only when **contact** is missing)             |
+| **contact**         | optional     | [Contact](#contact)       | Contact details in case of unregistered sale. (Use only when **contactId** is missing) |
+| **created**         | optional     | [datetime](#datetime)     | The timestamp of creation.                                                             |
+| **finished**        | optional     | [datetime](#datetime)     | The timestamp of the moment when the order is finished.                                |
+| **total**           | optional     | [decimal](#decimal)       | Total price of the order including shipping, discounts, etc.                           |
+| **totalWithoutTax** | optional     | [decimal](#decimal)       | Total price of the order including shipping, discounts, etc. - tax exclusive.          |
+| **currency**        | optional     | [string](#string)         | Order currency.                                                                        |
+| **payment**         | optional     | [string](#string)         | The means of payment.                                                                  |
+| **state**           | optional     | [string](#string)         | The state of the order.                                                                |
+| **items**           | **required** | [OrderItems](#orderitems) | The list of the items in the order.                                                    |
 
 #### Example
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <orders
-    version="2.15"
+    version="3.0"
     totalItems="10"
 >
     <o id="88886">
