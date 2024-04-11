@@ -638,7 +638,6 @@ Please, see the full list of parameters to implement below.
 | **since**         | optional     | [date](#date)       | When the request is called with **since** parameter, it is expected to return just the changes made since the respective date (inclusive). If it is technically impossible to implement it, you can always return the full list of items, and Incomaker distinguish the changes automatically. However, it is **strongly recommended** to implement it in order to save traffic and server load on both sides.  |
 | **limit**         | optional     | [integer](#integer) | Maximum number of items that should be returned in the call. Incomaker always tries to request the items in batches of reasonable sizes, however it is recommended to limit the maximum number of returned items for the security reasons. Optionally could be used together with **offset**.                                                                                                                            |
 | **offset**        | optional     | [integer](#integer) | First item that will be returned in the requested batch. Can be used together with **limit** only.                                                                                                                                                                                                                                                                                                                       |
-| **downloadCount** | optional     | [integer](#integer) | Only relevant for **type=coupon**. Indicates the number of coupons to be generated.                                                                                                                                                                                                                                                                                                                                      |
 
 ## Feed Data Structure
 
@@ -1182,15 +1181,18 @@ Root element tag: **couponTemplates**
 
 A single coupon template.
 
+All attributes except **id** are marked as optional, but you must provide them either in the CouponTemplate feed or provide all necessary attributes on per-coupon basis in Coupon feed (**discountType**, **reusable**, **discount**, **validFrom**, **validTo**).
+
 Root element tag: **couponTemplate**
 
 | Element Name     | Required     | Type                  | Description                                                                                                                                                                                                                        |
 |------------------|--------------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **id**           | **required** | [string](#string)     | Unique identifier of coupon template.                                                                                                                                                                                              |
 | **title**        | optional     | [string](#string)     | Optional human-readable name of the coupon template.                                                                                                                                                                               |
-| **reusable**     | **required** | [integer](#integer)   | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage. |
-| **discountType** | **required** | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                      |
-| **discount**     | **required** | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                             |
+| **reusable**     | optional     | [integer](#integer)   | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage. |
+| **discountType** | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                      |
+| **discount**     | optional     | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                             |
+| **assigned**     | optional     | [integer](#integer)   | 0=Coupons are not assigned to particular contacts in the e-shop. Incomaker will assign and send them randomly (**default**). 1=Coupons are already assigned to particular contacts on creation in the e-shop.                      |
 | **validFrom**    | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                    |
 | **validTo**      | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                    |
 
@@ -1290,16 +1292,16 @@ Request body contains [JSON](https://www.json.org/json-en.html) document that sp
 
 You must either provide template ID matching **couponTemplateId** that references a template from [Coupon Templates](#coupon-templates) or provide all necessary attributes on per-coupon basis (**discountType**, **reusable**, **discount**, **validFrom**, **validTo**).
 
-| Attribute Name       | Required     | Type                  | Description                                                                                                                                                                                                                                                                      |
-|----------------------|--------------|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **downloadCount**    | optional     | [integer](#integer)   | Indicates the number of coupons to be generated. This can only be empty if you fill **contactIds**                                                                                                                                                                               |
-| **couponTemplateId** | optional     | [string](#string)     | An identifier of coupon type as in [Coupon Templates](#coupon-templates) feed.                                                                                                                                                                                                   |
-| **discountType**     | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                                                                    |
-| **reusable**         | optional     | boolean               | Whether this type of coupon can be used multiple times. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage.                                                                        |
-| **discount**         | optional     | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                                                                           |
-| **validFrom**        | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                  |
-| **validTo**          | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                  |
-| **contactIds**       | optional     | Array&lt;string&gt;   | Coupon recipients. Optional. If specified, then there should be a coupon created for each contact. Array of contact IDs in the e-shop that will own created coupons, must match **id** attribute in the contact feed. This is used, for example, when creating birthday coupons. |
+| Attribute Name       | Required     | Type                  | Description                                                                                                                                                                                                                                                                                                                               |
+|----------------------|--------------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **amount**           | optional     | [integer](#integer)   | Indicates the number of coupons to be generated. This can only be empty if you fill **contactIds** and is only applicable to coupon templates that are not "assigned".                                                                                                                                                                    |
+| **couponTemplateId** | optional     | [string](#string)     | An identifier of coupon type as in [Coupon Templates](#coupon-templates) feed.                                                                                                                                                                                                                                                            |
+| **discountType**     | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                                                                                                                             |
+| **reusable**         | optional     | boolean               | Whether this type of coupon can be used multiple times. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage.                                                                                                                                 |
+| **discount**         | optional     | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                                                                                                                                    |
+| **validFrom**        | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                                                                           |
+| **validTo**          | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                                                                           |
+| **contactIds**       | optional     | Array&lt;string&gt;   | Coupon recipients. Optional. If specified, then there should be a coupon created for each contact. Array of contact IDs in the e-shop that will own created coupons, must match **id** attribute in the contact feed. This is used, for example, when creating birthday coupons. Only applicable to coupon templates that are "assigned". |
 
 #### Example - by template ID
 
@@ -1307,7 +1309,7 @@ Following example will generate 1000 new coupons from template **DiscountChristm
 
     POST https://www.myeshop.com/feed.php?key=92342b04-fa97-4fde-baa5-c3f912b88430&type=coupon
     {
-        "downloadCount": 1000,
+        "amount": 1000,
         "couponTemplateId": "DiscountChristmas2024"
     }
 
@@ -1317,7 +1319,7 @@ Following example will generate 500 new coupons for 10% discount:
 
     POST https://www.myeshop.com/feed.php?key=92342b04-fa97-4fde-baa5-c3f912b88430&type=coupon
     {
-        "downloadCount": 500,
+        "amount": 500,
         "reusable": false,
         "discountType": "PERCENTUAL",
         "discount": 10,
