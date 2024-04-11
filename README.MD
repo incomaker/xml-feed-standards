@@ -1103,11 +1103,11 @@ Root element tag: **i**
 |----------------|--------------|-------------------|-------------------------------------------------------------------|
 | **id**         | **required** | [string](#string) | An Id of product variant. Should match **id** in *Products* feed. |
 
-| Element Name        | Required     | Type                | Description                           |
-|---------------------|--------------|---------------------|---------------------------------------|
-| **quantity**        | **required** | [decimal](#decimal) | The quantity of goods sold.           |
-| **price**           | **required** | [decimal](#decimal) | The price of the item. Tax inclusive. |
-| **priceWithoutTax** | optional     | [decimal](#decimal) | The price of the item without tax.    |
+| Element Name        | Required     | Type                | Description                   |
+|---------------------|--------------|---------------------|-------------------------------|
+| **quantity**        | **required** | [decimal](#decimal) | Quantity of goods sold.       |
+| **price**           | **required** | [decimal](#decimal) | Price per unit including tax. |
+| **priceWithoutTax** | optional     | [decimal](#decimal) | Price per unit without tax.   |
 
 #### Order
 

@@ -18,7 +18,7 @@
 				<amount>129</amount>
 				<priceWithoutTax>111</priceWithoutTax>
 				<priceAfterDiscount>99</priceAfterDiscount>
-				<discountRate>15</discountRate>
+				<discountRate>25</discountRate>
 			</p>
 			<p currency="CZK">
 				<amount>2500</amount>

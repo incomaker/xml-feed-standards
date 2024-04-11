@@ -3,17 +3,23 @@
 	version="2.15"
 	totalItems="10"
 >
-	<o id="88886">
+	<o id="88887">
 		<contact>
 			<email>neil.armstrong@nasa.gov</email>
 			<firstName>Neil</firstName>
 			<lastName>Armstrong</lastName>
-			<phoneNumber1>0102030405</phoneNumber1>
+			<phoneNumber1>0102030406</phoneNumber1>
 			<city>Moon City</city>
 			<country>US</country>
 			<street>Crater Road</street>
 			<language>en</language>
 			<zipCode>79401</zipCode>
+			<customFields>
+				<f key="ShoeSize" group="trait">XXL</f>
+			</customFields>
+			<tags>
+				<t>Astronaut</t>
+			</tags>
 		</contact>
 		<created>1969-06-24T16:19:22</created>
 		<finished>1969-06-24T18:20:05</finished>
