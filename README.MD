@@ -479,8 +479,17 @@ Root element tag: **c**
             <t>Astronaut</t>
         </tags>
         <customFields>
-            <f key="ShoeSize" group="trait">L</f>
-            <f key="EyeColor" group="trait">blue</f>
+            <f key="currency">CZK</f>
+            <f key="platform">app</f>
+            <f key="userName">Franta Knihomol</f>
+            <f key="userCreated">2024-01-18T11:23:33+01:0</f>
+            <f key="userRevenue">670</f>
+            <f key="subscriptionType">Popular</f>
+            <f key="subscriptionTrial">Ano</f>
+            <f key="subscriptionDur">app</f>
+            <f key="customerType">B2B</f>
+
+            <f key="subscriptionRenewCount">2</f>
         </customFields>
     </c>
 </contacts>
