@@ -319,13 +319,16 @@ Root element tag: **p**
 |---------------------|--------------|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
 | **imageUrl**        | optional     | [string](#string)                       | URL of image of the product.                                                                                                                  |
 | **categories**      | optional     | [ProductCategories](#productcategories) | The list of the category IDs, where the product is present.                                                                                   |
-| **prices**          | **required** | [ProductPrices](#productprices)         | List of product prices in different currencies.                                                                                               |
+| **prices**          | optional     | [ProductPrices](#productprices)         | List of product prices in different currencies.                                                                                               |
 | **purchase**        | optional     | [decimal](#decimal)                     | Purchase price of the stock. Purchase price of the stock. In an optional attribute **currency**, you can set the currency of the price.       |
 | **tags**            | optional     | [Tags](#tags)                           | Product tags.                                                                                                                                 |
 | **tax**             | optional     | [decimal](#decimal)                     | Tax in form of decimal number (e.g. 1.21 for tax of 21%)                                                                                      |
 | **unit**            | optional     | [string](#string)                       | The name of the unit.                                                                                                                         |
 | **brand**           | optional     | [string](#string)                       | Brand name.                                                                                                                                   |
 | **ean**             | optional     | [string](#string)                       | EAN code                                                                                                                                      |
+| **isbn**            | optional     | [string](#integer)                      | ISBN code                                                                                                                                     |
+| **publisher**       | optional     | [string](#integer)                      | publisher                                                                                                                                     |
+| **datePublish**     | optional     | [string](#integer)                      | Date of publish                                                                                              |
 | **condition**       | optional     | [string](#string)                       | The condition of the product. The possible values are: **new**, **unwrapped**, **used**, **damaged**, **defunct**, **refurbished**, **other** |
 | **stock**           | optional     | [integer](#integer)                     | The number of the items on hand.                                                                                                              |
 | **active**          | optional     | [integer](#integer)                     | The product is active (**0** - no, **1** - yes).                                                                                              |
@@ -352,6 +355,9 @@ Root element tag: **p**
         <productId>101834</productId>
         <active>1</active>
         <ean>85941691750107</ean>
+        <isbn>978-80-244-6365-0</isbn>
+        <publisher>Grada</publisher>
+        <datePublish>2024-01-18T11:23:33+01:0</datePublish>
         <imageUrl>https://images.books.com/space-program.jpg</imageUrl>
         <categories>
             <c>1</c>
@@ -486,9 +492,11 @@ Root element tag: **c**
             <f key="userRevenue">670</f>
             <f key="subscriptionType">Popular</f>
             <f key="subscriptionTrial">Ano</f>
-            <f key="subscriptionDur">app</f>
+            <f key="subscriptionDuration">Yearly</f>
+            <f key="subscriptionMember">3</f>
             <f key="customerType">B2B</f>
-
+            <f key="subscriptionDateEnd">2024-01-18T11:23:33+01:0</f>
+            <f key="trialDateEnd">2024-01-18T11:23:33+01:0</f>
             <f key="subscriptionRenewCount">2</f>
         </customFields>
     </c>
@@ -587,13 +595,11 @@ Root element tag: **o**
         </contact>
         <created>1969-06-24T16:19:22</created>
         <finished>1969-06-24T18:20:05</finished>
-        <payment>credit card</payment>
         <total>284</total>
         <totalWithoutTax>234.71074388429753</totalWithoutTax>
         <currency>USD</currency>
         <items>
             <i id="111836">
-                <quantity>1</quantity>
                 <price currency="EUR">199</price>
                 <priceWithoutTax>164.46281</priceWithoutTax>
                 <currency>CZK</currency>
