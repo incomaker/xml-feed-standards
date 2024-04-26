@@ -488,7 +488,7 @@ Root element tag: **c**
             <f key="currency">CZK</f>
             <f key="platform">app</f>
             <f key="userName">Franta Knihomol</f>
-            <f key="userCreated">2024-01-18T11:23:33+01:0</f>
+            <f key="userCreated">2024-01-18T11:23:33+01:00</f>
             <f key="userRevenue">670</f>
             <f key="subscriptionType">Popular</f>
             <f key="subscriptionTrial">Ano</f>
@@ -496,7 +496,7 @@ Root element tag: **c**
             <f key="subscriptionMember">3</f>
             <f key="customerType">B2B</f>
             <f key="subscriptionDateEnd">2024-01-18T11:23:33+01:0</f>
-            <f key="trialDateEnd">2024-01-18T11:23:33+01:0</f>
+            <f key="trialDateEnd">2024-01-18T11:23:33+01:00</f>
             <f key="subscriptionRenewCount">2</f>
         </customFields>
     </c>
