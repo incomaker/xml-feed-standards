@@ -59,7 +59,7 @@ Wrong value of **totalItems** can break paging algorithm and cause feed to be un
 
 ### Version
 
-Version of the feed definition you've implemented. Optional.
+Version of the feed schema definition you've implemented. Optional.
 
 Current version of feed schema: **2.18**
 
