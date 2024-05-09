@@ -48,10 +48,32 @@ Please, see the full list of parameters to implement below.
 Incomaker expects the feeds provided by the e-shop in the following formats. Most of the fields are optional, however you should provide as much as possible.
 The intelligence of Incomaker is dependent on data available, and the more data we have the better results we deliver.
 
-In all cases, the root element (products, orders, etc.) can contain an optional attribute **totalItems** containing the total number of filtered items of the current entity.
+XML structure definition is bellow, for each feed, a link to XSD schema file is enclosed.
+
+### Total Items
+
+Feed's root element (**products**, **orders**, etc.) can contain an optional attribute **totalItems** containing the total number of filtered items of the current entity.
 It means all the available entities after filtering (applied *since* date) before applying pagination (*limit* and *offset*).
 
-XML structure definition is bellow, for each feed, a link to XSD schema file is enclosed.
+Wrong value of **totalItems** can break paging algorithm and cause feed to be unreadable. It's better to not include the field at all rather than providing wrong value.
+
+### Version
+
+Version of the feed definition you've implemented. Optional.
+
+Current version of feed schema: **2.18**
+
+### Generator
+
+Name and version of the program or plugin that generated the feed. Optional.
+
+### XML Header Example
+
+```
+<?xml version="1.0" encoding="UTF-8" ?>
+<products version="2.18" totalItems="12859" generator="Magento2:5.1.18">
+...
+```
 
 ### Common Data Types
 
@@ -183,7 +205,7 @@ Root element tag: **l**
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <categories
-    version="2.15"
+    version="2.18"
     totalItems="2"
 >
     <c id="1">
@@ -266,7 +288,7 @@ A map of language-specific custom attributes.
 
 Root element tag: **attributes**
 
-###### ProductLanguageAttribute
+##### ProductLanguageAttribute
 
 Custom product language-specific attribute. Tag content represents attribute value.
 
@@ -345,7 +367,7 @@ Root element tag: **p**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <products
-    version="2.16"
+    version="2.18"
     totalItems="123"
 >
     <p id="P257">
@@ -449,7 +471,7 @@ Root element tag: **c**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <contacts
-    version="2.15"
+    version="2.18"
     totalItems="6040"
 >
     <c id="e28bc2f0">
@@ -543,25 +565,26 @@ Root element tag: **o**
 |----------------|--------------|-------------------|------------------------------------|
 | **id**         | **required** | [string](#string) | An Id of the order in the e-shop.  |
 
-| Element Name        | Required     | Type                          | Description                                                                            |
-|---------------------|--------------|-------------------------------|----------------------------------------------------------------------------------------|
-| **contactId**       | optional     | [string](#string)             | An Id of the contact in the e-shop. (Use only when **contact** is missing)             |
-| **contact**         | optional     | [OrderContact](#ordercontact) | Contact details in case of unregistered sale. (Use only when **contactId** is missing) |
-| **created**         | optional     | [datetime](#datetime)         | The timestamp of creation.                                                             |
-| **finished**        | optional     | [datetime](#datetime)         | The timestamp of the moment when the order is finished.                                |
-| **total**           | optional     | [decimal](#decimal)           | Total price of the order including shipping, discounts, etc.                           |
-| **totalWithoutTax** | optional     | [decimal](#decimal)           | Total price of the order including shipping, discounts, etc. - tax exclusive.          |
-| **currency**        | optional     | [string](#string)             | Order currency.                                                                        |
-| **payment**         | optional     | [string](#string)             | The means of payment.                                                                  |
-| **state**           | optional     | [string](#string)             | The state of the order.                                                                |
-| **items**           | **required** | [OrderItems](#orderitems)     | The list of the items in the order.                                                    |
+| Element Name        | Required     | Type                                          | Description                                                                            |
+|---------------------|--------------|-----------------------------------------------|----------------------------------------------------------------------------------------|
+| **contactId**       | optional     | [string](#string)                             | An Id of the contact in the e-shop. (Use only when **contact** is missing)             |
+| **contact**         | optional     | [OrderContact](#ordercontact)                 | Contact details in case of unregistered sale. (Use only when **contactId** is missing) |
+| **created**         | optional     | [datetime](#datetime)                         | The timestamp of creation.                                                             |
+| **finished**        | optional     | [datetime](#datetime)                         | The timestamp of the moment when the order is finished.                                |
+| **total**           | optional     | [decimal](#decimal)                           | Total price of the order including shipping, discounts, etc.                           |
+| **totalWithoutTax** | optional     | [decimal](#decimal)                           | Total price of the order including shipping, discounts, etc. - tax exclusive.          |
+| **currency**        | optional     | [string](#string)                             | Order currency.                                                                        |
+| **payment**         | optional     | [string](#string)                             | The means of payment.                                                                  |
+| **state**           | optional     | [string](#string)                             | The state of the order.                                                                |
+| **customFields**    | optional     | [GroupedCustomFields](#groupedcustomfields)   |                                                                                        |
+| **items**           | **required** | [OrderItems](#orderitems)                     | The list of the items in the order.                                                    |
 
 #### Example
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <orders
-    version="2.15"
+    version="2.18"
     totalItems="10"
 >
     <o id="88886">
@@ -582,6 +605,10 @@ Root element tag: **o**
         <total>284</total>
         <totalWithoutTax>234.71074388429753</totalWithoutTax>
         <currency>USD</currency>
+        <customFields>
+            <f key="Step" group="man">Small</f>
+            <f key="Leap" group="mankind">Giant</f>
+        </customFields>
         <items>
             <i id="111836">
                 <quantity>1</quantity>
@@ -636,7 +663,7 @@ Root element tag: **c**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <coupons
-    version="2.17"
+    version="2.18"
     totalItems="1"
 >
     <c id="DiscountChristmas2024">
@@ -685,7 +712,7 @@ This special xml feed contains a single collection of fields where you can provi
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="2.15">
+<info version="2.18">
     <contact>
         <customFields>
             <c id="ico">IČO</c>

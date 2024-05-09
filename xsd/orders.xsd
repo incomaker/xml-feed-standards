@@ -37,6 +37,7 @@
 									<xs:element name="total" type="xs:decimal" minOccurs="0" />
 									<xs:element name="totalWithoutTax" type="xs:decimal" minOccurs="0" />
 									<xs:element name="currency" type="xs:string" minOccurs="0" />
+									<xs:element name="customFields" type="in:groupedCustomFields" minOccurs="0" />
 									<xs:element name="items">
 										<xs:complexType>
 											<xs:sequence>

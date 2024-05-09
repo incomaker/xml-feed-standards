@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <products
-	version="2.16"
-	totalItems="100"
+	version="2.18"
+	totalItems="12859"
+	generator="Magento2:5.1.18"
 >
 	<p id="P257">
 		<productId>101834</productId>
