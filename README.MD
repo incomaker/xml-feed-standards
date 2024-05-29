@@ -60,7 +60,7 @@ Wrong value of **totalItems** can break paging algorithm and cause feed to be un
 
 Version of the feed schema definition you've implemented. Optional.
 
-Current version of feed schema: **2.18**
+Current version of feed schema: **3.0**
 
 ### Generator
 
@@ -70,7 +70,7 @@ Name and version of the program or plugin that generated the feed. Optional.
 
 ```
 <?xml version="1.0" encoding="UTF-8" ?>
-<products version="2.18" totalItems="12859" generator="Magento2:5.1.18">
+<products version="3.0" totalItems="12859" generator="Magento2:5.1.18">
 ...
 ```
 
@@ -366,7 +366,7 @@ Root element tag: **p**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <products
-    version="2.16"
+    version="3.0"
     totalItems="123"
 >
     <p id="P257">
@@ -423,6 +423,7 @@ Root element tag: **p**
             <t>Astronaut</t>
         </tags>
     </p>
+    ...
 </products>
 ```
 
@@ -470,8 +471,9 @@ Root element tag: **c**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <contacts
-    version="2.15"
+    version="3.0"
     totalItems="6040"
+    generator="NasaSpaceFeeds:1.2.3"
 >
     <c id="e28bc2f0">
         <email>neil.armstrong@nasa.gov</email>
@@ -504,6 +506,7 @@ Root element tag: **c**
             <f key="EyeColor" group="trait">blue</f>
         </customFields>
     </c>
+    ...
 </contacts>
 ```
 
@@ -582,7 +585,7 @@ Root element tag: **o**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <orders
-    version="2.15"
+    version="3.0"
     totalItems="10"
 >
     <o id="88886">
@@ -612,6 +615,7 @@ Root element tag: **o**
             </i>
         </items>
     </o>
+    ...
 </orders>
 ```
 ### Coupon Templates
@@ -812,7 +816,7 @@ This special xml feed contains a single collection of fields where you can provi
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="2.15">
+<info version="3.0">
     <contact>
         <customFields>
             <c id="ico">IČO</c>

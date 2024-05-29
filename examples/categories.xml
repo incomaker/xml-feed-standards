@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <categories
-	version="2.18"
-	totalItems="2"
+	version="3.0"
+	totalItems="280"
+	generator="MyShop:1.2.3"
 >
 	<c id="1">
 		<languages>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <couponTemplates
 	version="3.0"
-	totalItems="2"
+	totalItems="22589"
+	generator="MyShop:1.2.3"
 >
 	<couponTemplate>
 		<id>16</id>

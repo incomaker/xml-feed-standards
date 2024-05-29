@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <orders
-	version="2.18"
+	version="3.0"
 	totalItems="1000"
+	generator="MyShop:1.2.3"
 >
 	<o id="88887">
 		<contact>
