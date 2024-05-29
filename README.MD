@@ -12,6 +12,7 @@ You should create the following data feeds:
 - [Products](#products)
 - [Contacts](#contacts)
 - [Orders](#orders)
+- [Coupon Templates](#coupon-templates)
 - [Coupons](#coupons)
 - [Info](#info)
 
@@ -204,8 +205,8 @@ Root element tag: **l**
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <categories
-    version="2.15"
-    totalItems="2"
+    version="3.0"
+    totalItems="27"
 >
     <c id="1">
         <languages>
@@ -223,6 +224,7 @@ Root element tag: **l**
             </l>
         </languages>
     </c>
+    ...
 </categories>
 ```
 
@@ -604,13 +606,13 @@ Root element tag: **o**
         <finished>1969-06-24T18:20:05</finished>
         <payment>credit card</payment>
         <total>284</total>
-        <totalWithoutTax>234.71074388429753</totalWithoutTax>
+        <totalWithoutTax>234</totalWithoutTax>
         <currency>USD</currency>
         <items>
             <i id="111836">
                 <quantity>1</quantity>
                 <price currency="EUR">199</price>
-                <priceWithoutTax>164.46281</priceWithoutTax>
+                <priceWithoutTax>164.46</priceWithoutTax>
                 <currency>CZK</currency>
             </i>
         </items>
@@ -715,7 +717,7 @@ Root element tag: **c**
 <?xml version="1.0" encoding="UTF-8" ?>
 <coupons
     version="3.0"
-    totalItems="2"
+    totalItems="2267"
 >
     <coupon>
         <couponTypeId>16</couponTypeId>
