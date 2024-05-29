@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <orders
-	version="2.15"
-	totalItems="10"
+	version="2.18"
+	totalItems="1000"
 >
 	<o id="88887">
 		<contact>
@@ -27,6 +27,10 @@
 		<total>284</total>
 		<totalWithoutTax>234.71074388429753</totalWithoutTax>
 		<currency>USD</currency>
+		<customFields>
+			<f key="Step" group="man">Small</f>
+			<f key="Leap" group="mankind">Giant</f>
+		</customFields>
 		<items>
 			<i id="111836">
 				<quantity>1</quantity>
