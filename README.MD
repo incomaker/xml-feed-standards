@@ -720,7 +720,7 @@ Root element tag: **c**
     totalItems="2267"
 >
     <coupon>
-        <couponTypeId>16</couponTypeId>
+        <couponTemplateId>16</couponTemplateId>
         <code>GHCJKD</code>
     </coupon>
     <coupon>
