@@ -37,7 +37,7 @@ Please, see the full list of parameters to implement below.
 | Param Name        | Required     | Type                | Description                                                                                                                                                                                                                                                                                                                                                                                                    |
 |-------------------|--------------|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **key**           | **required** | [string](#string)   | API key returned from the register plugin function. API key has a format of [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier)                                                                                                                                                                                                                                                                |
-| **type**          | **required** | [string](#string)   | Indicates type of returned feed. Supported values are: **category**, **product**, **contact**, **order**, **couponType** or **coupon**.                                                                                                                                                                                                                                                                        |
+| **type**          | **required** | [string](#string)   | Indicates type of returned feed. Supported values are: **info**, **category**, **product**, **contact**, **order**, **couponTemplate** and **coupon**.                                                                                                                                                                                                                                                         |
 | **id**            | optional     | [string](#string)   | An internal identifier of an item to be returned. If the request with this parameters is called, Incomaker expects to receive one item (e.g. one product) with the respective ID. The ID is the internal ID of the eshop. Id has the highest priority. If it is used in the call together with since, limit, or offset, ID is the only parameter to follow.                                                    |
 | **since**         | optional     | [date](#date)       | When the request is called with **since** parameter, it is expected to return just the changes made since the respective date (inclusive). If it is technically impossible to implement it, you can always return the full list of items, and Incomaker distinguish the changes automatically. However, it is **strongly recommended** to implement it in order to save traffic and server load on both sides. |
 | **limit**         | optional     | [integer](#integer) | Maximum number of items that should be returned in the call. Incomaker always tries to request the items in batches of reasonable sizes, however it is recommended to limit the maximum number of returned items for the security reasons. Optionally could be used together with **offset**.                                                                                                                  |
@@ -227,6 +227,8 @@ Root element tag: **l**
     ...
 </categories>
 ```
+
+Validate with [XML Schema Definition](xsd/categories.xsd).
 
 ### Products
 
@@ -429,6 +431,8 @@ Root element tag: **p**
 </products>
 ```
 
+Validate with [XML Schema Definition](xsd/products.xsd).
+
 ### Contacts
 
 Collection of e-shop customers.
@@ -620,6 +624,9 @@ Root element tag: **o**
     ...
 </orders>
 ```
+
+Validate with [XML Schema Definition](xsd/orders.xsd).
+
 ### Coupon Templates
 
 Each coupon must be assigned to a single template. This feed provides a list of all coupon templates present in the e-shop.
@@ -674,6 +681,8 @@ Root element tag: **couponTemplate**
 </couponTemplates>
 ```
 
+Validate with [XML Schema Definition](xsd/couponTemplates.xsd).
+
 ### Coupons
 
 A list of discount coupons (aka *vouchers*).
@@ -690,7 +699,7 @@ Root element tag: **coupon**
 
 | Element Name         | Required     | Type                  | Description                                                                                                                                                                                                                                                           |
 |----------------------|--------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **couponTemplateId** | optional     | [string](#string)     | Unique identifier of the coupon type. Must match **id** in [Coupon Templates](#couponTemplates) feed.                                                                                                                                                                 |
+| **couponTemplateId** | optional     | [string](#string)     | Unique identifier of the coupon type. Must match **id** in [Coupon Templates](#coupon-templates) feed.                                                                                                                                                                |
 | **code**             | **required** | [string](#string)     | The actual coupon code that a customer will use when claiming the coupon.                                                                                                                                                                                             |
 | **reusable**         | optional     | [integer](#integer)   | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage.                                    |
 | **discountType**     | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                                                         |
@@ -722,6 +731,8 @@ Root element tag: **coupon**
     ...
 </coupons>
 ```
+
+Validate with [XML Schema Definition](xsd/coupons.xsd).
 
 ### Creating New Coupons
 
@@ -826,6 +837,8 @@ This special xml feed contains a single collection of fields where you can provi
     </contact>
 </info>
 ```
+
+Validate with [XML Schema Definition](xsd/info.xsd).
 
 ## XML Feed Validation
 
