@@ -690,14 +690,14 @@ Root element tag: **coupon**
 
 | Element Name         | Required     | Type                  | Description                                                                                                                                                                                                                                                           |
 |----------------------|--------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **code**             | **required** | [string](#string)     | The actual coupon code that a customer will use when claiming the coupon.                                                                                                                                                                                             |
 | **couponTemplateId** | optional     | [string](#string)     | Unique identifier of the coupon type. Must match **id** in [Coupon Templates](#couponTemplates) feed.                                                                                                                                                                 |
-| **discountType**     | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                                                         |
+| **code**             | **required** | [string](#string)     | The actual coupon code that a customer will use when claiming the coupon.                                                                                                                                                                                             |
 | **reusable**         | optional     | [integer](#integer)   | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage.                                    |
+| **discountType**     | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                                                         |
 | **discount**         | optional     | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                                                                |
+| **contactId**        | optional     | [string](#string)     | Coupon recipient. Optional. An Id of the contact in the e-shop that owns the coupon, must match **id** attribute in the contact feed. This is used, for example, when coupon is for customer's birthday and hence is reserved for this customer since it was created. |
 | **validFrom**        | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                       |
 | **validTo**          | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                       |
-| **contactId**        | optional     | [string](#string)     | Coupon recipient. Optional. An Id of the contact in the e-shop that owns the coupon, must match **id** attribute in the contact feed. This is used, for example, when coupon is for customer's birthday and hence is reserved for this customer since it was created. |
 
 #### Example
 
@@ -713,11 +713,11 @@ Root element tag: **coupon**
     </coupon>
     <coupon>
         <discountType>PERCENTUAL</discountType>
+        <code>D45s45</code>
         <discount>20</discount>
+        <contactId>1789</contactId>
         <validFrom>2020-04-10T00:00:00</validFrom>
         <validTo>2025-04-17T00:00:00</validTo>
-        <contactId>1789</contactId>
-        <code>D45s45</code>
     </coupon>
     ...
 </coupons>
