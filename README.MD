@@ -694,6 +694,8 @@ A single coupon.
 
 All attributes except **code** are marked as optional, but you must provide either **couponTemplateId** that references a template from [Coupon Templates](#coupon-templates) or provide all necessary attributes on per-coupon basis (**discountType**, **reusable**, **discount**, **validFrom**, **validTo**).
 
+Normally, coupons are generated on the e-shop side and sent to Incomaker. Incomaker distributes the coupons to the users by e-mail, SMS, etc. E-shop does not allocate the coupons to a particular user until the user use it. We call such coupons "unassigned". Alternatively, sometimes could be useful to have the coupons allocated to the particular user while generating it. We call such coupons "assigned".
+
 Root element tag: **coupon**
 
 | Element Name         | Required     | Type                  | Description                                                                                                                                                                                                                                                           |
