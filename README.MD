@@ -255,6 +255,7 @@ List of product prices.
 
 | Attribute Name | Required | Type              | Description                           |
 |----------------|----------|-------------------|---------------------------------------|
+| **country**    | optional | [string](#string) | An ISO country code                   |
 | **currency**   | optional | [string](#string) | An Id of the variant of the product.. |
 | **pricelist**  | optional | [string](#string) | Name of the pricelist.                |
 
@@ -270,7 +271,7 @@ List of product prices.
 
 ```xml
 <prices>
-    <p currency="USD" pricelist="cenik1">
+    <p country="CZ" currency="USD" pricelist="cenik1">
         <amount>129</amount>
         <priceWithoutTax>111</priceWithoutTax>
         <priceAfterDiscount>99</priceAfterDiscount>
