@@ -61,7 +61,7 @@ Wrong value of **totalItems** can break paging algorithm and cause feed to be un
 
 Version of the feed schema definition you've implemented. Optional.
 
-Current version of feed schema: **3.0**
+Current version of feed schema: **3.1**
 
 ### Generator
 
@@ -71,7 +71,7 @@ Name and version of the program or plugin that generated the feed. Optional.
 
 ```
 <?xml version="1.0" encoding="UTF-8" ?>
-<products version="3.0" totalItems="12859" generator="Magento2:5.1.18">
+<products version="3.1" totalItems="12859" generator="Magento2:5.1.18">
 ...
 ```
 
@@ -352,6 +352,7 @@ Root element tag: **p**
 | **unit**            | optional     | [string](#string)                       | The name of the unit.                                                                                                                         |
 | **brand**           | optional     | [string](#string)                       | Brand name.                                                                                                                                   |
 | **ean**             | optional     | [string](#string)                       | EAN code                                                                                                                                      |
+| **sku**             | optional     | [string](#string)                       | Stock Keeping Unit                                                                                                                            |
 | **condition**       | optional     | [string](#string)                       | The condition of the product. The possible values are: **new**, **unwrapped**, **used**, **damaged**, **defunct**, **refurbished**, **other** |
 | **stock**           | optional     | [integer](#integer)                     | The number of the items on hand.                                                                                                              |
 | **active**          | optional     | [integer](#integer)                     | The product is active (**0** - no, **1** - yes).                                                                                              |
@@ -371,13 +372,14 @@ Root element tag: **p**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <products
-    version="3.0"
+    version="3.1"
     totalItems="123"
 >
     <p id="P257">
         <productId>101834</productId>
         <active>1</active>
         <ean>85941691750107</ean>
+        <sku>123ABC</sku>
         <imageUrl>https://images.books.com/space-program.jpg</imageUrl>
         <categories>
             <c>1</c>
