@@ -1,7 +1,6 @@
-version: "3"
-
 services:
   xmllint:
     image: pipelinecomponents/xmllint
     volumes:
       - ./xsd:/xml/xsd
+      - ./examples:/xml/examples
