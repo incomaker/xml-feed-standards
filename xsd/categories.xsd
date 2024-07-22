@@ -3,7 +3,6 @@
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:in="https://incomaker.com/feed/v3"
 	elementFormDefault="qualified"
-	targetNamespace="https://incomaker.com/feed/v3/category"
 >
 	<xs:import namespace="https://incomaker.com/feed/v3" schemaLocation="incomaker.xsd"/>
 	<xs:element name="categories">

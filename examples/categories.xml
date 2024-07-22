@@ -3,7 +3,6 @@
 	version="3.0"
 	totalItems="280"
 	generator="MyShop:1.2.3"
-	xmlns="https://incomaker.com/feed/v3/category"
 >
 	<c id="1">
 		<languages>

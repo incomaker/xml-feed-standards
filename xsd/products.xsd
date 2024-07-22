@@ -1,8 +1,8 @@
 <xs:schema
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:in="https://incomaker.com/feed/3"
+	xmlns:in="https://incomaker.com/feed/v3"
 >
-	<xs:import namespace="https://incomaker.com/feed/3" schemaLocation="incomaker.xsd"/>
+	<xs:import namespace="https://incomaker.com/feed/v3" schemaLocation="incomaker.xsd"/>
 	<xs:simpleType name="productCondition" final="restriction" >
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="new" />
