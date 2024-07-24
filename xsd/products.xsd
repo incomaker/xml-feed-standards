@@ -25,6 +25,7 @@
 									<xs:element name="productId" type="xs:string" minOccurs="0"/>
 									<xs:element name="active" type="xs:byte" minOccurs="0"/>
 									<xs:element name="ean" type="xs:string" minOccurs="0"/>
+									<xs:element name="sku" type="xs:string" minOccurs="0"/>
 									<xs:element name="imageUrl" minOccurs="0" type="xs:string" />
 									<xs:element name="categories" minOccurs="0">
 										<xs:complexType>

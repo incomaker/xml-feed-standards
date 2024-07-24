@@ -367,7 +367,7 @@ Root element tag: **p**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <products
-    version="2.18"
+    version="2.19"
     totalItems="123"
 >
     <p id="P257">
