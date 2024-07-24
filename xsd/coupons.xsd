@@ -3,7 +3,7 @@
 	xmlns:in="https://incomaker.com/feed/2.15"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
-	<xs:import namespace="https://incomaker.com/feed/3.0" schemaLocation="incomaker.xsd"/>
+	<xs:import namespace="https://incomaker.com/feed/2.15" schemaLocation="incomaker.xsd"/>
 	<xs:element name="coupons">
 		<xs:complexType>
 			<xs:complexContent>
