@@ -13,23 +13,7 @@
 							<xs:complexType>
 								<xs:all>
 									<xs:element name="contactId" type="xs:string" minOccurs="0" />
-									<xs:element name="contact" minOccurs="0">
-										<xs:complexType>
-											<xs:all>
-												<xs:element name="email" type="xs:string"/>
-												<xs:element name="firstName" type="xs:string" minOccurs="0" />
-												<xs:element name="lastName" type="xs:string" minOccurs="0" />
-												<xs:element name="street" type="xs:string" minOccurs="0"/>
-												<xs:element name="street2" type="xs:string" minOccurs="0" />
-												<xs:element name="zipCode" type="xs:string" minOccurs="0"/>
-												<xs:element name="city" type="xs:string" minOccurs="0" />
-												<xs:element name="phoneNumber1" type="xs:string" minOccurs="0"/>
-												<xs:element name="phoneNumber2" type="xs:string" minOccurs="0"/>
-												<xs:element name="country" type="xs:string" minOccurs="0"/>
-												<xs:element name="language" type="xs:string" minOccurs="0"/>
-											</xs:all>
-										</xs:complexType>
-									</xs:element>
+									<xs:element name="contact" type="in:contact" minOccurs="0"/>
 									<xs:element name="created" type="xs:dateTime" />
 									<xs:element name="finished" type="xs:dateTime" minOccurs="0" />
 									<xs:element name="payment" type="xs:string" minOccurs="0" />

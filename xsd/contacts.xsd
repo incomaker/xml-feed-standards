@@ -9,35 +9,7 @@
 			<xs:complexContent>
 				<xs:extension base="in:feed">
 					<xs:sequence>
-						<xs:element name="c" minOccurs="0" maxOccurs="unbounded">
-							<xs:complexType>
-								<xs:all>
-									<xs:element name="sex" type="xs:string" minOccurs="0" />
-									<xs:element name="language" type="xs:string" minOccurs="0"/>
-									<xs:element name="companyName" type="xs:string" minOccurs="0" />
-									<xs:element name="firstName" type="xs:string" minOccurs="0" />
-									<xs:element name="lastName" type="xs:string" minOccurs="0" />
-									<xs:element name="email" type="xs:string" minOccurs="0" />
-									<xs:element name="birthday" type="xs:date" minOccurs="0" />
-									<xs:element name="consentDate" type="xs:dateTime" minOccurs="0" />
-									<xs:element name="consentTitle" type="xs:string" minOccurs="0" />
-									<xs:element name="web" type="xs:string" minOccurs="0" />
-									<xs:element name="remarks" type="xs:string" minOccurs="0" />
-									<xs:element name="street" type="xs:string" minOccurs="0" />
-									<xs:element name="street2" type="xs:string" minOccurs="0" />
-									<xs:element name="zipCode" type="xs:string" minOccurs="0" />
-									<xs:element name="city" type="xs:string" minOccurs="0" />
-									<xs:element name="phoneNumber1" type="xs:string" minOccurs="0" />
-									<xs:element name="phoneNumber2" type="xs:string" minOccurs="0" />
-									<xs:element name="country" type="xs:string" minOccurs="0" />
-									<xs:element name="newsletter" type="xs:byte" minOccurs="0" />
-									<xs:element name="currency" type="xs:string" minOccurs="0" />
-									<xs:element name="pricelist" type="xs:string" minOccurs="0" />
-									<xs:element name="tags" type="in:tags" minOccurs="0" />
-									<xs:element name="customFields" type="in:groupedCustomFields" minOccurs="0" />
-								</xs:all>
-								<xs:attribute type="xs:string" name="id"/>
-							</xs:complexType>
+						<xs:element name="c" type="in:contact" minOccurs="0" maxOccurs="unbounded">
 						</xs:element>
 					</xs:sequence>
 				</xs:extension>
