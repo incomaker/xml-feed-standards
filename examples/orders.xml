@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <orders
-	version="3.0"
+	version="3.2"
 	totalItems="1000"
 	generator="MyShop:1.2.3"
 >
@@ -25,6 +25,7 @@
 		<created>1969-06-24T16:19:22</created>
 		<finished>1969-06-24T18:20:05</finished>
 		<payment>credit card</payment>
+		<shipping>Postal service</shipping>
 		<total>284</total>
 		<totalWithoutTax>234.71074388429753</totalWithoutTax>
 		<currency>USD</currency>

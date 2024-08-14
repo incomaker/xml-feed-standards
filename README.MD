@@ -61,7 +61,7 @@ Wrong value of **totalItems** can break paging algorithm and cause feed to be un
 
 Version of the feed schema definition you've implemented. Optional.
 
-Current version of feed schema: **3.1**
+Current version of feed schema: **3.2**
 
 ### Generator
 
@@ -586,6 +586,7 @@ Root element tag: **o**
 | **totalWithoutTax** | optional     | [decimal](#decimal)           | Total price of the order including shipping, discounts, etc. - tax exclusive.          |
 | **currency**        | optional     | [string](#string)             | Order currency.                                                                        |
 | **payment**         | optional     | [string](#string)             | The means of payment.                                                                  |
+| **shipping**        | optional     | [string](#string)             | The means of shipping.                                                                 |
 | **state**           | optional     | [string](#string)             | The state of the order.                                                                |
 | **items**           | **required** | [OrderItems](#orderitems)     | The list of the items in the order.                                                    |
 
@@ -594,7 +595,7 @@ Root element tag: **o**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <orders
-    version="3.0"
+    version="3.2"
     totalItems="10"
 >
     <o id="88886">
@@ -611,7 +612,8 @@ Root element tag: **o**
         </contact>
         <created>1969-06-24T16:19:22</created>
         <finished>1969-06-24T18:20:05</finished>
-        <payment>credit card</payment>
+        <payment>with Moon coins</payment>
+        <shipping>by rocket</shipping>
         <total>284</total>
         <totalWithoutTax>234</totalWithoutTax>
         <currency>USD</currency>

@@ -17,6 +17,7 @@
 									<xs:element name="created" type="xs:dateTime" />
 									<xs:element name="finished" type="xs:dateTime" minOccurs="0" />
 									<xs:element name="payment" type="xs:string" minOccurs="0" />
+									<xs:element name="shipping" type="xs:string" minOccurs="0" />
 									<xs:element name="state" type="xs:string" minOccurs="0" />
 									<xs:element name="total" type="xs:decimal" minOccurs="0" />
 									<xs:element name="totalWithoutTax" type="xs:decimal" minOccurs="0" />
