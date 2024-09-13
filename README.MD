@@ -61,7 +61,7 @@ Wrong value of **totalItems** can break paging algorithm and cause feed to be un
 
 Version of the feed schema definition you've implemented. Optional.
 
-Current version of feed schema: **3.2**
+Current version of feed schema: **3.3**
 
 ### Generator
 
@@ -205,7 +205,7 @@ Root element tag: **l**
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <categories
-    version="3.0"
+    version="3.3"
     totalItems="27"
 >
     <c id="1">
@@ -372,7 +372,7 @@ Root element tag: **p**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <products
-    version="3.1"
+    version="3.3"
     totalItems="123"
 >
     <p id="P257">
@@ -480,7 +480,7 @@ Root element tag: **c**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <contacts
-    version="3.0"
+    version="3.3"
     totalItems="6040"
     generator="NasaSpaceFeeds:1.2.3"
 >
@@ -525,31 +525,6 @@ Validate with [XML Schema Definition](xsd/contacts.xsd).
 
 List of the orders.
 
-#### OrderContact
-
-Contact details in case of unregistered sale.
-There must be either **contactId** or **contact** specified. Only one of the elements is allowed!
-
-Root element tag: **contact**
-
-| Attribute Name | Required     | Type              | Description                        |
-|----------------|--------------|-------------------|------------------------------------|
-| **id**         | **required** | [string](#string) | An Id of the order in the e-shop.  |
-
-| Element Name     | Required | Type              | Description                     |
-|------------------|----------|-------------------|---------------------------------|
-| **firstName**    | optional | [string](#string) |                                 |
-| **lastName**     | optional | [string](#string) |                                 |
-| **email**        | optional | [string](#string) |                                 |
-| **street**       | optional | [string](#string) |                                 |
-| **street2**      | optional | [string](#string) |                                 |
-| **city**         | optional | [string](#string) |                                 |
-| **zipCode**      | optional | [string](#string) |                                 |
-| **phoneNumber1** | optional | [string](#string) |                                 |
-| **phoneNumber2** | optional | [string](#string) |                                 |
-| **country**      | optional | [string](#string) | ISO country code (two letters)  |
-| **language**     | optional | [string](#string) | ISO language code (two letters) |
-
 #### OrderItems
 
 List of order items.
@@ -579,7 +554,7 @@ Root element tag: **o**
 | Element Name        | Required     | Type                          | Description                                                                            |
 |---------------------|--------------|-------------------------------|----------------------------------------------------------------------------------------|
 | **contactId**       | optional     | [string](#string)             | An Id of the contact in the e-shop. (Use only when **contact** is missing)             |
-| **contact**         | optional     | [OrderContact](#ordercontact) | Contact details in case of unregistered sale. (Use only when **contactId** is missing) |
+| **contact**         | optional     | [Contact](#contact) | Contact details in case of unregistered sale. (Use only when **contactId** is missing) |
 | **created**         | optional     | [datetime](#datetime)         | The timestamp of creation.                                                             |
 | **finished**        | optional     | [datetime](#datetime)         | The timestamp of the moment when the order is finished.                                |
 | **total**           | optional     | [decimal](#decimal)           | Total price of the order including shipping, discounts, etc.                           |
@@ -595,7 +570,7 @@ Root element tag: **o**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <orders
-    version="3.2"
+    version="3.3"
     totalItems="10"
 >
     <o id="88886">
@@ -663,7 +638,7 @@ Root element tag: **couponTemplate**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <couponTemplates
-    version="3.0"
+    version="3.3"
     totalItems="25"
 >
     <couponTemplate>
@@ -719,7 +694,7 @@ Root element tag: **coupon**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <coupons
-    version="3.0"
+    version="3.3"
     totalItems="2267"
 >
     <coupon>
@@ -823,7 +798,7 @@ This special xml feed contains a single collection of fields where you can provi
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="3.0">
+<info version="3.3">
     <contact>
         <customFields>
             <c id="ico">IČO</c>
