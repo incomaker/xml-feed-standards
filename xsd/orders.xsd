@@ -29,7 +29,6 @@
 												<xs:element name="i" minOccurs="0" maxOccurs="unbounded">
 													<xs:complexType>
 														<xs:all>
-															<xs:element name="variantId" type="xs:string" minOccurs="0" />
 															<xs:element name="quantity" type="xs:decimal"/>
 															<xs:element name="price">
 																<xs:complexType>
@@ -49,7 +48,6 @@
 																	</xs:simpleContent>
 																</xs:complexType>
 															</xs:element>
-															<xs:element name="currency" type="xs:string"/>
 														</xs:all>
 														<xs:attribute name="id" type="xs:string"/>
 													</xs:complexType>
