@@ -14,6 +14,16 @@
 			<xs:minLength value="1" />
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="date">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{4}-\d{2}-\d{2}" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="dateTime">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{4}-\d{2}-\d{2}([T ])\d{2}:\d{2}:\d{2}(\.\d{1,3})?(Z|[+-]\d{2}:\d{2})?" />
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:complexType name="tags">
 		<xs:sequence>
 			<xs:element minOccurs="0" maxOccurs="unbounded" name="t" type="in:nonEmptyString"/>
@@ -54,8 +64,8 @@
 			<xs:element name="firstName" type="xs:string" minOccurs="0" />
 			<xs:element name="lastName" type="xs:string" minOccurs="0" />
 			<xs:element name="email" type="xs:string" minOccurs="0" />
-			<xs:element name="birthday" type="xs:date" minOccurs="0" />
-			<xs:element name="consentDate" type="xs:dateTime" minOccurs="0" />
+			<xs:element name="birthday" type="in:date" minOccurs="0" />
+			<xs:element name="consentDate" type="in:dateTime" minOccurs="0" />
 			<xs:element name="consentTitle" type="xs:string" minOccurs="0" />
 			<xs:element name="web" type="xs:string" minOccurs="0" />
 			<xs:element name="remarks" type="xs:string" minOccurs="0" />

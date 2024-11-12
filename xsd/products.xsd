@@ -70,8 +70,8 @@
 									<xs:element name="specialDealFlag" type="xs:byte" minOccurs="0"/>
 									<xs:element name="choiceFlag" type="xs:byte" minOccurs="0"/>
 									<xs:element name="freeShippingFlag" type="xs:byte" minOccurs="0"/>
-									<xs:element name="added" type="xs:dateTime" minOccurs="0"/>
-									<xs:element name="updated" type="xs:dateTime" minOccurs="0"/>
+									<xs:element name="added" type="in:dateTime" minOccurs="0"/>
+									<xs:element name="updated" type="in:dateTime" minOccurs="0"/>
 									<xs:element name="availability" type="xs:int" minOccurs="0"/>
 									<xs:element name="languages">
 										<xs:complexType>
