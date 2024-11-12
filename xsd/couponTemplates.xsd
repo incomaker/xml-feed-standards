@@ -13,7 +13,7 @@
 							<xs:complexType>
 								<xs:all>
 									<xs:element type="xs:int" name="id"/>
-									<xs:element name="reusable">
+									<xs:element name="reusable" minOccurs="0">
 										<xs:simpleType>
 											<xs:restriction base="xs:byte">
 												<xs:enumeration value="0" />
@@ -21,7 +21,7 @@
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:element>
-									<xs:element name="discountType">
+									<xs:element name="discountType" minOccurs="0">
 										<xs:simpleType>
 											<xs:restriction base="xs:string">
 												<xs:enumeration value="PERCENTUAL" />
@@ -29,7 +29,7 @@
 											</xs:restriction>
 										</xs:simpleType>
 									</xs:element>
-									<xs:element type="xs:decimal" name="discount"/>
+									<xs:element type="xs:decimal" name="discount" minOccurs="0"/>
 									<xs:element type="in:dateTime" name="validFrom" minOccurs="0"/>
 									<xs:element type="in:dateTime" name="validTo" minOccurs="0"/>
 									<xs:element type="in:nonEmptyString" name="title" minOccurs="0"/>
