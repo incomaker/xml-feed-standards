@@ -28,6 +28,13 @@
 									<xs:element name="ean" type="xs:string" minOccurs="0"/>
 									<xs:element name="sku" type="xs:string" minOccurs="0"/>
 									<xs:element name="imageUrl" minOccurs="0" type="xs:string" />
+									<xs:element name="imageUrls" minOccurs="0"><!-- obsolete, but tolerated -->
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="i" type="xs:string" maxOccurs="unbounded"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
 									<xs:element name="categories" minOccurs="0">
 										<xs:complexType>
 											<xs:sequence>
