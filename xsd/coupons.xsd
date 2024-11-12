@@ -9,7 +9,7 @@
 			<xs:complexContent>
 				<xs:extension base="in:feed">
 					<xs:sequence>
-						<xs:element name="c" maxOccurs="unbounded">
+						<xs:element name="c" maxOccurs="unbounded" minOccurs="0">
 							<xs:complexType>
 								<xs:sequence>
 									<xs:element name="reusable">
