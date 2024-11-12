@@ -31,8 +31,8 @@
 										</xs:simpleType>
 									</xs:element>
 									<xs:element type="xs:decimal" name="discount" minOccurs="0"/>
-									<xs:element type="xs:dateTime" name="validFrom" minOccurs="0"/>
-									<xs:element type="xs:dateTime" name="validTo" minOccurs="0"/>
+									<xs:element type="in:dateTime" name="validFrom" minOccurs="0"/>
+									<xs:element type="in:dateTime" name="validTo" minOccurs="0"/>
 									<xs:element type="xs:string" name="contactId" minOccurs="0"/>
 								</xs:all>
 							</xs:complexType>
