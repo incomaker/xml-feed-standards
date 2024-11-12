@@ -26,7 +26,15 @@
 	</xs:simpleType>
 	<xs:complexType name="tags">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="t" type="in:nonEmptyString"/>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="t">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="in:nonEmptyString">
+							<xs:attribute name="key" type="xs:string" /><!-- obsolete, but tolerated -->
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="customFields">

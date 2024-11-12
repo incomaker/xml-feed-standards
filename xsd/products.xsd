@@ -23,6 +23,7 @@
 							<xs:complexType>
 								<xs:all>
 									<xs:element name="productId" type="xs:string" minOccurs="0"/>
+									<xs:element name="variantId" type="xs:string" minOccurs="0"/><!-- obsolete, but tolerated -->
 									<xs:element name="active" type="xs:byte" minOccurs="0"/>
 									<xs:element name="ean" type="xs:string" minOccurs="0"/>
 									<xs:element name="sku" type="xs:string" minOccurs="0"/>
