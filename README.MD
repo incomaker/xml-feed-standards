@@ -551,19 +551,19 @@ Root element tag: **o**
 |----------------|--------------|-------------------|------------------------------------|
 | **id**         | **required** | [string](#string) | An Id of the order in the e-shop.  |
 
-| Element Name        | Required     | Type                          | Description                                                                            |
-|---------------------|--------------|-------------------------------|----------------------------------------------------------------------------------------|
-| **contactId**       | optional     | [string](#string)             | An Id of the contact in the e-shop. (Use only when **contact** is missing)             |
-| **contact**         | optional     | [Contact](#contact) | Contact details in case of unregistered sale. (Use only when **contactId** is missing) |
-| **created**         | optional     | [datetime](#datetime)         | The timestamp of creation.                                                             |
-| **finished**        | optional     | [datetime](#datetime)         | The timestamp of the moment when the order is finished.                                |
-| **total**           | optional     | [decimal](#decimal)           | Total price of the order including shipping, discounts, etc.                           |
-| **totalWithoutTax** | optional     | [decimal](#decimal)           | Total price of the order including shipping, discounts, etc. - tax exclusive.          |
-| **currency**        | optional     | [string](#string)             | Order currency.                                                                        |
-| **payment**         | optional     | [string](#string)             | The means of payment.                                                                  |
-| **shipping**        | optional     | [string](#string)             | The means of shipping.                                                                 |
-| **state**           | optional     | [string](#string)             | The state of the order.                                                                |
-| **items**           | **required** | [OrderItems](#orderitems)     | The list of the items in the order.                                                    |
+| Element Name        | Required     | Type                      | Description                                                                            |
+|---------------------|--------------|---------------------------|----------------------------------------------------------------------------------------|
+| **contactId**       | optional     | [string](#string)         | An Id of the contact in the e-shop. (Use only when **contact** is missing)             |
+| **contact**         | optional     | [Contact](#contact)       | Contact details in case of unregistered sale. (Use only when **contactId** is missing) |
+| **created**         | optional     | [datetime](#datetime)     | The timestamp of creation.                                                             |
+| **finished**        | optional     | [datetime](#datetime)     | The timestamp of the moment when the order is finished.                                |
+| **total**           | optional     | [decimal](#decimal)       | Total price of the order including shipping, discounts, etc.                           |
+| **totalWithoutTax** | optional     | [decimal](#decimal)       | Total price of the order including shipping, discounts, etc. - tax exclusive.          |
+| **currency**        | optional     | [string](#string)         | Order currency.                                                                        |
+| **payment**         | optional     | [string](#string)         | The means of payment.                                                                  |
+| **shipping**        | optional     | [string](#string)         | The means of shipping.                                                                 |
+| **state**           | optional     | [string](#string)         | The state of the order.                                                                |
+| **items**           | **required** | [OrderItems](#orderitems) | The list of the items in the order.                                                    |
 
 #### Example
 
