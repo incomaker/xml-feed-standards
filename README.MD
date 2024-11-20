@@ -664,6 +664,8 @@ Validate with [XML Schema Definition](xsd/couponTemplates.xsd).
 
 A list of discount coupons (aka *vouchers*).
 
+If your platform doesn't support coupon templates, instead of implementing this feed, you should use [ad-hoc coupons](#creating-new-coupons).
+
 Root element tag: **coupons**
 
 #### Coupon
@@ -716,7 +718,7 @@ Validate with [XML Schema Definition](xsd/coupons.xsd).
 ### Creating New Coupons
 
 If you want Incomaker to send coupons within an email campaign, we can use this method to create coupons on the fly. 
-If you implement this, there is no need to also implement [Coupon Templates](#coupon-templates). 
+If you implement this, there is no need to also implement [Coupon Templates](#coupon-templates) and [Coupons](#coupons). 
 
 To create coupons, Incomaker will make a **POST** request to your standard base URL with following parameters:
 
