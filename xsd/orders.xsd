@@ -12,7 +12,7 @@
 						<xs:element name="o" minOccurs="0" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:all>
-									<xs:element name="orderId" type="xs:string" /><!-- obsolete, but tolerated -->
+									<xs:element name="orderId" type="xs:string" minOccurs="0" /><!-- obsolete, but tolerated -->
 									<xs:element name="contactId" type="xs:string" minOccurs="0" />
 									<xs:element name="contact" type="in:contact" minOccurs="0"/>
 									<xs:element name="created" type="in:dateTime" />
