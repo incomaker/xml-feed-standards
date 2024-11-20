@@ -24,6 +24,12 @@
 			<xs:minLength value="1" />
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="htmlContent" mixed="true">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:any processContents="lax" />
+		</xs:choice>
+		<xs:anyAttribute processContents="lax" />
+	</xs:complexType>
 	<xs:complexType name="tags">
 		<xs:sequence>
 			<xs:element minOccurs="0" maxOccurs="unbounded" name="t" type="in:nonEmptyString"/>

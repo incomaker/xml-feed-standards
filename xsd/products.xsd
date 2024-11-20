@@ -83,8 +83,8 @@
 														<xs:all>
 															<xs:element type="xs:string" name="name" />
 															<xs:element type="xs:anyURI" name="url" />
-															<xs:element type="xs:string" name="description" minOccurs="0"/>
-															<xs:element type="xs:string" name="shortDescription" minOccurs="0"/>
+															<xs:element type="in:htmlContent" name="description" minOccurs="0"/>
+															<xs:element type="in:htmlContent" name="shortDescription" minOccurs="0"/>
 															<xs:element name="attributes" minOccurs="0">
 																<xs:complexType>
 																	<xs:sequence>
