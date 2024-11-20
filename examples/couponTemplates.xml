@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <couponTemplates
-	version="3.3"
+	version="4.0"
 	totalItems="22589"
 	generator="MyShop:1.2.3"
 >
@@ -16,7 +16,5 @@
 		<reusable>0</reusable>
 		<discountType>MONETARY</discountType>
 		<discount>500</discount>
-		<validFrom>2020-04-10T00:00:00</validFrom>
-		<validTo>2020-04-17T00:00:00</validTo>
 	</couponTemplate>
 </couponTemplates>

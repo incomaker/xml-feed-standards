@@ -61,7 +61,7 @@ Wrong value of **totalItems** can break paging algorithm and cause feed to be un
 
 Version of the feed schema definition you've implemented. Optional.
 
-Current version of feed schema: **3.3**
+Current version of feed schema: **4.0**
 
 ### Generator
 
@@ -71,7 +71,7 @@ Name and version of the program or plugin that generated the feed. Optional.
 
 ```
 <?xml version="1.0" encoding="UTF-8" ?>
-<products version="3.1" totalItems="12859" generator="Magento2:5.1.18">
+<products version="4.0" totalItems="12859" generator="Magento2:5.1.18">
 ...
 ```
 
@@ -205,7 +205,7 @@ Root element tag: **l**
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <categories
-    version="3.3"
+    version="4.0"
     totalItems="27"
 >
     <c id="1">
@@ -372,7 +372,7 @@ Root element tag: **p**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <products
-    version="3.3"
+    version="4.0"
     totalItems="123"
 >
     <p id="P257">
@@ -480,7 +480,7 @@ Root element tag: **c**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <contacts
-    version="3.3"
+    version="4.0"
     totalItems="6040"
     generator="NasaSpaceFeeds:1.2.3"
 >
@@ -570,7 +570,7 @@ Root element tag: **o**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <orders
-    version="3.3"
+    version="4.0"
     totalItems="10"
 >
     <o id="88886">
@@ -611,7 +611,7 @@ Validate with [XML Schema Definition](xsd/orders.xsd).
 
 Each coupon must be assigned to a single template. This feed provides a list of all coupon templates present in the e-shop.
 
-If your platform doesn't support coupon templates, instead of implementing this feed, you will output all coupon attributes in coupon feed.
+If your platform doesn't support coupon templates, instead of implementing this feed, you should use [ad-hoc coupons](#creating-new-coupons).
 
 Root element tag: **couponTemplates**
 
@@ -630,15 +630,13 @@ Root element tag: **couponTemplate**
 | **reusable**     | optional     | [integer](#integer)   | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage. |
 | **discountType** | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                      |
 | **discount**     | optional     | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                             |
-| **validFrom**    | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                    |
-| **validTo**      | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                    |
 
 #### Example
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <couponTemplates
-    version="3.3"
+    version="4.0"
     totalItems="25"
 >
     <couponTemplate>
@@ -678,23 +676,23 @@ Normally, coupons are generated on the e-shop side and sent to Incomaker. Incoma
 
 Root element tag: **coupon**
 
-| Element Name         | Required     | Type                  | Description                                                                                                                                                                                                                                                           |
-|----------------------|--------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **couponTemplateId** | optional     | [string](#string)     | Unique identifier of the coupon type. Must match **id** in [Coupon Templates](#coupon-templates) feed.                                                                                                                                                                |
-| **code**             | **required** | [string](#string)     | The actual coupon code that a customer will use when claiming the coupon.                                                                                                                                                                                             |
-| **reusable**         | optional     | [integer](#integer)   | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage.                                    |
-| **discountType**     | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                                                         |
-| **discount**         | optional     | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                                                                |
-| **contactId**        | optional     | [string](#string)     | Coupon recipient. Optional. An Id of the contact in the e-shop that owns the coupon, must match **id** attribute in the contact feed. This is used, for example, when coupon is for customer's birthday and hence is reserved for this customer since it was created. |
-| **validFrom**        | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                       |
-| **validTo**          | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                       |
+| Element Name         | Required      | Type                  | Description                                                                                                                                                                                                                                                           |
+|----------------------|---------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **couponTemplateId** | **required**  | [string](#string)     | Unique identifier of the coupon type. Must match **id** in [Coupon Templates](#coupon-templates) feed.                                                                                                                                                                |
+| **code**             | **required**  | [string](#string)     | The actual coupon code that a customer will use when claiming the coupon.                                                                                                                                                                                             |
+| **reusable**         | optional      | [integer](#integer)   | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage.                                    |
+| **discountType**     | optional      | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**                                                                                                                                                                                                                         |
+| **discount**         | optional      | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                                                                |
+| **contactId**        | optional      | [string](#string)     | Coupon recipient. Optional. An Id of the contact in the e-shop that owns the coupon, must match **id** attribute in the contact feed. This is used, for example, when coupon is for customer's birthday and hence is reserved for this customer since it was created. |
+| **validFrom**        | optional      | [datetime](#datetime) |                                                                                                                                                                                                                                                                       |
+| **validTo**          | optional      | [datetime](#datetime) |                                                                                                                                                                                                                                                                       |
 
 #### Example
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <coupons
-    version="3.3"
+    version="4.0"
     totalItems="2267"
 >
     <coupon>
@@ -717,7 +715,8 @@ Validate with [XML Schema Definition](xsd/coupons.xsd).
 
 ### Creating New Coupons
 
-If you want Incomaker to send coupons within an email campaign, it can use this method to create coupons on the fly.
+If you want Incomaker to send coupons within an email campaign, we can use this method to create coupons on the fly. 
+If you implement this, there is no need to also implement [Coupon Templates](#coupon-templates). 
 
 To create coupons, Incomaker will make a **POST** request to your standard base URL with following parameters:
 
@@ -798,7 +797,7 @@ This special xml feed contains a single collection of fields where you can provi
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
-<info version="3.3">
+<info version="4.0">
     <contact>
         <customFields>
             <c id="ico">IČO</c>

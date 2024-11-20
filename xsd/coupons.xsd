@@ -13,7 +13,7 @@
 							<xs:complexType>
 								<xs:all>
 									<xs:element type="xs:string" name="code"/>
-									<xs:element type="xs:string" name="couponTemplateId" minOccurs="0"/>
+									<xs:element type="xs:string" name="couponTemplateId" />
 									<xs:element name="reusable" minOccurs="0">
 										<xs:simpleType>
 											<xs:restriction base="xs:byte">

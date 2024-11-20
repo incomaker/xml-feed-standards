@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <coupons
-	version="3.3"
+	version="4.0"
 	totalItems="25"
 	generator="MyShop:1.2.3"
 >
 	<coupon>
-		<reusable>0</reusable>
-		<discountType>MONETARY</discountType>
-		<discount>500</discount>
+		<code>GHCJKD</code>
+		<couponTemplateId>16</couponTemplateId>
 		<validFrom>2020-04-10T00:00:00</validFrom>
 		<validTo>2020-04-17T00:00:00</validTo>
-		<code>GHCJKD</code>
 	</coupon>
 	<coupon>
+		<code>D45s45</code>
 		<couponTemplateId>156</couponTemplateId>
 		<contactId>client16</contactId>
-		<code>D45s45</code>
 	</coupon>
 </coupons>
