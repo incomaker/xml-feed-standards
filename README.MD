@@ -651,8 +651,6 @@ Root element tag: **couponTemplate**
         <reusable>0</reusable>
         <discountType>MONETARY</discountType>
         <discount>500</discount>
-        <validFrom>2020-04-10T00:00:00</validFrom>
-        <validTo>2020-04-17T00:00:00</validTo>
     </couponTemplate>
     ...
 </couponTemplates>
