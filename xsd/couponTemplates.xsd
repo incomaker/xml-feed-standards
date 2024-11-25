@@ -9,7 +9,7 @@
 			<xs:complexContent>
 				<xs:extension base="in:feed">
 					<xs:sequence>
-						<xs:element name="couponTemplate" maxOccurs="unbounded">
+						<xs:element name="couponTemplate" minOccurs="0" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:all>
 									<xs:element type="xs:int" name="id"/>
