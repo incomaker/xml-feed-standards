@@ -630,6 +630,7 @@ Root element tag: **couponTemplate**
 | **reusable**     | optional     | [integer](#integer)   | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage. |
 | **discountType** | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**, **FREE_SHIPPING**                                                                                                                                                                   |
 | **discount**     | optional     | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                             |
+| **minOrder**     | optional     | [decimal](#decimal)   | Free shipping minimal order amount.                                                                                                                                                                                                |
 
 #### Example
 
@@ -657,6 +658,7 @@ Root element tag: **couponTemplate**
         <title>Free shipping</title>
         <reusable>0</reusable>
         <discountType>FREE_SHIPPING</discountType>
+        <minOrder>2000</minOrder>
     </couponTemplate>
     ...
 </couponTemplates>
@@ -747,6 +749,8 @@ You must either provide template ID matching **couponTemplateId** that reference
 | **discountType**     | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**, **FREE_SHIPPING**                                                                                                                                                                                                                                                                          |
 | **reusable**         | optional     | boolean               | Whether this type of coupon can be used multiple times. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage.                                                                                                                                 |
 | **discount**         | optional     | [decimal](#decimal)   | Either the monetary or percentual value of the coupon.                                                                                                                                                                                                                                                                                    |
+| **minOrder**         | optional     | [decimal](#decimal)   | Free shipping minimal order amount.                                                                                                                                                                                                                            
+                                                                           |
 | **validFrom**        | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                                                                           |
 | **validTo**          | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                                                                           |
 | **contactIds**       | optional     | Array&lt;string&gt;   | Coupon recipients. Optional. If specified, then there should be a coupon created for each contact. Array of contact IDs in the e-shop that will own created coupons, must match **id** attribute in the contact feed. This is used, for example, when creating birthday coupons. Only applicable to coupon templates that are "assigned". |
