@@ -366,6 +366,11 @@ Root element tag: **p**
 | **languages**       | **required** | [ProductLanguages](#productlanguages)   | Product strings in different languages.                                                                                                       |
 | **related**         | optional     | [RelatedProducts](#relatedproducts)     | A set of productIds of similar/related products.                                                                                              |
 | **customFields**    | optional     | [CustomFields](#customfields)           | A map of custom fields where any product-related value can be stored.                                                                         |
+| **type**            | optional     | [string](#string)                       | Typee PRODUCT or VACATIONS                                                                                                                    |
+| **validFrom**       | optional     | [datetime](#datetime)                   | Valid from date                                                                                                                               |
+| **validTo**         | optional     | [datetime](#datetime)                   | Valid to date                                                                                                                                 |
+| **originName**      | optional     | [string](#string)                       | Valid to date                                                                                                                                 |
+| **destinationName** | optional     | [string](#string)                       | Valid to date                                                                                                                                 |
 
 #### Example
 
