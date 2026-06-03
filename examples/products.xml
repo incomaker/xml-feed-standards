@@ -21,6 +21,9 @@
 				<priceWithoutTax>111</priceWithoutTax>
 				<priceAfterDiscount>99</priceAfterDiscount>
 				<discountRate>25</discountRate>
+				<measurePrice>22.5</measurePrice>
+				<measureAmount>1.5</measureAmount>
+				<measureUnitName>kg</measureUnitName>
 			</p>
 			<p currency="CZK">
 				<amount>2500</amount>

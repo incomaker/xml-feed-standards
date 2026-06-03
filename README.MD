@@ -266,6 +266,9 @@ List of product prices.
 | **priceAfterDiscount** | optional     | [decimal](#decimal) | Reduced price if there is a discount (the same regime as in the amount element, i.e. tax inclusive). If there is no reduction on this item, don’t use the element at all. |
 | **priceWithoutTax**    | optional     | [decimal](#decimal) | Price without tax (VAT or sales tax).                                                                                                                                     |
 | **discountRate**       | optional     | [decimal](#decimal) | Percentual discount rate.                                                                                                                                                 |
+| **measurePrice**       | optional     | [decimal](#decimal) | Unit measure price. Decimal fractions are supported; use a dot as the XML decimal separator.                                                                               |
+| **measureAmount**      | optional     | [decimal](#decimal) | Unit measure amount, e.g. 1, 10, 100, or 1.5. Decimal fractions are supported; use a dot as the XML decimal separator.                                                    |
+| **measureUnitName**    | optional     | [string](#string)   | Unit measure name, e.g. kg, g, or barel.                                                                                                                                  |
 
 #### Example
 
@@ -276,6 +279,9 @@ List of product prices.
         <priceWithoutTax>111</priceWithoutTax>
         <priceAfterDiscount>99</priceAfterDiscount>
         <discountRate>15</discountRate>
+        <measurePrice>150</measurePrice>
+        <measureAmount>1</measureAmount>
+        <measureUnitName>kg</measureUnitName>
     </p>
 </prices>
 ```
@@ -396,6 +402,9 @@ Root element tag: **p**
                 <amount>129</amount>
                 <priceWithoutTax>111</priceWithoutTax>
                 <priceAfterDiscount>99</priceAfterDiscount>
+                <measurePrice>990</measurePrice>
+                <measureAmount>1</measureAmount>
+                <measureUnitName>kg</measureUnitName>
             </p>
             <p currency="CZK">
                 <amount>2500</amount>
