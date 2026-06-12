@@ -1,45 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema
-	xmlns:in="https://incomaker.com/feed/v3"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:in="https://incomaker.com/feed/v4"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
-	<xs:import namespace="https://incomaker.com/feed/v3" schemaLocation="incomaker.xsd"/>
-	<xs:element name="coupons">
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base="in:feed">
-					<xs:sequence>
-						<xs:element name="coupon" maxOccurs="unbounded" minOccurs="0">
-							<xs:complexType>
-								<xs:all>
-									<xs:element type="xs:string" name="code"/>
-									<xs:element type="xs:string" name="couponTemplateId" />
-									<xs:element name="reusable" minOccurs="0">
-										<xs:simpleType>
-											<xs:restriction base="xs:byte">
-												<xs:enumeration value="0" />
-												<xs:enumeration value="1" />
-											</xs:restriction>
-										</xs:simpleType>
-									</xs:element>
-									<xs:element name="discountType" minOccurs="0">
-										<xs:simpleType>
-											<xs:restriction base="xs:string">
-												<xs:enumeration value="PERCENTUAL" />
-												<xs:enumeration value="MONETARY" />
-											</xs:restriction>
-										</xs:simpleType>
-									</xs:element>
-									<xs:element type="xs:decimal" name="discount" minOccurs="0"/>
-									<xs:element type="in:dateTime" name="validFrom" minOccurs="0"/>
-									<xs:element type="in:dateTime" name="validTo" minOccurs="0"/>
-									<xs:element type="xs:string" name="contactId" minOccurs="0"/>
-								</xs:all>
-							</xs:complexType>
-						</xs:element>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+    <xs:import namespace="https://incomaker.com/feed/v4" schemaLocation="incomaker.xsd"/>
+    <xs:element name="coupons">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="in:feed">
+                    <xs:sequence>
+                        <xs:element name="coupon" maxOccurs="unbounded" minOccurs="0">
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element type="xs:string" name="code"/>
+                                    <xs:element type="xs:string" name="couponTemplateId" minOccurs="0"/>
+                                    <xs:element name="reusable" minOccurs="0">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:integer">
+                                                <xs:enumeration value="0"/>
+                                                <xs:enumeration value="1"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="discountType" minOccurs="0">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="PERCENTUAL"/>
+                                                <xs:enumeration value="MONETARY"/>
+                                                <xs:enumeration value="FREE_SHIPPING"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element type="xs:decimal" name="discount" minOccurs="0"/>
+                                    <xs:element type="xs:decimal" name="minOrder" minOccurs="0"/>
+                                    <xs:element type="in:dateTime" name="validFrom" minOccurs="0"/>
+                                    <xs:element type="in:dateTime" name="validTo" minOccurs="0"/>
+                                    <xs:element type="xs:string" name="contactId" minOccurs="0"/>
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>
