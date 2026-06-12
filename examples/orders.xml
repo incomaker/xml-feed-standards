@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <orders
-	version="4.0"
-	totalItems="1000"
-	generator="MyShop:1.2.3"
+    version="4.0"
+    totalItems="1000"
+    generator="MyShop:1.2.3"
 >
-	<o id="88887">
-		<contact>
-			<email>neil.armstrong@nasa.gov</email>
-			<firstName>Neil</firstName>
-			<lastName>Armstrong</lastName>
-			<phoneNumber1>0102030406</phoneNumber1>
-			<city>Moon City</city>
-			<country>US</country>
-			<street>Crater Road</street>
-			<language>en</language>
-			<zipCode>79401</zipCode>
-			<customFields>
-				<f key="ShoeSize" group="trait">XXL</f>
-			</customFields>
-			<tags>
-				<t>Astronaut</t>
-			</tags>
-		</contact>
-		<created>1969-06-24T16:19:22</created>
-		<finished>1969-06-24T18:20:05</finished>
-		<payment>credit card</payment>
-		<shipping>Postal service</shipping>
-		<total>284</total>
-		<totalWithoutTax>234.71074388429753</totalWithoutTax>
-		<currency>USD</currency>
-		<customFields>
-			<f key="Step" group="man">Small</f>
-			<f key="Leap" group="mankind">Giant</f>
-		</customFields>
-		<items>
-			<i id="111836">
-				<quantity>1</quantity>
-				<price currency="EUR">199</price>
-				<priceWithoutTax>164.46281</priceWithoutTax>
-			</i>
-			<i id="111837">
-				<quantity>2</quantity>
-				<price currency="EUR">20</price>
-				<priceWithoutTax>16</priceWithoutTax>
-			</i>
-		</items>
-	</o>
+    <o id="88887">
+        <contact>
+            <email>neil.armstrong@nasa.gov</email>
+            <firstName>Neil</firstName>
+            <lastName>Armstrong</lastName>
+            <phoneNumber1>0102030406</phoneNumber1>
+            <city>Moon City</city>
+            <country>US</country>
+            <street>Crater Road</street>
+            <language>en</language>
+            <zipCode>79401</zipCode>
+            <customFields>
+                <f key="ShoeSize" group="trait">XXL</f>
+            </customFields>
+            <tags>
+                <t>Astronaut</t>
+            </tags>
+        </contact>
+        <created>1969-06-24T16:19:22</created>
+        <finished>1969-06-24T18:20:05</finished>
+        <payment>credit card</payment>
+        <shipping>Postal service</shipping>
+        <total>284</total>
+        <totalWithoutTax>234.71074388429753</totalWithoutTax>
+        <currency>USD</currency>
+        <customFields>
+            <f key="Step" group="man">Small</f>
+            <f key="Leap" group="mankind">Giant</f>
+        </customFields>
+        <items>
+            <i id="111836">
+                <quantity>1</quantity>
+                <price currency="EUR">199</price>
+                <priceWithoutTax>164.46281</priceWithoutTax>
+            </i>
+            <i id="111837">
+                <quantity>2</quantity>
+                <price currency="EUR">20</price>
+                <priceWithoutTax>16</priceWithoutTax>
+            </i>
+        </items>
+    </o>
 </orders>
