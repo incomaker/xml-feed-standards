@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema
-	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:in="https://incomaker.com/feed/v3"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:in="https://incomaker.com/feed/v4"
 >
-	<xs:import namespace="https://incomaker.com/feed/v3" schemaLocation="incomaker.xsd"/>
-	<xs:element name="contacts">
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base="in:feed">
-					<xs:sequence>
-						<xs:element name="c" minOccurs="0" maxOccurs="unbounded" type="in:contact"/>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
-	</xs:element>
+    <xs:import namespace="https://incomaker.com/feed/v4" schemaLocation="incomaker.xsd"/>
+    <xs:element name="contacts">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="in:feed">
+                    <xs:sequence>
+                        <xs:element name="c" minOccurs="0" maxOccurs="unbounded" type="in:contact"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>
