@@ -153,12 +153,21 @@ Root element tag: **f**
 
 A set of simple tags.
 
+##### Tag
+
+Root element tag: **t**
+
+| Attribute Name | Required | Type              | Description                  |
+|----------------|----------|-------------------|------------------------------|
+| **key**        | optional | [string](#string) | Category or type of the tag. |
+
 ##### Example
 
 ```xml
 <tags>
     <t>Apollo Program</t>
-    <t>Astronaut</t>
+    <t key="Size">S</t>
+    <t key="Composition">Cotton</t>
 </tags>
 ```
 
@@ -180,6 +189,7 @@ Root element tag: **c**
 |----------------------|--------------|-------------------------------------------|---------------------------------------------------------|
 | **parentCategoryId** | optional     | [string](#string)                         | An internal category identifier of the parent category. |
 | **languages**        | **required** | [CategoryLanguages](#categorylanguages)   | Category names in different languages.                  |
+| **customFields**     | optional     | [GroupedCustomFields](#groupedcustomfields) | Possible custom fields.                              |
 
 #### CategoryLanguages
 
@@ -214,6 +224,11 @@ Root element tag: **l**
                 <name>Rockets</name>
             </l>
         </languages>
+        <customFields>
+	        <f key=”CategoryImage” group=”trait”>https://www.myshop.cz/img/123.png</f>
+	        <f key=”CategoryImportance” group=”trait”>100</f>
+	        <f key=”Temporary”>1</f>
+        </customFields>
     </c>
     <c id="2">
         <parentCategoryId>1</parentCategoryId>
@@ -256,7 +271,7 @@ List of product prices.
 | Attribute Name | Required | Type              | Description                           |
 |----------------|----------|-------------------|---------------------------------------|
 | **country**    | optional | [string](#string) | An ISO country code                   |
-| **currency**   | optional | [string](#string) | An Id of the variant of the product.. |
+| **currency**   | optional | [string](#string) | An ISO currency code.                 |
 | **pricelist**  | optional | [string](#string) | Name of the pricelist.                |
 
 
@@ -324,6 +339,23 @@ Root element tag: **l**
 | **url**              | **required** | [string](#string)                                       | A URL of the product in the given language.           |
 | **attributes**       | optional     | [ProductLanguageAttributes](#productlanguageattributes) | A map of language-specific custom attributes.         |
 
+#### ProductImages
+
+A list of product image URLs.
+
+Root element tag: **imageUrls**
+
+Each image URL is wrapped in an **i** child element.
+
+##### Example
+
+```xml
+<imageUrls>
+    <i>https://images.books.com/space-program-front.jpg</i>
+    <i>https://images.books.com/space-program-back.jpg</i>
+</imageUrls>
+```
+
 #### RelatedProducts
 
 A set of productIds of similar/related products.
@@ -349,10 +381,10 @@ Root element tag: **p**
 
 | Element Name        | Required     | Type                                    | Description                                                                                                                                   |
 |---------------------|--------------|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| **imageUrl**        | optional     | [string](#string)                       | URL of image of the product.                                                                                                                  |
+| **imageUrls**       | optional     | [ProductImages](#productimages)         | URLs of images of the product.                                                                                                                |
 | **categories**      | optional     | [ProductCategories](#productcategories) | The list of the category IDs, where the product is present.                                                                                   |
 | **prices**          | **required** | [ProductPrices](#productprices)         | List of product prices in different currencies.                                                                                               |
-| **purchase**        | optional     | [decimal](#decimal)                     | Purchase price of the stock. Purchase price of the stock. In an optional attribute **currency**, you can set the currency of the price.       |
+| **purchase**        | optional     | [decimal](#decimal)                     | Purchase price of the stock. In an optional attribute **currency**, you can set the currency of the price.                                    |
 | **tags**            | optional     | [Tags](#tags)                           | Product tags.                                                                                                                                 |
 | **tax**             | optional     | [decimal](#decimal)                     | Tax in form of decimal number (e.g. 1.21 for tax of 21%)                                                                                      |
 | **unit**            | optional     | [string](#string)                       | The name of the unit.                                                                                                                         |
@@ -363,20 +395,17 @@ Root element tag: **p**
 | **stock**           | optional     | [integer](#integer)                     | The number of the items on hand.                                                                                                              |
 | **active**          | optional     | [integer](#integer)                     | The product is active (**0** - no, **1** - yes).                                                                                              |
 | **productId**       | optional     | [string](#string)                       | If this item is a variant, then this is an Id of the parent product.                                                                          |
-| **newFlag**         | optional     | [integer](#integer)                     | The product is flagged new (**0** - no, **1** - yes).                                                                                         |
-| **specialDealFlag** | optional     | [integer](#integer)                     | The product is flagged a special deal (**0** - no, **1** - yes).                                                                              |
-| **choiceFlag**      | optional     | [integer](#integer)                     | The product is flagged a choice - recommended product (**0** - no, **1** - yes).                                                              |
+| **newFlag**         | optional     | [integer](#integer)                     | *Deprecated — use [tags](#tags) instead. Still supported.* The product is flagged new (**0** - no, **1** - yes).                              |
+| **specialDealFlag** | optional     | [integer](#integer)                     | *Deprecated — use [tags](#tags) instead. Still supported.* The product is flagged a special deal (**0** - no, **1** - yes).                   |
+| **choiceFlag**      | optional     | [integer](#integer)                     | *Deprecated — use [tags](#tags) instead. Still supported.* The product is flagged a choice - recommended product (**0** - no, **1** - yes).   |
 | **added**           | optional     | [datetime](#datetime)                   | When the product was added to e-shop.                                                                                                         |
 | **updated**         | optional     | [datetime](#datetime)                   | When the product was updated for the last time.                                                                                               |
 | **availability**    | optional     | [integer](#integer)                     | The number of days to deliver the product. 0 means immediately.                                                                               |
 | **languages**       | **required** | [ProductLanguages](#productlanguages)   | Product strings in different languages.                                                                                                       |
 | **related**         | optional     | [RelatedProducts](#relatedproducts)     | A set of productIds of similar/related products.                                                                                              |
 | **customFields**    | optional     | [CustomFields](#customfields)           | A map of custom fields where any product-related value can be stored.                                                                         |
-| **type**            | optional     | [string](#string)                       | Type PRODUCT or VACATION                                                                                                                      |
-| **validFrom**       | optional     | [datetime](#datetime)                   | Product/Vacation valid from date                                                                                                              |
-| **validTo**         | optional     | [datetime](#datetime)                   | Product/Vacation valid to date                                                                                                                |
-| **originName**      | optional     | [string](#string)                       | Origin place for vacation                                                                                                                     |
-| **destinationName** | optional     | [string](#string)                       | Destination place for vacation                                                                                                                |
+| **validFrom**       | optional     | [datetime](#datetime)                   | Product valid from date                                                                                                              |
+| **validTo**         | optional     | [datetime](#datetime)                   | Product valid to date                                                                                                                |
 
 #### Example
 
@@ -391,7 +420,9 @@ Root element tag: **p**
         <active>1</active>
         <ean>85941691750107</ean>
         <sku>123ABC</sku>
-        <imageUrl>https://images.books.com/space-program.jpg</imageUrl>
+        <imageUrls>
+            <i>https://images.books.com/space-program.jpg</i>
+        </imageUrls>
         <categories>
             <c>1</c>
             <c>2</c>
@@ -468,6 +499,7 @@ Root element tag: **c**
 |------------------|----------|---------------------------------------------|-------------------------------------------------------------------|
 | **firstName**    | optional | [string](#string)                           |                                                                   |
 | **lastName**     | optional | [string](#string)                           |                                                                   |
+| **companyName**  | optional | [string](#string)                           |                                                                   |
 | **sex**          | optional | [string](#string)                           | Possible values: **MALE**, **FEMALE** or **UNKNOWN**              |
 | **email**        | optional | [string](#string)                           |                                                                   |
 | **language**     | optional | [string](#string)                           | The language code (ISO 639-1, e.g. en)                            |
@@ -554,7 +586,7 @@ Root element tag: **i**
 | Element Name        | Required     | Type                | Description                            |
 |---------------------|--------------|---------------------|----------------------------------------|
 | **quantity**        | **required** | [decimal](#decimal) | The quantity of goods sold.            |
-| **price**           | **required** | [decimal](#decimal) | Unit price of the item. Tax inclusive. |
+| **price**           | **required** | [decimal](#decimal) | Unit price of the item. Tax inclusive. Optional attribute **currency** overrides the order currency. |
 | **priceWithoutTax** | optional     | [decimal](#decimal) | Unit price of the item without tax.    |
 
 #### Order
@@ -578,6 +610,7 @@ Root element tag: **o**
 | **shipping**        | optional     | [string](#string)         | The means of shipping.                                                                 |
 | **state**           | optional     | [string](#string)         | The state of the order.                                                                |
 | **items**           | **required** | [OrderItems](#orderitems) | The list of the items in the order.                                                    |
+| **customFields**    | optional     | [GroupedCustomFields](#groupedcustomfields) | A map of custom fields where any order-related value can be stored.   |
 
 #### Example
 
@@ -611,9 +644,12 @@ Root element tag: **o**
                 <quantity>1</quantity>
                 <price currency="EUR">199</price>
                 <priceWithoutTax>164.46</priceWithoutTax>
-                <currency>CZK</currency>
             </i>
         </items>
+        <customFields>
+            <f key="Store" group="logistics">External</f>
+            <f key="Delivery">DHL</f>
+        </customFields>
     </o>
     ...
 </orders>
@@ -700,10 +736,10 @@ Root element tag: **coupon**
 
 | Element Name         | Required      | Type                  | Description                                                                                                                                                                                                                                                           |
 |----------------------|---------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **couponTemplateId** | **required**  | [string](#string)     | Unique identifier of the coupon type. Must match **id** in [Coupon Templates](#coupon-templates) feed.                                                                                                                                                                |
+| **couponTemplateId** | optional      | [string](#string)     | Unique identifier of the coupon type. Must match **id** in [Coupon Templates](#coupon-templates) feed. Required when not providing **discountType**, **reusable**, **discount**, **validFrom**, and **validTo** directly.                                              |
 | **code**             | **required**  | [string](#string)     | The actual coupon code that a customer will use when claiming the coupon.                                                                                                                                                                                             |
 | **reusable**         | optional      | [integer](#integer)   | Whether this type of coupon can be used multiple times. **0** - no, **1** - yes. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage.                                    |
-| **discountType**     | optional      | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**, **FREEE_SHIPPING**                                                                                                                                                                                                     |
+| **discountType**     | optional      | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**, **FREE_SHIPPING**                                                                                                                                                                                                     |
 | **discount**         | optional      | [decimal](#decimal)   | Either the **MONETARY** or **PERCENTUAL** value of the coupon.                                                                                                                                                                                                        |
 | **minOrder**         | optional      | [decimal](#decimal)   | **FREE_SHIPPING**  minimal order amount.                                                                                                                                                                                                                              |
 | **contactId**        | optional      | [string](#string)     | Coupon recipient. Optional. An Id of the contact in the e-shop that owns the coupon, must match **id** attribute in the contact feed. This is used, for example, when coupon is for customer's birthday and hence is reserved for this customer since it was created. |
@@ -764,8 +800,7 @@ You must either provide template ID matching **couponTemplateId** that reference
 | **discountType**     | optional     | [string](#string)     | Possible values: **PERCENTUAL**, **MONETARY**, **FREE_SHIPPING**                                                                                                                                                                                                                                                                          |
 | **reusable**         | optional     | boolean               | Whether this type of coupon can be used multiple times. Reusable coupons are typically used as a single code for multiple users. Non-reusable coupon is usually personalized, and we can track its usage.                                                                                                                                 |
 | **discount**         | optional     | [decimal](#decimal)   | Either the **MONETARY** or **PERCENTUAL** value of the coupon.                                                                                                                                                                                                                                                                                    |
-| **minOrder**         | optional     | [decimal](#decimal)   | **FREE_SHIPPING**  minimal order amount.                                                                                                                                                                                                                            
-                                                                           |
+| **minOrder**         | optional     | [decimal](#decimal)   | **FREE_SHIPPING** minimal order amount.                                                                                                                                                                                                                               |
 | **validFrom**        | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                                                                           |
 | **validTo**          | optional     | [datetime](#datetime) |                                                                                                                                                                                                                                                                                                                                           |
 | **contactIds**       | optional     | Array&lt;string&gt;   | Coupon recipients. Optional. If specified, then there should be a coupon created for each contact. Array of contact IDs in the e-shop that will own created coupons, must match **id** attribute in the contact feed. This is used, for example, when creating birthday coupons. Only applicable to coupon templates that are "assigned". |
@@ -809,6 +844,8 @@ Following example will generate new coupon for discount of 150 (in e-shop's curr
     }
 
 ### Info
+
+> **Deprecated.** This feed is no longer the recommended way to provide additional e-shop information.
 
 This special xml feed contains a single collection of fields where you can provide us with additional information about your e-shop.
 
