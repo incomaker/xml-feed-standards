@@ -1,38 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<contacts
-	version="4.0"
-	totalItems="6040"
-	generator="MyShop:1.2.3"
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:in="https://incomaker.com/feed/v4"
 >
-	<c id="e28bc2f0">
-		<email>neil.armstrong@nasa.gov</email>
-		<sex>MALE</sex>
-		<firstName>Neil</firstName>
-		<lastName>Armstrong</lastName>
-		<street>Crater Road</street>
-		<street2>2nd floor</street2>
-		<city>Moon City</city>
-		<zipCode>79401</zipCode>
-		<phoneNumber1>0102030405</phoneNumber1>
-		<phoneNumber2/>
-		<language>en</language>
-		<country>US</country>
-		<companyName>NASA</companyName>
-		<birthday>1930-08-05</birthday>
-		<consentDate>2069-07-24T16:50:35</consentDate>
-		<consentTitle>Fake Moon Landing Non-Disclosure Agreement</consentTitle>
-		<web>http://nasa.gov</web>
-		<remarks/>
-		<newsletter>1</newsletter>
-		<currency>USD</currency>
-		<pricelist>pricelist1</pricelist>
-		<tags>
-			<t>Apollo Program</t>
-			<t>Astronaut</t>
-		</tags>
-		<customFields>
-			<f key="ShoeSize" group="trait">L</f>
-			<f key="EyeColor" group="trait">blue</f>
-		</customFields>
-	</c>
-</contacts>
+    <xs:import namespace="https://incomaker.com/feed/v4" schemaLocation="incomaker.xsd"/>
+    <xs:element name="contacts">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="in:feed">
+                    <xs:sequence>
+                        <xs:element name="c" minOccurs="0" maxOccurs="unbounded" type="in:contact"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
